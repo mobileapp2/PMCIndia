@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registrationbg"
+    tools:context=".view.SignupActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:text="Sign Up"
+                android:textColor="@color/darkgreen"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <LinearLayout
+                    android:id="@+id/layout_user_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height">
+
+                    <EditText
+                        android:id="@+id/mEditUserId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/id"
+                        android:drawableLeft="@drawable/id"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Enter ID"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/userid"
+                        android:drawableLeft="@drawable/userid"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Enter Name"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/email"
+                        android:drawableLeft="@drawable/email"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Enter ID"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditConfirmEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/email"
+                        android:drawableLeft="@drawable/email"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Confirm Email ID"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/password"
+                        android:drawableLeft="@drawable/password"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Enter Password"
+                        android:inputType="textPassword"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/password"
+                        android:drawableLeft="@drawable/password"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Confirm Password"
+                        android:inputType="textPassword"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditSponsorName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/userid"
+                        android:drawableLeft="@drawable/userid"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Enter Sponsor's Name"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_editbox_height"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/mEditMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:drawableStart="@drawable/mobile"
+                        android:drawableLeft="@drawable/mobile"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:hint=" Enter Mobile Number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGreen"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="18sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/bgbtn"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="center"
+                    android:text="sign Up"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="center"
+                    android:text="Already User? SIGN IN here !!"
+                    android:textColor="@color/darkgreen"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -2,6 +2,8 @@ package com.imuons.pmcindia.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,8 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.imuons.pmcindia.Entity.RegitrationEntity;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.QuestionResponse;
+import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
@@ -24,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends Activity {
 
 
 
@@ -57,46 +61,7 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private void callQustionAPI() {
-        if (AppCommon.getInstance(this).isConnectingToInternet(this)) {
-            AppCommon.getInstance(this).setNonTouchableFlags(this);
-            AppService apiService = ServiceGenerator.createService(AppService.class);
-            progressBar.setVisibility(View.VISIBLE);
-            Call call = apiService.GetProductCall();
-            call.enqueue(new Callback() {
-                @Override
-                public void onResponse(Call call, Response response) {
-                    AppCommon.getInstance(SignupActivity.this).clearNonTouchableFlags(SignupActivity.this);
-                    progressBar.setVisibility(View.GONE);
-                    QuestionResponse authResponse = (QuestionResponse) response.body();
-                    if (authResponse != null) {
-                        Log.i("QueResponse::", new Gson().toJson(authResponse));
-                        if (authResponse.getCode() == 200) {
 
-                        } else {
-                            Toast.makeText(SignupActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        AppCommon.getInstance(SignupActivity.this).showDialog(SignupActivity.this, "Server Error");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call call, Throwable t) {
-                    progressBar.setVisibility(View.GONE);
-                    AppCommon.getInstance(SignupActivity.this).clearNonTouchableFlags(SignupActivity.this);
-                    // loaderView.setVisibility(View.GONE);
-                    Toast.makeText(SignupActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-        } else {
-            // no internet
-            progressBar.setVisibility(View.GONE);
-            Toast.makeText(this, "Please check your internet", Toast.LENGTH_SHORT).show();
-        }
-    }
     private void callRendomNumberAPI() {
         if (AppCommon.getInstance(this).isConnectingToInternet(this)) {
             AppCommon.getInstance(this).setNonTouchableFlags(this);
@@ -168,33 +133,31 @@ public class SignupActivity extends AppCompatActivity {
             mEditSponsorName.setError("please enter Sponsor Id");
         else if(mobileNumber.isEmpty())
             mEditMobile.setError("please enter mobile number");
-        else
-            callRegisterApi();
-
-
-
-
-
-
+        else{
+            callRegisterApi(new RegitrationEntity(userId , userName , emailId , mobileNumber , sponserId , password , cmfPassword ));
+        }
     }
 
-    private void callRegisterApi() {
+    private void callRegisterApi(RegitrationEntity regitrationEntity) {
         if (AppCommon.getInstance(this).isConnectingToInternet(this)) {
             AppCommon.getInstance(this).setNonTouchableFlags(this);
             AppService apiService = ServiceGenerator.createService(AppService.class);
             progressBar.setVisibility(View.VISIBLE);
             //  Call call = apiService.token_CALL(new AuthEntitiyClass("vp235345@vp11.com", "123456"));
-            Call call = apiService.GetRendomNumber();
+            Call call = apiService.RegisterApi(regitrationEntity);
             call.enqueue(new Callback() {
                 @Override
                 public void onResponse(Call call, Response response) {
                     AppCommon.getInstance(SignupActivity.this).clearNonTouchableFlags(SignupActivity.this);
                     progressBar.setVisibility(View.GONE);
-                    RendomNumberResponse authResponse = (RendomNumberResponse) response.body();
+                    RegisterResponse authResponse = (RegisterResponse) response.body();
                     if (authResponse != null) {
                         Log.i("RendomResponse::", new Gson().toJson(authResponse));
                         if (authResponse.getCode() == 200) {
-                            mEditUserId.setText(String.valueOf(authResponse.getData()));
+                            Intent intent = new Intent();
+                            intent.putExtra("userId" , authResponse.getResponseData().getUserid());
+                            setResult(180 , intent);
+                            finish();
                         } else {
                             Toast.makeText(SignupActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -219,4 +182,6 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "Please check your internet", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

@@ -20,6 +20,7 @@ import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
 import com.imuons.pmcindia.fragments.DashboardFragment;
 import com.imuons.pmcindia.models.ExpandableListModel;
+import com.imuons.pmcindia.utils.AppCommon;
 import com.imuons.pmcindia.utils.SharedPreferenceUtils;
 
 import java.util.ArrayList;
@@ -417,9 +418,9 @@ public class DashboardActivity extends AppCompatActivity {
                         SharedPreferenceUtils.clearID(DashboardActivity.this);
                         SharedPreferenceUtils.clearAccess_Token(DashboardActivity.this);
                         SharedPreferenceUtils.storeSplash(DashboardActivity.this, "stop");
-
+                        AppCommon.getInstance(DashboardActivity.this).clearPreference();
                         startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                        finish();
+                        finishAffinity();
                         Toast.makeText(DashboardActivity.this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                     }
                 });

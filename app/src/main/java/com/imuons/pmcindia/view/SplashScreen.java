@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
                     String token = AppCommon.getInstance(SplashScreen.this).getToken();
                     //SharedPreferenceUtils.getAccesstoken(SplashScreen.this);
 
-                    if (token == null) {
+                    if (token == null || token.isEmpty()) {
                         startActivity(new Intent(SplashScreen.this, LoginActivity.class));
                     } else {
                         startActivity(new Intent(SplashScreen.this, DashboardActivity.class));

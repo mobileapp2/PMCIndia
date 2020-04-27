@@ -1,7 +1,9 @@
 package com.imuons.pmcindia.view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Body;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     @BindView(R.id.mEditUserName)
     EditText mEditUserName;
@@ -110,6 +112,15 @@ public class LoginActivity extends AppCompatActivity {
     private void setData(LoginData data) {
         AppCommon.getInstance(this).setUserObject(new Gson().toJson(data));
         AppCommon.getInstance(this).setToken(data.getAccess_token());
-        startActivity(new Intent(this , DashboardActivity.class));
+        startActivityForResult(new Intent(this , DashboardActivity.class) , 190);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 190 && resultCode == 180){
+            String userId = data.getStringExtra("userId");
+            mEditUserName.setText(userId);
+        }
     }
 }

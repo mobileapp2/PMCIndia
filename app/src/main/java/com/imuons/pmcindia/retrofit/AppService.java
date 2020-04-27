@@ -2,8 +2,10 @@ package com.imuons.pmcindia.retrofit;
 
 
 import com.imuons.pmcindia.Entity.LoginEntity;
+import com.imuons.pmcindia.Entity.RegitrationEntity;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
 import com.imuons.pmcindia.ResponseModel.QuestionResponse;
+import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
 
@@ -16,8 +18,9 @@ public interface AppService {
 
 
     @POST("register")
-    //https://www.pmcindia.biz/pmc-india/public/api/register
-    Call<QuestionResponse> GetProductCall();
+    Call<RegisterResponse> RegisterApi(
+            @Body RegitrationEntity registerEntity
+    );
 
     @GET("generate-random-no")
     Call<RendomNumberResponse> GetRendomNumber();

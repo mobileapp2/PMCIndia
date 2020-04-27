@@ -15,7 +15,8 @@ import retrofit2.http.POST;
 public interface AppService {
 
 
-    @GET("get-questions")
+    @POST("register")
+    //https://www.pmcindia.biz/pmc-india/public/api/register
     Call<QuestionResponse> GetProductCall();
 
     @GET("generate-random-no")

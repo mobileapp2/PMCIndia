@@ -4,15 +4,27 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.imuons.pmcindia.DataModel.DashBoardData;
 import com.imuons.pmcindia.R;
+import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
+import com.imuons.pmcindia.retrofit.AppService;
+import com.imuons.pmcindia.retrofit.ServiceGenerator;
+import com.imuons.pmcindia.utils.AppCommon;
+import com.imuons.pmcindia.view.DashboardActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,8 +63,59 @@ public class DashboardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         ButterKnife.bind(this, view);
-
+        callDashBoardApi();
 
         return view;
+    }
+    private void callDashBoardApi() {
+
+        if (AppCommon.getInstance(getContext()).isConnectingToInternet(getContext())) {
+            AppCommon.getInstance(getContext()).setNonTouchableFlags(getActivity());
+            AppService apiService = ServiceGenerator.createService(AppService.class , AppCommon.getInstance(getContext()).getToken());
+            //  progressBar.setVisibility(View.VISIBLE);
+            Call call = apiService.GetDashBoard();
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
+                    // progressBar.setVisibility(View.GONE);
+                    DashboardResponseModel authResponse = (DashboardResponseModel) response.body();
+                    if (authResponse != null) {
+                        Log.i("DashboardResponse::", new Gson().toJson(authResponse));
+                        if (authResponse.getCode() == 200) {
+                            setData(authResponse.getData());
+                        } else {
+                            Toast.makeText(getContext(), authResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        AppCommon.getInstance(getContext()).showDialog(getActivity(), "Server Error");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    // progressBar.setVisibility(View.GONE);
+                    AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
+                    // loaderView.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        } else {
+            // no internet
+            //  progressBar.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Please check your internet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setData(DashBoardData data) {
+        team.setText(data.getTotalTeam());
+        totalDirect.setText(data.getTotalDirects());
+        roitotalWithdrawal.setText(data.getRoiIncome());
+        tv_directIncome.setText(data.getDirectRefIncome());
+        tv_investment.setText(data.getTotalInvestment());
+        tv_winning.setText(data.getWinningIncome());
+        roitotalWithdrawal.setText(data.getTotalIncome());
     }
 }

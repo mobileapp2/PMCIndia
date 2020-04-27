@@ -163,7 +163,9 @@ public class SignupActivity extends AppCompatActivity {
         else if(password.isEmpty())
             mEditPassword.setError("please enter password");
         else if(cmfPassword.isEmpty())
-            mEditPassword.setError("please enter confirm password");
+            mEditConfirmPassword.setError("please enter confirm password");
+         else if(sponserId.isEmpty())
+            mEditSponsorName.setError("please enter Sponsor Id");
         else if(mobileNumber.isEmpty())
             mEditMobile.setError("please enter mobile number");
         else

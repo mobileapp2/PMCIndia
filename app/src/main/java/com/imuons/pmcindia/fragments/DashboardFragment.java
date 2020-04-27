@@ -31,7 +31,6 @@ import retrofit2.Response;
  */
 public class DashboardFragment extends Fragment {
 
-
     @BindView(R.id.team)
     TextView team;
     @BindView(R.id.totalDirect)
@@ -67,11 +66,12 @@ public class DashboardFragment extends Fragment {
 
         return view;
     }
+
     private void callDashBoardApi() {
 
         if (AppCommon.getInstance(getContext()).isConnectingToInternet(getContext())) {
             AppCommon.getInstance(getContext()).setNonTouchableFlags(getActivity());
-            AppService apiService = ServiceGenerator.createService(AppService.class , AppCommon.getInstance(getContext()).getToken());
+            AppService apiService = ServiceGenerator.createService(AppService.class, AppCommon.getInstance(getContext()).getToken());
             //  progressBar.setVisibility(View.VISIBLE);
             Call call = apiService.GetDashBoard();
             call.enqueue(new Callback() {

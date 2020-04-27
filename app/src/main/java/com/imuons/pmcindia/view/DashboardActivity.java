@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
 import com.imuons.pmcindia.fragments.DashboardFragment;
+import com.imuons.pmcindia.fragments.MyTeamFragment;
+import com.imuons.pmcindia.fragments.ProfileFragment;
 import com.imuons.pmcindia.models.ExpandableListModel;
 import com.imuons.pmcindia.utils.AppCommon;
 import com.imuons.pmcindia.utils.SharedPreferenceUtils;
@@ -88,19 +90,32 @@ public class DashboardActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
 
                         break;
+                    case 1:
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, ProfileFragment.newInstance()).commit();
+                        getSupportActionBar().setTitle("Profile");
+                        mDrawerLayout.closeDrawers();
 
-                    case 7:
-                        fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                        getSupportActionBar().setTitle("Security");
+                        break;
+
+                    case 2:
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, MyTeamFragment.newInstance()).commit();
+                        getSupportActionBar().setTitle("My Team");
                         mDrawerLayout.closeDrawers();
                         break;
 
-                    case 8:
-                        Intent i = new Intent(DashboardActivity.this, DashboardFragment.class);
-                        startActivity(i);
+                    case 6:
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, MyTeamFragment.newInstance()).commit();
+                        getSupportActionBar().setTitle("Lucky Winner Report");
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case 7:
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, MyTeamFragment.newInstance()).commit();
+                        getSupportActionBar().setTitle("Chat");
+                        mDrawerLayout.closeDrawers();
                         break;
 
-                    case 9:
+
+                    case 8:
                         showAlertDialog();
                         break;
                 }
@@ -115,80 +130,24 @@ public class DashboardActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 switch (groupPosition) {
 
-                    case 1:
-                        switch (childPosition) {
-
-                            case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Add Fund");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-                            case 1:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Pending Fund Report");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-                            case 2:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Add Fund Report");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-                            case 3:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Invest From Purchase Wallet");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-                            case 4:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Transfer Purchase Wallet Balance");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-
-                        }
-                        break;
-
-                    case 2:
-                        switch (childPosition) {
-                            case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Profile");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-
-                            case 1:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Edit Profile");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-                            case 2:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Change Password");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-
-                        }
-                        break;
-
                     case 3:
                         switch (childPosition) {
+
                             case 0:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Tree View");
+                                getSupportActionBar().setTitle("Investment");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
-
                             case 1:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Direct User List");
+                                getSupportActionBar().setTitle("Investment Report");
+                                mExpandableListView.setItemChecked(childPosition, true);
+                                mExpandableListView.setSelection(childPosition);
+                                break;
+                            case 2:
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                getSupportActionBar().setTitle("Investment Request Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
@@ -200,26 +159,20 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
                             case 0:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Direct Income");
+                                getSupportActionBar().setTitle("Direct Referral Income Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
 
                             case 1:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("ROI Income");
+                                getSupportActionBar().setTitle("ROI Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
                             case 2:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Binary Income");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-                            case 3:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Franchise Income");
+                                getSupportActionBar().setTitle("Estimate Amount Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
@@ -231,55 +184,29 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
                             case 0:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Account Wallet");
+                                getSupportActionBar().setTitle("Withdraw");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
 
                             case 1:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Withdrawal Wallet Report");
+                                getSupportActionBar().setTitle("Principal Withdraw");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
+                            case 2:
 
-
-                        }
-                        break;
-
-                    case 6:
-                        switch (childPosition) {
-                            case 0:
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Investment Report");
+                                getSupportActionBar().setTitle("Withdrawal Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
 
-                            case 1:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Transfer Purchase Wallet Report");
-                                mExpandableListView.setItemChecked(childPosition, true);
-                                mExpandableListView.setSelection(childPosition);
-                                break;
-//                            case 2:
-//                                fragmentManager.beginTransaction().replace(R.id.content_frame, AddFundReportFragment.newInstance()).commit();
-//                                getSupportActionBar().setTitle("Add Fund Report");
-//                                mExpandableListView.setItemChecked(childPosition, true);
-//                                mExpandableListView.setSelection(childPosition);
-//                                break;
-
                         }
                         break;
 
-                  /*  case 8:
-                        switch (childPosition) {
 
-
-
-                        }
-                        break;
-*/
                 }
                 mDrawerLayout.closeDrawers();
                 return false;
@@ -305,64 +232,46 @@ public class DashboardActivity extends AppCompatActivity {
         mExpandableListData = new HashMap<String, ArrayList<String>>();
 
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Dashboard"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Invest Wallet"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Profile"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Team"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Income"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Withdrawal Wallet"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Report"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Security"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.userid, "Profile"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.userid, "My Team"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Investment"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Income Report"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Withdrawal"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Lucky Winner Report"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Chat"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Logout"));
 
-        //one
-        ArrayList<String> invest = new ArrayList<String>();
-        invest.add("Add Fund");
-        invest.add("Pending Fund Report");
-        invest.add("Add Fund Report");
-        invest.add("Invest From Purchase Wallet");
-        invest.add("Transfer Purchase Wallet Balance To Other ID");
-
-        //two
-        ArrayList<String> profile = new ArrayList<String>();
-        profile.add("Profile");
-        profile.add("Edit Profile");
-        profile.add("Change Password");
-
         //three
-        ArrayList<String> team = new ArrayList<String>();
-        team.add("Tree View");
-        team.add("Direct User List");
+        ArrayList<String> investment = new ArrayList<String>();
+        investment.add("Investment");
+        investment.add("Investment Report");
+        investment.add("Investment Request Report");
+
 
         //four
         ArrayList<String> incomereport = new ArrayList<String>();
-        incomereport.add("Direct Income");
-        incomereport.add("ROI Income");
-        incomereport.add("Binary Income");
-        incomereport.add("Franchise Income");
+        incomereport.add("Direct Referral Income Report");
+        incomereport.add("ROI Report");
+        incomereport.add("Estimate Amount Report");
 
         //five
-        ArrayList<String> wallet = new ArrayList<String>();
-        wallet.add("Account Wallet");
-        wallet.add("Withdrawal Wallet Report");
+        ArrayList<String> withdrawal = new ArrayList<String>();
+        withdrawal.add("Make Withdrawal");
+        withdrawal.add("Principal Withdrawal");
+        withdrawal.add("Withdrawal Report");
 
-        //Six
-        ArrayList<String> report = new ArrayList<String>();
-        report.add("Investment Report");
-        report.add("Transfer Purchase Wallet Report");
 
 
         ArrayList<String> allTransactions = new ArrayList<String>();
         mExpandableListData.put(mExpandableListTitle.get(0).title, allTransactions);
-        mExpandableListData.put(mExpandableListTitle.get(1).title, invest);
-        mExpandableListData.put(mExpandableListTitle.get(2).title, profile);
-        mExpandableListData.put(mExpandableListTitle.get(3).title, team);
+        mExpandableListData.put(mExpandableListTitle.get(1).title, allTransactions);
+        mExpandableListData.put(mExpandableListTitle.get(2).title, allTransactions);
+        mExpandableListData.put(mExpandableListTitle.get(3).title, investment);
         mExpandableListData.put(mExpandableListTitle.get(4).title, incomereport);
-        mExpandableListData.put(mExpandableListTitle.get(5).title, wallet);
-        mExpandableListData.put(mExpandableListTitle.get(6).title, report);
+        mExpandableListData.put(mExpandableListTitle.get(5).title, withdrawal);
+        mExpandableListData.put(mExpandableListTitle.get(6).title, allTransactions);
         mExpandableListData.put(mExpandableListTitle.get(7).title, allTransactions);
         mExpandableListData.put(mExpandableListTitle.get(8).title, allTransactions);
-        mExpandableListData.put(mExpandableListTitle.get(9).title, allTransactions);
 
         mExpandableListAdapter = new CustomExpandableListAdapter(DashboardActivity.this, mExpandableListTitle, mExpandableListData);
         mExpandableListView.setAdapter(mExpandableListAdapter);

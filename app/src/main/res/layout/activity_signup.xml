@@ -50,6 +50,8 @@
                         android:drawableStart="@drawable/id"
                         android:drawableLeft="@drawable/id"
                         android:drawablePadding="20dp"
+                        android:focusable="false"
+                        android:editable="false"
                         android:fontFamily="@font/open_sans_bold"
                         android:hint=" Enter ID"
                         android:paddingStart="10dp"
@@ -269,6 +271,13 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBar"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

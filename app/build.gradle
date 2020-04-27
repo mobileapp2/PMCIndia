@@ -80,4 +80,8 @@ dependencies {
 
     //circleimage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // butter knife
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 }

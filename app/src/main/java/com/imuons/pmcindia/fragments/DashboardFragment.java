@@ -62,7 +62,7 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this ,view);
         callDashBoardApi();
 
         return view;
@@ -110,12 +110,12 @@ public class DashboardFragment extends Fragment {
     }
 
     private void setData(DashBoardData data) {
-        team.setText(data.getTotalTeam());
-        totalDirect.setText(data.getTotalDirects());
-        roitotalWithdrawal.setText(data.getRoiIncome());
-        tv_directIncome.setText(data.getDirectRefIncome());
-        tv_investment.setText(data.getTotalInvestment());
-        tv_winning.setText(data.getWinningIncome());
-        roitotalWithdrawal.setText(data.getTotalIncome());
+        team.setText(String.valueOf(data.getTotalTeam()));
+        totalDirect.setText(String.valueOf(data.getTotalDirects()));
+        roiIncome.setText(String.valueOf(data.getRoiIncome()));
+        tv_directIncome.setText(String.valueOf(data.getDirectRefIncome()));
+        tv_investment.setText(String.valueOf(data.getTotalInvestment()));
+        tv_winning.setText(String.valueOf(data.getWinningIncome()));
+        roitotalWithdrawal.setText(String.valueOf(data.getTotalWithdraw()));
     }
 }

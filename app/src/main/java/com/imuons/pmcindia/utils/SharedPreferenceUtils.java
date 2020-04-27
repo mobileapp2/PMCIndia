@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 
 import com.google.gson.Gson;
-import com.imuons.pmcindia.models.DashboardResponseModel;
+import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
 import com.imuons.pmcindia.models.LoginResponseModel;
 
 import static android.content.Context.MODE_PRIVATE;

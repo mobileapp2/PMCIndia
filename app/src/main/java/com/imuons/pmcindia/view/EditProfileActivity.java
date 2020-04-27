@@ -42,7 +42,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         Intent intent = null;
-       
+
 
         switch (v.getId()) {
             case R.id.tv_Info:

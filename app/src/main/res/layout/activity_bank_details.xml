@@ -115,6 +115,7 @@
                     android:drawableLeft="@drawable/ic_account_box_black_24dp"
                     android:drawablePadding="20dp"
                     android:focusable="false"
+                    android:inputType="phone"
                     android:fontFamily="@font/open_sans_bold"
                     android:hint="Account No"
                     android:paddingStart="10dp"
@@ -123,6 +124,7 @@
                     android:textColor="@color/colorGreen"
                     android:textColorHint="@color/text_color"
                     android:textSize="18sp"
+                    android:editable="true"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
 
@@ -234,7 +236,6 @@
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/open_sans_bold"
                     android:hint="IFSC Code"
-
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
@@ -249,6 +250,34 @@
                 android:layout_height="1dp"
                 android:background="@color/textColorGreen" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_editbox_height"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/mPan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:drawableStart="@drawable/pan"
+                    android:drawableLeft="@drawable/pan"
+                    android:drawablePadding="20dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:hint="PAN Code"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorGreen"
+                    android:textColorHint="@color/text_color"
+                    android:textSize="18sp"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/textColorGreen" />
         </LinearLayout>
     </ScrollView>
 
@@ -263,14 +292,14 @@
         android:gravity="center"
         android:text="Update"
         android:textAllCaps="true"
-        android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </RelativeLayout>

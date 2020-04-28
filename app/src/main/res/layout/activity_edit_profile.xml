@@ -107,7 +107,7 @@
                 android:layout_height="@dimen/register_editbox_height">
 
                 <EditText
-                    android:id="@+id/mUserName"
+                    android:id="@+id/tv_userId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -117,6 +117,7 @@
                     android:focusable="false"
                     android:fontFamily="@font/open_sans_bold"
                     android:hint="User Name"
+                    android:editable="false"
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
@@ -137,7 +138,7 @@
                 android:layout_marginTop="10dp">
 
                 <EditText
-                    android:id="@+id/mEmail"
+                    android:id="@+id/tv_emailId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -167,7 +168,7 @@
                 android:layout_marginTop="10dp">
 
                 <EditText
-                    android:id="@+id/mMobileNo"
+                    android:id="@+id/tv_MobileNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -198,6 +199,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
+                    android:id="@+id/tv_withdrawType"
                     android:textAlignment="gravity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -266,11 +268,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/register_editbox_height"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/mBTCAddress"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_btcAddress"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
                     android:drawableStart="@drawable/ic_stars_black_24dp"
@@ -279,11 +283,13 @@
                     android:fontFamily="@font/open_sans_bold"
                     android:hint="BTC Address"
                     android:paddingStart="10dp"
+                    android:editable="false"
+                    android:maxLines="3"
                     android:paddingLeft="10dp"
-                    android:singleLine="true"
+                    android:singleLine="false"
                     android:textColor="@color/colorGreen"
                     android:textColorHint="@color/text_color"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     tools:ignore="RtlSymmetry" />
             </LinearLayout>
 

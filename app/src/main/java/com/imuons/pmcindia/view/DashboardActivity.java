@@ -237,7 +237,7 @@ public class DashboardActivity extends AppCompatActivity {
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Investment"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Income Report"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Withdrawal"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Lucky Winner Report"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.cup, "Lucky Winner Report"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Chat"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Logout"));
 

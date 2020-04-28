@@ -4,15 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.imuons.pmcindia.Entity.ChangePasswordEntity;
+import com.imuons.pmcindia.Entity.UserInfoEntity;
 import com.imuons.pmcindia.R;
+import com.imuons.pmcindia.ResponseModel.ChangePasswordResponseModel;
+import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.fragments.ProfileFragment;
+import com.imuons.pmcindia.retrofit.AppService;
+import com.imuons.pmcindia.retrofit.ServiceGenerator;
+import com.imuons.pmcindia.utils.AppCommon;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +42,18 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     TextView tv_change_Password;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.tv_OldPassword)
+    EditText tv_OldPassword;
+    @BindView(R.id.tv_NewPassword)
+    EditText tv_NewPassword;
+    @BindView(R.id.tv_reEnterPassword)
+    EditText tv_reEnterPassword;
+
+    //button
+    @BindView(R.id.changePassword)
+    TextView changePassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,37 +61,94 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         ButterKnife.bind(this);
         registerListeners();
     }
-        private void registerListeners () {
-            tv_Info.setOnClickListener(this);
-            tv_editProfile.setOnClickListener(this);
-            tv_bank_Details.setOnClickListener(this);
 
+
+    @OnClick(R.id.changePassword)
+    void change() {
+        String old_password = tv_OldPassword.getText().toString().trim();
+        String new_password = tv_NewPassword.getText().toString().trim();
+        String confirm_password = tv_reEnterPassword.getText().toString().trim();
+
+
+        callChangePassApi(new ChangePasswordEntity(confirm_password, new_password, old_password));
+
+    }
+
+    private void callChangePassApi(ChangePasswordEntity changePasswordEntity) {
+
+        if (AppCommon.getInstance(this).isConnectingToInternet(this)) {
+            AppCommon.getInstance(this).setNonTouchableFlags(this);
+            AppService apiService = ServiceGenerator.createService(AppService.class);
+            progressBar.setVisibility(View.VISIBLE);
+            Call call = apiService.ChangePassword(changePasswordEntity);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    AppCommon.getInstance(ChangePasswordActivity.this).clearNonTouchableFlags(ChangePasswordActivity.this);
+                    progressBar.setVisibility(View.GONE);
+                    ChangePasswordResponseModel authResponse = (ChangePasswordResponseModel) response.body();
+                    if (authResponse != null) {
+                        Log.i("editprofile::", new Gson().toJson(authResponse));
+                        if (authResponse.getCode() == 200) {
+                            if (authResponse.getData() != null)
+                                Toast.makeText(ChangePasswordActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            tv_OldPassword.setText("");
+                            tv_NewPassword.setText("");
+                            tv_reEnterPassword.setText("");
+
+                        } else {
+                            Toast.makeText(ChangePasswordActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        AppCommon.getInstance(ChangePasswordActivity.this).showDialog(ChangePasswordActivity.this, "Server Error");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    progressBar.setVisibility(View.GONE);
+                    AppCommon.getInstance(ChangePasswordActivity.this).clearNonTouchableFlags(ChangePasswordActivity.this);
+                    // loaderView.setVisibility(View.GONE);
+                    Toast.makeText(ChangePasswordActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        } else {
+            // no internet
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this, "Please check your internet", Toast.LENGTH_SHORT).show();
         }
-    
-        @Override
-        public void onClick (View v){
-            Intent intent = null;
+
+    }
+
+    private void registerListeners() {
+        tv_Info.setOnClickListener(this);
+        tv_editProfile.setOnClickListener(this);
+        tv_bank_Details.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
 
 
-            switch (v.getId()) {
-                case R.id.tv_Info:
-                    intent = new Intent(ChangePasswordActivity.this,
-                            ProfileFragment.class);
-                    startActivity(intent);
-                    break;
-                case R.id.tv_editProfile:
-                    intent = new Intent(ChangePasswordActivity.this,
-                            EditProfileActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.tv_bank_Details:
-                    intent = new Intent(ChangePasswordActivity.this,
-                            BankDetailsActivity.class);
-                    startActivity(intent);
-                    break;
+        switch (v.getId()) {
 
-                default:
-                    break;
-            }
+            case R.id.tv_editProfile:
+                intent = new Intent(ChangePasswordActivity.this,
+                        EditProfileActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_bank_Details:
+                intent = new Intent(ChangePasswordActivity.this,
+                        ChangePasswordActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
+                break;
         }
     }
+}

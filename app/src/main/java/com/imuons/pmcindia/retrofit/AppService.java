@@ -1,10 +1,13 @@
 package com.imuons.pmcindia.retrofit;
 
 
+import com.imuons.pmcindia.Entity.ChangePasswordEntity;
 import com.imuons.pmcindia.Entity.CheckOtpEntity;
 import com.imuons.pmcindia.Entity.CheckuserEntity;
 import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.Entity.RegitrationEntity;
+import com.imuons.pmcindia.Entity.UserInfoEntity;
+import com.imuons.pmcindia.ResponseModel.ChangePasswordResponseModel;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
@@ -13,10 +16,13 @@ import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
 import com.imuons.pmcindia.ResponseModel.SendResponse;
+import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
+import com.imuons.pmcindia.ResponseModel.UserProfileResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface AppService {
@@ -52,4 +58,18 @@ public interface AppService {
     Call<CheckOtpResponse> CheckOtp(
             @Body CheckOtpEntity checkOtpentity
     );
+
+    @GET("get-profile-info")
+    Call<UserProfileResponse> UserInfo();
+
+    @POST("change-profile")
+    Call<UpdateProfileResponse> UpdateProfile(
+            @Body UserInfoEntity userInfoEntity
+    );
+
+    @POST("change-password")
+    Call<ChangePasswordResponseModel> ChangePassword(
+            @Body ChangePasswordEntity changePasswordEntity
+    );
+
 }

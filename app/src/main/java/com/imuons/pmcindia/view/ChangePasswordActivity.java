@@ -140,11 +140,13 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                 intent = new Intent(ChangePasswordActivity.this,
                         EditProfileActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.tv_bank_Details:
                 intent = new Intent(ChangePasswordActivity.this,
-                        ChangePasswordActivity.class);
+                        BankDetailsActivity.class);
                 startActivity(intent);
+                finish();
                 break;
 
             default:

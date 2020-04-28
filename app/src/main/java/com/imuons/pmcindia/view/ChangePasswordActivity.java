@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.imuons.pmcindia.R;
@@ -24,7 +25,8 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     TextView tv_bank_Details;
     @BindView(R.id.tv_change_Password)
     TextView tv_change_Password;
-
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -44,7 +45,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     TextView tv_btcAddress;
     @BindView(R.id.tv_withdrawType)
     TextView tv_withdrawType;
-
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     public ProfileFragment() {
         // Required empty public constructor
     }

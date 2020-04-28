@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
 
     @OnClick(R.id.singUp)
     void singUp(){
-        startActivity(new Intent(this , SignupActivity.class));
+        startActivityForResult(new Intent(this , SignupActivity.class) , 190);
     }
     @OnClick(R.id.login)
     void login(){
@@ -112,7 +112,7 @@ public class LoginActivity extends Activity {
     private void setData(LoginData data) {
         AppCommon.getInstance(this).setUserObject(new Gson().toJson(data));
         AppCommon.getInstance(this).setToken(data.getAccess_token());
-        startActivityForResult(new Intent(this , DashboardActivity.class) , 190);
+        startActivity(new Intent(this , DashboardActivity.class) );
     }
 
     @Override
@@ -123,4 +123,11 @@ public class LoginActivity extends Activity {
             mEditUserName.setText(userId);
         }
     }
+
+    @OnClick(R.id.tvForgetPassword)
+    void forgot()
+    {
+        startActivity(new Intent(this , ForgetPassword.class));
+    }
+
 }

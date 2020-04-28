@@ -31,7 +31,7 @@ public class BankDetailsActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_bank_details);
         ButterKnife.bind(this);
         registerListeners();
-       
+
     }
 
     private void registerListeners() {

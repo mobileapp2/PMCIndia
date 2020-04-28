@@ -52,7 +52,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                     break;
                 case R.id.tv_editProfile:
                     intent = new Intent(ChangePasswordActivity.this,
-                            ChangePasswordActivity.class);
+                            EditProfileActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.tv_bank_Details:

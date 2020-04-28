@@ -50,8 +50,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         ProfileFragment.class);
                 startActivity(intent);
                 break;
-
-
             case R.id.tv_bank_Details:
                 intent = new Intent(EditProfileActivity.this,
                         BankDetailsActivity.class);

@@ -31,6 +31,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.tv_change_Password)
     TextView tv_change_Password;
 
+
+    @BindView(R.id.tv_userId)
+    TextView tv_userId;
+    @BindView(R.id.tv_sponsorId)
+    TextView tv_sponsorId;
+    @BindView(R.id.tv_emailId)
+    TextView tv_emailId;
+    @BindView(R.id.tv_MobileNo)
+    TextView tv_MobileNo;
+    @BindView(R.id.tv_btcAddress)
+    TextView tv_btcAddress;
+    @BindView(R.id.tv_withdrawType)
+    TextView tv_withdrawType;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -64,11 +78,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         Gson gS = new Gson();
 
         switch (v.getId()) {
-            case R.id.tv_Info:
-                intent = new Intent(ProfileFragment.this.getContext(),
-                        ProfileFragment.class);
-                startActivity(intent);
-                break;
+
             case R.id.tv_editProfile:
                 intent = new Intent(ProfileFragment.this.getContext(),
                         EditProfileActivity.class);

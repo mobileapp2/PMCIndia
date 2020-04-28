@@ -31,6 +31,7 @@ public class BankDetailsActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_bank_details);
         ButterKnife.bind(this);
         registerListeners();
+       
     }
 
     private void registerListeners() {
@@ -53,7 +54,7 @@ public class BankDetailsActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.tv_editProfile:
                 intent = new Intent(BankDetailsActivity.this,
-                        BankDetailsActivity.class);
+                        EditProfileActivity.class);
                 startActivity(intent);
                 break;
 

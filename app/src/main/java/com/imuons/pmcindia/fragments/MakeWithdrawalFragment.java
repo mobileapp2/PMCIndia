@@ -128,8 +128,7 @@ public class MakeWithdrawalFragment extends Fragment {
 
             getBalanceInfo();
         } else {
-            Toast.makeText(MakeWithdrawalFragment.this.getContext(),
-                    getString(R.string.no_internet_connection_message), Toast.LENGTH_SHORT).show();
+           
         }
     }
 }

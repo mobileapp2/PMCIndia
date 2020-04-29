@@ -21,8 +21,11 @@ import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
 import com.imuons.pmcindia.fragments.DashboardFragment;
 import com.imuons.pmcindia.fragments.FragmentRequestReport;
 import com.imuons.pmcindia.fragments.InvestmentReportFragment;
+import com.imuons.pmcindia.fragments.MakeWithdrawalFragment;
 import com.imuons.pmcindia.fragments.MyTeamFragment;
+import com.imuons.pmcindia.fragments.PrincipleWithdrawFragment;
 import com.imuons.pmcindia.fragments.ProfileFragment;
+import com.imuons.pmcindia.fragments.WithdrawReportFragment;
 import com.imuons.pmcindia.models.ExpandableListModel;
 import com.imuons.pmcindia.utils.AppCommon;
 import com.imuons.pmcindia.utils.SharedPreferenceUtils;
@@ -186,21 +189,21 @@ public class DashboardActivity extends AppCompatActivity {
                     case 5:
                         switch (childPosition) {
                             case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
-                                getSupportActionBar().setTitle("Withdraw");
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, MakeWithdrawalFragment.newInstance()).commit();
+                                getSupportActionBar().setTitle("Make Withdraw");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
 
                             case 1:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, PrincipleWithdrawFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("Principal Withdraw");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
                             case 2:
 
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, WithdrawReportFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("Withdrawal Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -262,7 +265,6 @@ public class DashboardActivity extends AppCompatActivity {
         withdrawal.add("Make Withdrawal");
         withdrawal.add("Principal Withdrawal");
         withdrawal.add("Withdrawal Report");
-
 
 
         ArrayList<String> allTransactions = new ArrayList<String>();

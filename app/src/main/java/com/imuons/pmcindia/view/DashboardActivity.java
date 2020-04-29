@@ -20,6 +20,7 @@ import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
 import com.imuons.pmcindia.fragments.DashboardFragment;
 import com.imuons.pmcindia.fragments.InvestmentReportFragment;
+import com.imuons.pmcindia.fragments.InvestmentRequestReportFragment;
 import com.imuons.pmcindia.fragments.MyTeamFragment;
 import com.imuons.pmcindia.fragments.ProfileFragment;
 import com.imuons.pmcindia.models.ExpandableListModel;
@@ -147,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 mExpandableListView.setSelection(childPosition);
                                 break;
                             case 2:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, InvestmentRequestReportFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("Investment Request Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);

@@ -19,6 +19,8 @@ import com.imuons.pmcindia.ResponseModel.FundRequestRecordModel;
 
 import java.util.List;
 
+import static com.imuons.pmcindia.application.PMCApplication.imageLoader;
+
 public class InvestmentRequestAdapter extends RecyclerView.Adapter<InvestmentRequestAdapter.ViewHolder>{
 
 Context context;
@@ -75,7 +77,7 @@ List<FundRequestRecordModel> requestRecordModels_list;
         holder.tv_pkg_name.setText(fundRequestRecordModel.getProductName());
         holder.status.setText(fundRequestRecordModel.getStatus());
         holder.date.setText(fundRequestRecordModel.getEntryTime());
-
+        imageLoader.displayImage(fundRequestRecordModel.getAttachment(), holder.attacment);
     }
 
     @Override

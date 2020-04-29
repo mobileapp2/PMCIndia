@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_bold"
                     android:text="10"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -65,7 +65,7 @@
                 android:layout_weight="0.5"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
-                android:text="Search"
+                android:text="entries"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -76,13 +76,16 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1.8"
+                android:background="@drawable/searchborder"
                 android:drawableRight="@drawable/searchicon"
                 android:focusable="true"
+                android:gravity="center"
+                android:hint="Search"
                 android:imeOptions="actionSearch"
                 android:maxLines="1"
                 android:paddingRight="10dp"
                 android:singleLine="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/darkgreen" />
         </LinearLayout>
 
         <Spinner

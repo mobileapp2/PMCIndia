@@ -23,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(5 * 1000);
+                    sleep(2000);
                     String token = AppCommon.getInstance(SplashScreen.this).getToken();
                     //SharedPreferenceUtils.getAccesstoken(SplashScreen.this);
 
@@ -32,6 +32,7 @@ public class SplashScreen extends AppCompatActivity {
                     } else {
                         startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
                     }
+                    finish();
 
 
                 } catch (Exception e) {

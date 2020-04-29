@@ -62,8 +62,7 @@ public class ForgetPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
 
-        DecimalFormat form = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
-        //EditText et = null;
+
 
         mEditUserid.addTextChangedListener(new TextWatcher() {
             @Override

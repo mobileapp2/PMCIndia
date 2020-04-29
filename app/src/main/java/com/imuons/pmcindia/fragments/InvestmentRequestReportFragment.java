@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 
 import com.imuons.pmcindia.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import butterknife.ButterKnife;
+
+
 public class InvestmentRequestReportFragment extends Fragment {
 
     public InvestmentRequestReportFragment() {
@@ -29,6 +29,7 @@ public class InvestmentRequestReportFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_investment_request_report, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 }

@@ -17,6 +17,7 @@ import com.imuons.pmcindia.ResponseModel.LevelResponse;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
 import com.imuons.pmcindia.ResponseModel.MakeWithdrawResponseModel;
 import com.imuons.pmcindia.ResponseModel.MyTeamResponse;
+import com.imuons.pmcindia.ResponseModel.PrincipleWithdrawResponse;
 import com.imuons.pmcindia.ResponseModel.QuestionResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
@@ -93,6 +94,10 @@ public interface AppService {
     Call<WithdrawAmountResponse> WithdrawAmount(
             @Body WithdrawAmountEntity amountEntity
     );
+
+    //tabish
+    @GET("get-principal-balance")
+    Call<PrincipleWithdrawResponse> PrincipleWithdraw();
 
 
     //Rahul

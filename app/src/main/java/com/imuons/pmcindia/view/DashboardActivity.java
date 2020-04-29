@@ -18,13 +18,19 @@ import androidx.fragment.app.FragmentManager;
 
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
+import com.imuons.pmcindia.fragments.ChatFragment;
 import com.imuons.pmcindia.fragments.DashboardFragment;
+import com.imuons.pmcindia.fragments.DirectReferralIncomeReportFragment;
+import com.imuons.pmcindia.fragments.EstimateAmountReportFragment;
 import com.imuons.pmcindia.fragments.FragmentRequestReport;
+import com.imuons.pmcindia.fragments.InvestmentFragment;
 import com.imuons.pmcindia.fragments.InvestmentReportFragment;
+import com.imuons.pmcindia.fragments.LuckyWinnerReportFragment;
 import com.imuons.pmcindia.fragments.MakeWithdrawalFragment;
 import com.imuons.pmcindia.fragments.MyTeamFragment;
 import com.imuons.pmcindia.fragments.PrincipleWithdrawFragment;
 import com.imuons.pmcindia.fragments.ProfileFragment;
+import com.imuons.pmcindia.fragments.ROIReportFragment;
 import com.imuons.pmcindia.fragments.WithdrawReportFragment;
 import com.imuons.pmcindia.models.ExpandableListModel;
 import com.imuons.pmcindia.utils.AppCommon;
@@ -109,12 +115,12 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
 
                     case 6:
-                        fragmentManager.beginTransaction().replace(R.id.content_frame, MyTeamFragment.newInstance()).commit();
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, LuckyWinnerReportFragment.newInstance()).commit();
                         getSupportActionBar().setTitle("Lucky Winner Report");
                         mDrawerLayout.closeDrawers();
                         break;
                     case 7:
-                        fragmentManager.beginTransaction().replace(R.id.content_frame, MyTeamFragment.newInstance()).commit();
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, ChatFragment.newInstance()).commit();
                         getSupportActionBar().setTitle("Chat");
                         mDrawerLayout.closeDrawers();
                         break;
@@ -139,7 +145,7 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
 
                             case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, InvestmentFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("Investment");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -151,8 +157,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 mExpandableListView.setSelection(childPosition);
                                 break;
                             case 2:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame,
-                                        FragmentRequestReport.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, FragmentRequestReport.newInstance()).commit();
                                 getSupportActionBar().setTitle("Investment Request Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -164,20 +169,20 @@ public class DashboardActivity extends AppCompatActivity {
                     case 4:
                         switch (childPosition) {
                             case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, DirectReferralIncomeReportFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("Direct Referral Income Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
 
                             case 1:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, ROIReportFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("ROI Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
                                 break;
                             case 2:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, EstimateAmountReportFragment.newInstance()).commit();
                                 getSupportActionBar().setTitle("Estimate Amount Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -318,7 +323,7 @@ public class DashboardActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
             builder1 = new AlertDialog.Builder(DashboardActivity.this, AlertDialog.THEME_HOLO_LIGHT);
         }
-        builder1.setTitle("Exit");
+        builder1.setTitle("Alert");
         builder1.setMessage("Are you sure you want to Logout ?");
         builder1.setCancelable(true);
 

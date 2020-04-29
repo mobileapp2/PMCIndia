@@ -231,15 +231,15 @@ public class DashboardActivity extends AppCompatActivity {
         mExpandableListTitle = new ArrayList<ExpandableListModel>();
         mExpandableListData = new HashMap<String, ArrayList<String>>();
 
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Dashboard"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.userid, "Profile"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.userid, "My Team"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Investment"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Income Report"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Withdrawal"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.dashboard, "Dashboard"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.userss, "Profile"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.people, "My Team"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.money, "Investment"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.report, "Income Report"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.withdraw, "Withdrawal"));
         mExpandableListTitle.add(new ExpandableListModel(R.drawable.cup, "Lucky Winner Report"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Chat"));
-        mExpandableListTitle.add(new ExpandableListModel(R.drawable.user, "Logout"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.chat, "Chat"));
+        mExpandableListTitle.add(new ExpandableListModel(R.drawable.logout, "Logout"));
 
         //three
         ArrayList<String> investment = new ArrayList<String>();

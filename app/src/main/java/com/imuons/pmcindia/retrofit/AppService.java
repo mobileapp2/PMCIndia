@@ -7,20 +7,30 @@ import com.imuons.pmcindia.Entity.CheckuserEntity;
 import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.Entity.RegitrationEntity;
 import com.imuons.pmcindia.Entity.UserInfoEntity;
+import com.imuons.pmcindia.Entity.WithdrawAmountEntity;
 import com.imuons.pmcindia.ResponseModel.ChangePasswordResponseModel;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
+import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
+import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
+import com.imuons.pmcindia.ResponseModel.MakeWithdrawResponseModel;
 import com.imuons.pmcindia.ResponseModel.QuestionResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
 import com.imuons.pmcindia.ResponseModel.SendResponse;
+import com.imuons.pmcindia.ResponseModel.TopupReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.ResponseModel.UserProfileResponse;
+import com.imuons.pmcindia.ResponseModel.WithdrawAmountResponse;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -71,5 +81,25 @@ public interface AppService {
     Call<ChangePasswordResponseModel> ChangePassword(
             @Body ChangePasswordEntity changePasswordEntity
     );
+
+    //tabish
+    @GET("get-working-balance")
+    Call<MakeWithdrawResponseModel> MakeWithdraw();
+
+    //tabish
+    @POST("withdraw-income")
+    Call<WithdrawAmountResponse> WithdrawAmount(
+            @Body WithdrawAmountEntity amountEntity
+    );
+
+
+    //Rahul
+    Call<GetPackageResponseModel>GetPackages();
+    @FormUrlEncoded
+    @POST("fund-request-report")
+    Call<GetFundRequestReportResponseModel> GetFundRequestReport(@FieldMap Map<String, Object> param);
+    @FormUrlEncoded
+    @POST("topup-report")
+    Call<TopupReportResponseModel> GetTopupReport(@FieldMap Map<String, Object>  param);
 
 }

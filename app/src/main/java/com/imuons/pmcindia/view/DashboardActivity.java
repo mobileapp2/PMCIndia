@@ -1,11 +1,5 @@
 package com.imuons.pmcindia.view;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,9 +10,16 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
 import com.imuons.pmcindia.fragments.DashboardFragment;
+import com.imuons.pmcindia.fragments.FragmentRequestReport;
 import com.imuons.pmcindia.fragments.InvestmentReportFragment;
 import com.imuons.pmcindia.fragments.MyTeamFragment;
 import com.imuons.pmcindia.fragments.ProfileFragment;
@@ -147,7 +148,8 @@ public class DashboardActivity extends AppCompatActivity {
                                 mExpandableListView.setSelection(childPosition);
                                 break;
                             case 2:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame,
+                                        FragmentRequestReport.newInstance()).commit();
                                 getSupportActionBar().setTitle("Investment Request Report");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);

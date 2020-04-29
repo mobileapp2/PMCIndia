@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.imuons.pmcindia.R;
-import com.imuons.pmcindia.ResponseModel.TopupRecordModel;
-import com.imuons.pmcindia.ResponseModel.TopupReportResponseModel;
-import com.imuons.pmcindia.adapters.InvestmentReportAdapter;
+import com.imuons.pmcindia.ResponseModel.FundRequestRecordModel;
+import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
+import com.imuons.pmcindia.adapters.InvestmentRequestAdapter;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
@@ -35,24 +35,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class InvestmentReportFragment extends Fragment {
+public class FragmentRequestReport extends Fragment {
 
     private View view;
 
-    public InvestmentReportFragment() {
+    public FragmentRequestReport() {
         // Required empty public constructor
+    }
+
+    public static FragmentRequestReport newInstance() {
+        FragmentRequestReport fragment = new FragmentRequestReport();
+        return fragment;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view= inflater.inflate(R.layout.fragment_request_report, container, false);
+        initUI();
+        return view;
     }
     private RecyclerView recycle_view;
     private Spinner spinner_show_entry;
     private EditText searchbyid;
-    public static InvestmentReportFragment newInstance() {
-        InvestmentReportFragment fragment = new InvestmentReportFragment();
-
-        return fragment;
-    }
     private void initUI() {
         recycle_view = view.findViewById(R.id.recycler_view);
         spinner_show_entry = view.findViewById(R.id.spinner_show);
@@ -67,14 +72,7 @@ public class InvestmentReportFragment extends Fragment {
                 LinearLayoutManager.VERTICAL, false));
         searchListener();
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-         view = inflater.inflate(R.layout.fragment_investment_report, container, false);
-         initUI();
-        return view;
-    }
+
     private void searchListener() {
 
         searchbyid.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -94,8 +92,8 @@ public class InvestmentReportFragment extends Fragment {
         spinner_show_entry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                callRequestreport(
-                        Integer.parseInt(spinner_show_entry.getSelectedItem().toString()),searchbyid.getText().toString());
+               callRequestreport(
+                       Integer.parseInt(spinner_show_entry.getSelectedItem().toString()),searchbyid.getText().toString());
             }
 
             @Override
@@ -104,6 +102,7 @@ public class InvestmentReportFragment extends Fragment {
             }
         });
     }
+
     private void callRequestreport(int length,String  search) {
 
 
@@ -115,18 +114,18 @@ public class InvestmentReportFragment extends Fragment {
             param.put("length", length);
             param.put("search[value]",search);
             param.put("search[regex]",false);
-            Call call = apiService.GetTopupReport(param);
+            Call call = apiService.GetFundRequestReport(param);
             call.enqueue(new Callback() {
                 @Override
                 public void onResponse(Call call, Response response) {
                     AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
                     // progressBar.setVisibility(View.GONE);
-                    TopupReportResponseModel fundRequestReportResponseModel =
-                            (TopupReportResponseModel) response.body();
+                    GetFundRequestReportResponseModel fundRequestReportResponseModel =
+                            (GetFundRequestReportResponseModel) response.body();
                     if (fundRequestReportResponseModel != null) {
                         Log.i("requets fund::", new Gson().toJson(fundRequestReportResponseModel));
                         if (fundRequestReportResponseModel.getCode() == 200) {
-                            setadpter(fundRequestReportResponseModel.getData().getRecords());
+                            setadpter(fundRequestReportResponseModel.getData().getRecord());
                         } else {
                             Toast.makeText(getContext(), fundRequestReportResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -154,11 +153,9 @@ public class InvestmentReportFragment extends Fragment {
 
     }
 
-    private void setadpter(List<TopupRecordModel> records) {
-        InvestmentReportAdapter investmentReportAdapter=new InvestmentReportAdapter(getActivity()
-                , records);
-        recycle_view.setAdapter(investmentReportAdapter);
+    private void setadpter(List<FundRequestRecordModel> data) {
+        InvestmentRequestAdapter investmentRequestReportAdapter=
+                new InvestmentRequestAdapter(getActivity(),data);
+        recycle_view.setAdapter(investmentRequestReportAdapter);
     }
-
-
 }

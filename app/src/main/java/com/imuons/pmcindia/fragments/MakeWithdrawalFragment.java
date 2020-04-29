@@ -69,8 +69,6 @@ public class MakeWithdrawalFragment extends Fragment {
     void withdraw() {
         String amount = tv_amount.getText().toString().trim();
 
-
-
     }
 
     private void getBalanceInfo() {
@@ -128,7 +126,7 @@ public class MakeWithdrawalFragment extends Fragment {
 
             getBalanceInfo();
         } else {
-           
+
         }
     }
 }

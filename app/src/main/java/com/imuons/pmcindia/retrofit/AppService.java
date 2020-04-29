@@ -13,8 +13,10 @@ import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
 import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;
+import com.imuons.pmcindia.ResponseModel.LevelResponse;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
 import com.imuons.pmcindia.ResponseModel.MakeWithdrawResponseModel;
+import com.imuons.pmcindia.ResponseModel.MyTeamResponse;
 import com.imuons.pmcindia.ResponseModel.QuestionResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
@@ -94,12 +96,27 @@ public interface AppService {
 
 
     //Rahul
-    Call<GetPackageResponseModel>GetPackages();
+    Call<GetPackageResponseModel> GetPackages();
+
     @FormUrlEncoded
     @POST("fund-request-report")
     Call<GetFundRequestReportResponseModel> GetFundRequestReport(@FieldMap Map<String, Object> param);
+
     @FormUrlEncoded
     @POST("topup-report")
-    Call<TopupReportResponseModel> GetTopupReport(@FieldMap Map<String, Object>  param);
+    Call<TopupReportResponseModel> GetTopupReport(@FieldMap Map<String, Object> param);
 
+    //azhar
+    @GET("get-level")
+    Call<LevelResponse> getLevel(
+            //   LevelEntity levelEntity
+    );
+
+    //azhar
+    @FormUrlEncoded
+    @POST("level-view")
+    Call<MyTeamResponse> getLevelView(
+            //@Body MyTeamEntity myTeamEntity
+            @FieldMap Map<String, String> loginMap
+    );
 }

@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.adapters.CustomExpandableListAdapter;
 import com.imuons.pmcindia.fragments.DashboardFragment;
+import com.imuons.pmcindia.fragments.FragmentInvestment;
 import com.imuons.pmcindia.fragments.FragmentRequestReport;
 import com.imuons.pmcindia.fragments.InvestmentReportFragment;
 import com.imuons.pmcindia.fragments.MakeWithdrawalFragment;
@@ -47,6 +50,8 @@ public class DashboardActivity extends AppCompatActivity {
     private long lastPressedTime;
     private static final int PERIOD = 2000;
     Toolbar toolbar;
+    private String tag="DashboardActivity";
+    private FragmentInvestment fragmentInvestment;
 
 
     @Override
@@ -139,7 +144,9 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
 
                             case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, DashboardFragment.newInstance()).commit();
+                              fragmentInvestment=
+                                     FragmentInvestment.newInstance();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame,fragmentInvestment ).commit();
                                 getSupportActionBar().setTitle("Investment");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -350,5 +357,22 @@ public class DashboardActivity extends AppCompatActivity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(tag, "------requestCode code" + requestCode);
+        Log.d(tag, "------resultCode code" + resultCode);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 200 || requestCode == 100) {
+                fragmentInvestment.setImage(requestCode,resultCode,data);
+            } else if (requestCode == 100) {
 
+            } else if (requestCode == 1010) {
+
+            }
+
+        } else {
+
+        }
+    }
 }

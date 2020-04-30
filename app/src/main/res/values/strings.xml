@@ -13,4 +13,11 @@
         <item>5000</item>
         <item>10000</item>
     </string-array>
+    <string name="Capture_photo_from_camera">Capture photo from camera</string>
+    <string name="Select_photo_from_gallery">Select photo from gallery</string>
+
+    <string name="canclecaptcheimage">Captured image not uploaded</string>
+    <string name="failedtocaptch">Sorry! Failed to capture image</string>
+    <string name="cancle_imagegselect">Selected image not Uploaded</string>
+    <string name="flaid_select_image">No image selected</string>
 </resources>

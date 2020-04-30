@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
-    >
+    android:orientation="vertical">
+
     <LinearLayout
-        android:background="@drawable/selector_list_view"
         android:id="@+id/llmain"
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:background="@drawable/selector_list_view"
         android:orientation="horizontal"
         android:weightSum="6">
 
@@ -26,9 +25,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/selector_add_player"
                 android:padding="5dp"
-                android:tint="@color/colorGreen"/>
+                android:src="@drawable/selector_add_player"
+                android:tint="@color/colorGreen" />
 
             <TextView
                 android:id="@+id/srno"
@@ -42,20 +41,19 @@
         </LinearLayout>
 
 
-
         <TextView
-            android:layout_margin="2dp"
             android:id="@+id/deposit"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_margin="2dp"
             android:layout_weight="2.5"
             android:gravity="center"
             android:textColor="@color/colorBlack"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/amount"
+            android:id="@+id/packageName"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -67,22 +65,23 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
     <LinearLayout
-        android:visibility="visible"
         android:id="@+id/hiddenlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:elevation="5dp"
         android:background="@drawable/bg_green_20radius"
-        android:orientation="vertical">
+        android:elevation="5dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
 
         <LinearLayout
-
-            android:background="@color/colorGreen"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:background="@color/textColorGreen"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -92,12 +91,12 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:text="Package Name"
+                android:text="House"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/tv_pkg_name"
+                android:id="@+id/house"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -109,38 +108,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@color/textColorGreen"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:text="Status"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <LinearLayout
-
             android:background="@color/colorGreen"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -150,44 +120,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:text="Attachment"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <LinearLayout
-                android:id="@+id/tv_slot_no"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-              android:gravity="center"
-                android:orientation="horizontal">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/attacment"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp">
-
-                </de.hdodenhof.circleimageview.CircleImageView>
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:background="@color/textColorGreen"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:text="Date"
+                android:text="Date(MM/DD/YYYY)"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -202,8 +135,5 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
-
-
-
     </LinearLayout>
 </LinearLayout>

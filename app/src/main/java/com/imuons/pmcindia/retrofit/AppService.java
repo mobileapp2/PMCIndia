@@ -15,6 +15,7 @@ import com.imuons.pmcindia.ResponseModel.ChatResponse;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
 import com.imuons.pmcindia.ResponseModel.CommonResponse;
+import com.imuons.pmcindia.ResponseModel.DirectResponse;
 import com.imuons.pmcindia.ResponseModel.EstimateResponse;
 import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;

@@ -134,4 +134,15 @@ public interface AppService {
             //@Body MyTeamEntity myTeamEntity
             @FieldMap Map<String, String> loginMap
     );
+
+    //azhar
+    @POST("fetch_message_mob")
+    Call<ChatResponse> getChatList(
+            @Body ChatEntity chatEntity
+    );
+
+    @POST("send-chat-message")
+    Call<CommonResponse> sendMessage(
+            @Body SendMessage sendMessage
+    );
 }

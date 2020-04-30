@@ -50,4 +50,6 @@
     <color name="dashboard">#04061d</color>
     <color name="darkgreen">#308301</color>
     <color name="text_color">#a4c098</color>
+    <color name="green_chat">#a7d62e</color>
+    <color name="txt_green">#367b5a</color>
 </resources>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
@@ -22,8 +23,8 @@ import com.imuons.pmcindia.fragments.ChatFragment;
 import com.imuons.pmcindia.fragments.DashboardFragment;
 import com.imuons.pmcindia.fragments.DirectReferralIncomeReportFragment;
 import com.imuons.pmcindia.fragments.EstimateAmountReportFragment;
+import com.imuons.pmcindia.fragments.FragmentInvestment;
 import com.imuons.pmcindia.fragments.FragmentRequestReport;
-import com.imuons.pmcindia.fragments.InvestmentFragment;
 import com.imuons.pmcindia.fragments.InvestmentReportFragment;
 import com.imuons.pmcindia.fragments.LuckyWinnerReportFragment;
 import com.imuons.pmcindia.fragments.MakeWithdrawalFragment;
@@ -53,6 +54,8 @@ public class DashboardActivity extends AppCompatActivity {
     private long lastPressedTime;
     private static final int PERIOD = 2000;
     Toolbar toolbar;
+    private FragmentInvestment fragmentInvestment;
+    private String tag="Dashboard";
 
 
     @Override
@@ -145,7 +148,8 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
 
                             case 0:
-                                fragmentManager.beginTransaction().replace(R.id.content_frame, InvestmentFragment.newInstance()).commit();
+                             fragmentInvestment=FragmentInvestment.newInstance();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame,fragmentInvestment).commit();
                                 getSupportActionBar().setTitle("Investment");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -356,4 +360,22 @@ public class DashboardActivity extends AppCompatActivity {
         alert11.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(tag, "------requestCode code" + requestCode);
+        Log.d(tag, "------resultCode code" + resultCode);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 200 || requestCode == 100) {
+                fragmentInvestment.setImage(requestCode, resultCode, data);
+            } else if (requestCode == 100) {
+
+            } else if (requestCode == 1010) {
+
+            }
+
+        } else {
+
+        }
+    }
 }

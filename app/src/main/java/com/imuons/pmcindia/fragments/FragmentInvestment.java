@@ -513,7 +513,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             Log.d(tag, "--prduct id--"+packageRecordModel.getRefProductId());
             Log.d(tag, "--type-"+type);
             Log.d(tag, "-hashuint--"+amount);
-            Log.d(tag, "-param--"+new String(bos.toByteArray()));
 
         } else {
             // no internet
@@ -574,7 +573,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         }
         dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
         dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + fileName + "\"" + lineEnd);
-        dataOutputStream.writeBytes("Content-Type: image/png"+lineEnd);
         dataOutputStream.writeBytes(lineEnd);
         Log.d("build part 2", "--------------");
         ByteArrayInputStream fileInputStream = new ByteArrayInputStream(fileData);

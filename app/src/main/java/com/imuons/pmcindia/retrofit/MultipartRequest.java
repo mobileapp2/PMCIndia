@@ -25,17 +25,19 @@ public class MultipartRequest extends Request<NetworkResponse> implements Recove
     private final Map<String, String> mHeaders;
     private final String mMimeType;
     private final byte[] mMultipartBody;
+    private final String tag="MultipartRequest";
 
 
     public MultipartRequest(String url, Map<String, String> headers, String mimeType, byte[] multipartBody, Response.Listener<NetworkResponse> listener, Response.ErrorListener errorListener) {
         super(Method.POST, url, errorListener);
+
 
         this.mListener = listener;
         this.mErrorListener = errorListener;
         this.mHeaders = headers;
         this.mMimeType = mimeType;
         this.mMultipartBody = multipartBody;
-
+        Log.d(tag, "-param--"+new String(this.mMultipartBody));
     }
 
     @Override

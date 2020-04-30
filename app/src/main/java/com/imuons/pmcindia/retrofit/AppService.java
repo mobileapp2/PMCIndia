@@ -15,6 +15,7 @@ import com.imuons.pmcindia.ResponseModel.ChatResponse;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
 import com.imuons.pmcindia.ResponseModel.CommonResponse;
+import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
 import com.imuons.pmcindia.ResponseModel.DirectResponse;
 import com.imuons.pmcindia.ResponseModel.EstimateResponse;
 import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
@@ -24,11 +25,9 @@ import com.imuons.pmcindia.ResponseModel.LoginResponse;
 import com.imuons.pmcindia.ResponseModel.MakeWithdrawResponseModel;
 import com.imuons.pmcindia.ResponseModel.MyTeamResponse;
 import com.imuons.pmcindia.ResponseModel.PrincipleWithdrawResponse;
-import com.imuons.pmcindia.ResponseModel.QuestionResponse;
 import com.imuons.pmcindia.ResponseModel.ROIReportResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
-import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
 import com.imuons.pmcindia.ResponseModel.SendResponse;
 import com.imuons.pmcindia.ResponseModel.TopupReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
@@ -44,7 +43,6 @@ import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface AppService {
@@ -130,6 +128,9 @@ public interface AppService {
 
 
     //Rahul
+
+    @FormUrlEncoded
+    @GET("get-packages")
     Call<GetPackageResponseModel> GetPackages();
 
     @FormUrlEncoded

@@ -26,7 +26,9 @@ import com.imuons.pmcindia.ResponseModel.SendResponse;
 import com.imuons.pmcindia.ResponseModel.TopupReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.ResponseModel.UserProfileResponse;
+import com.imuons.pmcindia.ResponseModel.WinnerReportResponse;
 import com.imuons.pmcindia.ResponseModel.WithdrawAmountResponse;
+import com.imuons.pmcindia.ResponseModel.WithdrawReportResponse;
 
 import java.util.Map;
 
@@ -98,6 +100,14 @@ public interface AppService {
     //tabish
     @GET("get-principal-balance")
     Call<PrincipleWithdrawResponse> PrincipleWithdraw();
+    //tabish
+    @FormUrlEncoded
+    @POST("withdrwal-income")
+    Call<WithdrawReportResponse> GetWithdrawReport(@FieldMap Map<String, Object> param);
+    //tabish
+    @FormUrlEncoded
+    @POST("winner-report")
+    Call<WinnerReportResponse> GetWinnerReport(@FieldMap Map<String, Object> param);
 
 
     //Rahul
@@ -123,5 +133,16 @@ public interface AppService {
     Call<MyTeamResponse> getLevelView(
             //@Body MyTeamEntity myTeamEntity
             @FieldMap Map<String, String> loginMap
+    );
+
+    //azhar
+    @POST("fetch_message_mob")
+    Call<ChatResponse> getChatList(
+            @Body ChatEntity chatEntity
+    );
+
+    @POST("send-chat-message")
+    Call<CommonResponse> sendMessage(
+            @Body SendMessage sendMessage
     );
 }

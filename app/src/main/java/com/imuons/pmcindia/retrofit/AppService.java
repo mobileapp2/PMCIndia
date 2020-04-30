@@ -15,6 +15,7 @@ import com.imuons.pmcindia.ResponseModel.ChatResponse;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
 import com.imuons.pmcindia.ResponseModel.CommonResponse;
+import com.imuons.pmcindia.ResponseModel.EstimateResponse;
 import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;
 import com.imuons.pmcindia.ResponseModel.LevelResponse;
@@ -23,6 +24,7 @@ import com.imuons.pmcindia.ResponseModel.MakeWithdrawResponseModel;
 import com.imuons.pmcindia.ResponseModel.MyTeamResponse;
 import com.imuons.pmcindia.ResponseModel.PrincipleWithdrawResponse;
 import com.imuons.pmcindia.ResponseModel.QuestionResponse;
+import com.imuons.pmcindia.ResponseModel.ROIReportResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.ResponseModel.DashboardResponseModel;
@@ -104,14 +106,26 @@ public interface AppService {
     //tabish
     @GET("get-principal-balance")
     Call<PrincipleWithdrawResponse> PrincipleWithdraw();
+
     //tabish
     @FormUrlEncoded
     @POST("withdrwal-income")
     Call<WithdrawReportResponse> GetWithdrawReport(@FieldMap Map<String, Object> param);
+
     //tabish
     @FormUrlEncoded
     @POST("winner-report")
     Call<WinnerReportResponse> GetWinnerReport(@FieldMap Map<String, Object> param);
+
+    //tabish
+    @FormUrlEncoded
+    @POST("roi-income")
+    Call<ROIReportResponse> GetRoiReport(@FieldMap Map<String, Object> param);
+
+    //tabish
+    @FormUrlEncoded
+    @POST("estimate-amount")
+    Call<EstimateResponse> GetEstimateReport(@FieldMap Map<String, Object> param);
 
 
     //Rahul
@@ -149,4 +163,8 @@ public interface AppService {
     Call<CommonResponse> sendMessage(
             @Body SendMessage sendMessage
     );
+
+    @FormUrlEncoded
+    @POST("direct-income-referral")
+    Call<DirectResponse> GetDirectWithdrawReport(@FieldMap Map<String, Object> param);
 }

@@ -16,29 +16,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.TopupRecordModel;
+import com.imuons.pmcindia.ResponseModel.WinnerRecordModel;
+import com.imuons.pmcindia.ResponseModel.WinnerReportDataModel;
 
 import java.util.List;
 
-public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentReportAdapter.ViewHolder> {
+public class WinnerReportAdapter extends RecyclerView.Adapter<WinnerReportAdapter.ViewHolder>{
 
     Context context;
-    List<TopupRecordModel> requestRecordModels_list;
+    List<WinnerRecordModel> requestRecordModels_list;
     private int selected_postion;
 
-    public InvestmentReportAdapter(FragmentActivity activity, List<TopupRecordModel> data) {
+    public WinnerReportAdapter(FragmentActivity activity, List<WinnerRecordModel> data) {
         context = activity;
         requestRecordModels_list = data;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_request_report, parent, false);
+    public WinnerReportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_winner_report, parent, false);
+
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WinnerReportAdapter.ViewHolder holder, int position) {
         if (selected_postion == position) {
             holder.expand_icon.setSelected(true);
             holder.expand_icon.setActivated(true);
@@ -67,20 +70,14 @@ public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentRepo
             }
         });
     }
-
-    private void setData(ViewHolder holder, TopupRecordModel topupRecordModel, int position) {
+    private void setData(WinnerReportAdapter.ViewHolder holder, WinnerRecordModel topupRecordModel, int position) {
         holder.srno.setText(String.valueOf(position + 1));
-        holder.deposit.setText(topupRecordModel.getPin());
-        holder.amount.setText(String.valueOf(topupRecordModel.getAmount()));
-        holder.tv_plan.setText(topupRecordModel.getName());
-        holder.house.setText(topupRecordModel.getHouseName());
-        holder.tv_slot_no.setText(String.valueOf(topupRecordModel.getSlotNo()));
-        holder.tv_topu_up_by.setText(topupRecordModel.getTopUpBy());
-        holder.tv_payment_mode.setText(topupRecordModel.getPaymentType());
+        holder.deposit.setText(topupRecordModel.getProductName());
+        holder.amount.setText(String.valueOf(topupRecordModel.getHouseName()));
+        holder.tv_plan.setText(String.valueOf(topupRecordModel.getAmount()));
         holder.date.setText(topupRecordModel.getEntryTime());
 
     }
-
     @Override
     public int getItemCount() {
         return requestRecordModels_list.size();
@@ -95,10 +92,8 @@ public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentRepo
         private final TextView deposit;
         private final TextView amount;
         private final TextView tv_plan;
-        private final TextView house;
-        private final TextView tv_slot_no;
-        private final TextView tv_topu_up_by;
-        private final TextView tv_payment_mode;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -110,12 +105,6 @@ public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentRepo
             deposit = itemView.findViewById(R.id.deposit);
             amount = itemView.findViewById(R.id.amount);
             tv_plan = itemView.findViewById(R.id.tv_plan);
-            house = itemView.findViewById(R.id.house);
-            tv_slot_no = itemView.findViewById(R.id.tv_slot_no);
-            tv_topu_up_by = itemView.findViewById(R.id.tv_topu_up_by);
-            tv_payment_mode = itemView.findViewById(R.id.tv_payment_mode);
-
-
         }
     }
 }

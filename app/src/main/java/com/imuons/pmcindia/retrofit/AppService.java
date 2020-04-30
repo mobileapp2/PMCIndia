@@ -2,15 +2,19 @@ package com.imuons.pmcindia.retrofit;
 
 
 import com.imuons.pmcindia.Entity.ChangePasswordEntity;
+import com.imuons.pmcindia.Entity.ChatEntity;
 import com.imuons.pmcindia.Entity.CheckOtpEntity;
 import com.imuons.pmcindia.Entity.CheckuserEntity;
 import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.Entity.RegitrationEntity;
+import com.imuons.pmcindia.Entity.SendMessage;
 import com.imuons.pmcindia.Entity.UserInfoEntity;
 import com.imuons.pmcindia.Entity.WithdrawAmountEntity;
 import com.imuons.pmcindia.ResponseModel.ChangePasswordResponseModel;
+import com.imuons.pmcindia.ResponseModel.ChatResponse;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
 import com.imuons.pmcindia.ResponseModel.CheckUserResponse;
+import com.imuons.pmcindia.ResponseModel.CommonResponse;
 import com.imuons.pmcindia.ResponseModel.GetFundRequestReportResponseModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;
 import com.imuons.pmcindia.ResponseModel.LevelResponse;

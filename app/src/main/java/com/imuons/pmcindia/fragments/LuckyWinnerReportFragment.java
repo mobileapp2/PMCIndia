@@ -63,7 +63,7 @@ public class LuckyWinnerReportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         view =inflater.inflate(R.layout.fragment_lucky_winner_report, container, false);
+        view = inflater.inflate(R.layout.fragment_lucky_winner_report, container, false);
         initUI();
         return view;
     }
@@ -82,6 +82,7 @@ public class LuckyWinnerReportFragment extends Fragment {
                 LinearLayoutManager.VERTICAL, false));
         searchListener();
     }
+
     private void searchListener() {
 
         searchbyid.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -100,7 +101,7 @@ public class LuckyWinnerReportFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 callRequestreport(
-                        Integer.parseInt(spinner_show_entry.getSelectedItem().toString()),searchbyid.getText().toString());
+                        Integer.parseInt(spinner_show_entry.getSelectedItem().toString()), searchbyid.getText().toString());
             }
 
             @Override
@@ -110,15 +111,15 @@ public class LuckyWinnerReportFragment extends Fragment {
         });
     }
 
-    private void callRequestreport(int length,String  search) {
+    private void callRequestreport(int length, String search) {
         if (AppCommon.getInstance(getContext()).isConnectingToInternet(getContext())) {
             AppCommon.getInstance(getContext()).setNonTouchableFlags(getActivity());
             AppService apiService = ServiceGenerator.createService(AppService.class, AppCommon.getInstance(getContext()).getToken());
             Map<String, Object> param = new HashMap<>();
             param.put("start", 0);
             param.put("length", length);
-            param.put("search[value]",search);
-            param.put("search[regex]",false);
+            param.put("search[value]", search);
+            param.put("search[regex]", false);
             Call call = apiService.GetWinnerReport(param);
             call.enqueue(new Callback() {
                 @Override
@@ -157,8 +158,9 @@ public class LuckyWinnerReportFragment extends Fragment {
         }
 
     }
+
     private void setadpter(List<WinnerRecordModel> records) {
-        WinnerReportAdapter investmentReportAdapter=new WinnerReportAdapter(getActivity()
+        WinnerReportAdapter investmentReportAdapter = new WinnerReportAdapter(getActivity()
                 , records);
         recycle_view.setAdapter(investmentReportAdapter);
     }

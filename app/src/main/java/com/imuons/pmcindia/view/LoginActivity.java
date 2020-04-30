@@ -113,6 +113,7 @@ public class LoginActivity extends Activity {
         AppCommon.getInstance(this).setUserObject(new Gson().toJson(data));
         AppCommon.getInstance(this).setToken(data.getAccess_token());
         startActivity(new Intent(this , DashboardActivity.class) );
+        finish();
     }
 
     @Override

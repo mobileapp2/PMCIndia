@@ -105,8 +105,6 @@ public class InvestmentReportFragment extends Fragment {
         });
     }
     private void callRequestreport(int length,String  search) {
-
-
         if (AppCommon.getInstance(getContext()).isConnectingToInternet(getContext())) {
             AppCommon.getInstance(getContext()).setNonTouchableFlags(getActivity());
             AppService apiService = ServiceGenerator.createService(AppService.class, AppCommon.getInstance(getContext()).getToken());

@@ -17,46 +17,47 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/register_editbox_height">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_Balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BALANCE"
-                android:gravity="center"
                 android:layout_gravity="center"
-                android:textColor="@color/darkgreen"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:gravity="center"
+                android:text="00.00"
+                android:textColor="@color/colorBlack"
+                android:textSize="26sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Amount Balance" />
 
         <LinearLayout
             android:id="@+id/layout_user_id"
             android:layout_width="match_parent"
             android:layout_height="@dimen/register_editbox_height"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_border">
 
             <EditText
                 android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:drawableStart="@drawable/ic_account_balance_black_24dp"
-                android:drawableLeft="@drawable/ic_account_balance_black_24dp"
+                android:background="@drawable/rounded_border"
                 android:drawablePadding="20dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:hint="Amount"
+                android:gravity="center"
+                android:hint="Enter Amount"
+                android:inputType="number"
+                android:padding="10dp"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
                 android:singleLine="true"
-                android:inputType="number"
                 android:textColor="@color/colorGreen"
                 android:textColorHint="@color/text_color"
                 android:textSize="18sp"

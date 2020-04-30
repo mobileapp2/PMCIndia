@@ -19,15 +19,15 @@ import com.imuons.pmcindia.ResponseModel.TopupRecordModel;
 
 import java.util.List;
 
-public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentReportAdapter.ViewHolder>{
+public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentReportAdapter.ViewHolder> {
 
-Context context;
-List<TopupRecordModel> requestRecordModels_list;
+    Context context;
+    List<TopupRecordModel> requestRecordModels_list;
     private int selected_postion;
 
     public InvestmentReportAdapter(FragmentActivity activity, List<TopupRecordModel> data) {
-        context=activity;
-        requestRecordModels_list=data;
+        context = activity;
+        requestRecordModels_list = data;
     }
 
     @NonNull
@@ -86,7 +86,7 @@ List<TopupRecordModel> requestRecordModels_list;
         return requestRecordModels_list.size();
     }
 
-    class   ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout hidden_layer;
         LinearLayout ll_main_layer;
         ImageView expand_icon;
@@ -105,15 +105,15 @@ List<TopupRecordModel> requestRecordModels_list;
             hidden_layer = itemView.findViewById(R.id.hiddenlayout);
             ll_main_layer = itemView.findViewById(R.id.llmain);
             expand_icon = itemView.findViewById(R.id.expand_icon);
-            srno=itemView.findViewById(R.id.srno);
-            date=itemView.findViewById(R.id.date);
-            deposit=itemView.findViewById(R.id.deposit);
-            amount=itemView.findViewById(R.id.amount);
-            tv_plan=itemView.findViewById(R.id.tv_plan);
-            house=itemView.findViewById(R.id.house);
-            tv_slot_no=itemView.findViewById(R.id.tv_slot_no);
-            tv_topu_up_by=itemView.findViewById(R.id.tv_topu_up_by);
-            tv_payment_mode=itemView.findViewById(R.id.tv_payment_mode);
+            srno = itemView.findViewById(R.id.srno);
+            date = itemView.findViewById(R.id.date);
+            deposit = itemView.findViewById(R.id.deposit);
+            amount = itemView.findViewById(R.id.amount);
+            tv_plan = itemView.findViewById(R.id.tv_plan);
+            house = itemView.findViewById(R.id.house);
+            tv_slot_no = itemView.findViewById(R.id.tv_slot_no);
+            tv_topu_up_by = itemView.findViewById(R.id.tv_topu_up_by);
+            tv_payment_mode = itemView.findViewById(R.id.tv_payment_mode);
 
 
         }

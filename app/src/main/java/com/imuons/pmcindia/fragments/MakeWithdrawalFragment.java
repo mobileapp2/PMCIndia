@@ -15,14 +15,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.imuons.pmcindia.Entity.UserInfoEntity;
+import com.imuons.pmcindia.Entity.WithdrawAmountEntity;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.MakeWithdrawDataModel;
 import com.imuons.pmcindia.ResponseModel.MakeWithdrawResponseModel;
+import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.ResponseModel.UserProfileResponse;
+import com.imuons.pmcindia.ResponseModel.WithdrawAmountResponse;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
 import com.imuons.pmcindia.utils.Utils;
+import com.imuons.pmcindia.view.EditProfileActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +73,53 @@ public class MakeWithdrawalFragment extends Fragment {
     @OnClick(R.id.withdraw)
     void withdraw() {
         String amount = tv_amount.getText().toString().trim();
+        callWithdrawApi(new WithdrawAmountEntity(amount, "withdraw", 0, 0, 0, 0, 0, 0,0,0));
+
+    }
+
+    private void callWithdrawApi(WithdrawAmountEntity withdrawAmountEntity) {
+        if (AppCommon.getInstance(MakeWithdrawalFragment.this.getActivity()).isConnectingToInternet(MakeWithdrawalFragment.this.getActivity())) {
+            AppCommon.getInstance(MakeWithdrawalFragment.this.getActivity()).setNonTouchableFlags(MakeWithdrawalFragment.this.getActivity());
+            AppService apiService = ServiceGenerator.createService(AppService.class);
+            progressBar.setVisibility(View.VISIBLE);
+            Call call = apiService.WithdrawAmount(withdrawAmountEntity);
+            call.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    AppCommon.getInstance(MakeWithdrawalFragment.this.getActivity()).clearNonTouchableFlags(MakeWithdrawalFragment.this.getActivity());
+                    progressBar.setVisibility(View.GONE);
+                    WithdrawAmountResponse authResponse = (WithdrawAmountResponse) response.body();
+                    if (authResponse != null) {
+                        Log.i("withdraw::", new Gson().toJson(authResponse));
+                        if (authResponse.getCode() == 200) {
+                            if (authResponse.getData() != null)
+                                Toast.makeText(MakeWithdrawalFragment.this.getActivity(), authResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            getBalanceInfo();
+                            tv_amount.setText("");
+
+                        } else {
+                            Toast.makeText(MakeWithdrawalFragment.this.getActivity(), authResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        AppCommon.getInstance(MakeWithdrawalFragment.this.getActivity()).showDialog(MakeWithdrawalFragment.this.getActivity(), "Server Error");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    progressBar.setVisibility(View.GONE);
+                    AppCommon.getInstance(MakeWithdrawalFragment.this.getActivity()).clearNonTouchableFlags(MakeWithdrawalFragment.this.getActivity());
+                    // loaderView.setVisibility(View.GONE);
+                    Toast.makeText(MakeWithdrawalFragment.this.getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        } else {
+            // no internet
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(MakeWithdrawalFragment.this.getActivity(), "Please check your internet", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

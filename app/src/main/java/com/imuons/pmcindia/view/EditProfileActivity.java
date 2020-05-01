@@ -111,8 +111,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         String mobile = tv_MobileNo.getText().toString().trim();
         String email = tv_emailId.getText().toString().trim();
         btc = tv_btcAddress.getText().toString().trim();
+       String w_Type = tv_withdrawType.getText().toString().trim();
 
-        callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, btc, email, holder_name, ifsc_code, mobile, pan_no, status, withdraw_type));
+        callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, btc, email, holder_name, ifsc_code, mobile, pan_no, status, w_Type));
 
     }
 

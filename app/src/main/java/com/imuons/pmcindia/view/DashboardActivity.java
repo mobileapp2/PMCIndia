@@ -64,15 +64,17 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        /*userid = findViewById(R.id.tv_user);
-        String userID = AppCommon.getInstance(DashboardActivity.this).getUserId();
+       /* userid = findViewById(R.id.tv_user);
+        String userID = AppCommon.getInstance(DashboardActivity.this).getUserObject();
         userid.setText(userID);*/
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-
+        TextView user_id =toolbar.findViewById(R.id.tv_user);
+        user_id.setText(AppCommon.getInstance(this).getUserId());
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.title_activity_dashboard);
+
         }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mExpandableListView = findViewById(R.id.navList);

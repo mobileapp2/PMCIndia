@@ -196,7 +196,7 @@ public class MyTeamFragment extends Fragment {
                         bottomProgressBar.setVisibility(View.GONE);
                     AppCommon.getInstance(MyTeamFragment.this.getContext()).clearNonTouchableFlags(MyTeamFragment.this.getActivity());
                     // loaderView.setVisibility(View.GONE);
-                    Toast.makeText(MyTeamFragment.this.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyTeamFragment.this.getContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
                 }
             });
 

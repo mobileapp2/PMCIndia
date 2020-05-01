@@ -20,4 +20,5 @@
     <string name="failedtocaptch">Sorry! Failed to capture image</string>
     <string name="cancle_imagegselect">Selected image not Uploaded</string>
     <string name="flaid_select_image">No image selected</string>
+    <string name="something_went_wrong">Some thing went wrong</string>
 </resources>

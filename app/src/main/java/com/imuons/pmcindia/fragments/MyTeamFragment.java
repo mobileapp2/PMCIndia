@@ -276,8 +276,9 @@ public class MyTeamFragment extends Fragment {
 
     public void callapi(int position) {
         offsetLevel = offsetLevel+1;
-        callgetLevelView(position - 1, position , "");
+        callgetLevelView(position - 1, records.size() , "");
         bottomProgressBar.setVisibility(View.VISIBLE);
+
 
     }
 }

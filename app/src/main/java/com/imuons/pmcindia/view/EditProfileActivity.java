@@ -1,6 +1,8 @@
 package com.imuons.pmcindia.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     @BindView(R.id.update)
     TextView update;
-    String account_no, bank_name, branch_name, btc, holder_name, ifsc_code, pan_no, status, withdraw_type;
+    String account_no, bank_name, branch_name, btc, holder_name, ifsc_code, pan_no, status, withdraw_type, Type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,32 +76,44 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         registerListeners();
         getUserProfileInfo();
 
-        radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton rb = findViewById(checkedId);
-                if (rb.getText().toString().equals("BTC")) {
-                    Log.i("BTC", "1");
-                    withdraw_type = "BTC";
-                    rb.isChecked();
 
-                } else {
-                    Log.i("INR", "1");
-                    withdraw_type = "INR";
-                    rb.isChecked();
-                }
+        tv_Info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = ProfileFragment.newInstance();
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.container_layout, fragment).commit();
+                transaction.disallowAddToBackStack();
 
             }
         });
     }
-
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioBTC:
+                if (checked)
+                    withdraw_type = "BTC";
+                    break;
+            case R.id.radioINR:
+                if (checked)
+                    withdraw_type = "INR";
+                    break;
+        }
+        tv_withdrawType.setText(withdraw_type);
+    }
     @OnClick(R.id.update)
     void update() {
         String mobile = tv_MobileNo.getText().toString().trim();
         String email = tv_emailId.getText().toString().trim();
         btc = tv_btcAddress.getText().toString().trim();
+       String w_Type = tv_withdrawType.getText().toString().trim();
 
-        callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, btc, email, holder_name, ifsc_code, mobile, pan_no, status, withdraw_type));
+        callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, btc, email, holder_name, ifsc_code, mobile, pan_no, status, w_Type));
 
     }
 
@@ -205,6 +219,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ifsc_code = data.getIfscCode();
         pan_no = data.getPanNo();
         status = "1";
+        Type = data.getWithdrawType();
+        if(data.getWithdrawType().equals("BTC")){
+            radio_group.check(R.id.radioBTC);
+        }else {
+            radio_group.check(R.id.radioINR);
+        }
     }
 
     private void registerListeners() {

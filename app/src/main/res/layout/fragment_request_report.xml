@@ -115,7 +115,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Sr No"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                 android:layout_weight="2.5"
                 android:gravity="center"
                 android:text="Deposit"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -148,7 +148,7 @@
                 android:layout_weight="2.5"
                 android:gravity="center"
                 android:text="Amount"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 

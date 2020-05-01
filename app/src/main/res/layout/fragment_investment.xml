@@ -1,18 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.FragmentInvestment">
-
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
         android:numColumns="2"
+        android:visibility="visible"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" />
+        android:gravity="center"
+        />
+    <RelativeLayout
+        android:id="@+id/dialogBox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackTransparent"
+        android:clickable="true"
+        android:visibility="gone">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
+            android:background="@color/white"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/txtDeposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/bg_green_20radius"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp30"
+                android:paddingTop="@dimen/dp10"
+                android:paddingRight="@dimen/dp30"
+                android:paddingBottom="@dimen/dp10"
+                android:text="Deposit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp18" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDeposit"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/comingvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp5"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/sp20"
+                    tools:text="Amount" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/dp5"
+                    android:textColor="#D4C691"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    tools:text="Please Deposit to complete your topup." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Amount :"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/amt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/bg_green_20radius"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/dp30"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp10"
+                        android:text="Amount"
+                        android:textColor="@color/colorBlack" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_pending_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_marginBottom="@dimen/dp10">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="Remaining Amount:"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/remainingamt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/bg_green_20radius"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/dp30"
+                        android:text=""
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/tvCurencyType"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp10"
+                        android:text="Amount"
+                        android:textColor="@color/colorBlack" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_paid_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp40">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Paid Amount:"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/tvPaidAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/bg_green_20radius"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/dp30"
+                        android:text=""
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/tvPaidCurrencyType"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Amount"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/qrcode"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        android:id="@+id/link"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:background="@drawable/bg_green_20radius"
+                        android:lines="1"
+                        android:layout_marginStart="@dimen/dp5"
+                        android:layout_marginEnd="@dimen/dp5"
+                        android:padding="@dimen/dp5"
+                        android:textColor="@color/colorBlack"
+                        tools:text="address Text"
+                        android:textSize="@dimen/sp10"
+                        />
+
+                    <Button
+                        android:id="@+id/copyto"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp30"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/bg_green_20radius"
+                        android:text="Copy"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_invoice_copy"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+
+                    <TextView
+                        android:id="@+id/tv_invoice_id"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:background="@drawable/bg_green_20radius"
+                        android:lines="1"
+                        android:layout_marginStart="@dimen/dp5"
+                        android:layout_marginEnd="@dimen/dp5"
+                        android:padding="@dimen/dp5"
+                        android:textColor="@color/colorBlack"
+                        tools:text="123456789456"
+                        android:textSize="@dimen/sp10"
+                        />
+
+                    <Button
+                        android:id="@+id/copyto_invoice"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp30"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/bg_green_20radius"
+                        android:text="Copy"
+                        android:textSize="@dimen/sp10"
+                        android:textColor="@color/colorBlack" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:text="vxcvxv"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/dp15"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="@dimen/dp15"
+                    />
+
+                <TextView
+                    android:id="@+id/mTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:layout_marginBottom="@dimen/dp2"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp10"
+                  android:visibility="gone"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+                <Button
+                    android:id="@+id/closeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:background="@drawable/bg_green_20radius"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="Close"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

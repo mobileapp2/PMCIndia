@@ -12,5 +12,6 @@ public class Constants {
     public static final long TEN_SECONDS = 10 * ONE_SECOND;
     //Network Code Constants
     public static int RESPONSE_CODE_OK = 200;
-
+    public static String currency_Ruppes_symbol = "₹";
+    public static String currency_Dollor_symbol = "$";
 }

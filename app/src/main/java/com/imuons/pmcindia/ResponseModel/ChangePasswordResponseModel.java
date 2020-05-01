@@ -50,4 +50,5 @@ public class ChangePasswordResponseModel {
         this.data = data;
     }
 
+
 }

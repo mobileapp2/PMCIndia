@@ -82,7 +82,8 @@ public class LoginActivity extends Activity {
                         Log.i("loginResponse::", new Gson().toJson(authResponse));
                         if (authResponse.getCode() == 200) {
                            if(authResponse.getData() != null)
-                               setData(authResponse.getData());
+
+                        setData(authResponse.getData());
 
                         } else {
                             Toast.makeText(LoginActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();

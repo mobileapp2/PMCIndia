@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -55,14 +56,17 @@ public class DashboardActivity extends AppCompatActivity {
     private static final int PERIOD = 2000;
     Toolbar toolbar;
     private FragmentInvestment fragmentInvestment;
-    private String tag="Dashboard";
-
+    private String tag = "Dashboard";
+    private TextView userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*userid = findViewById(R.id.tv_user);
+        String userID = AppCommon.getInstance(DashboardActivity.this).getUserId();
+        userid.setText(userID);*/
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
@@ -148,8 +152,8 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
 
                             case 0:
-                             fragmentInvestment=FragmentInvestment.newInstance();
-                                fragmentManager.beginTransaction().replace(R.id.content_frame,fragmentInvestment).commit();
+                                fragmentInvestment = FragmentInvestment.newInstance();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentInvestment).commit();
                                 getSupportActionBar().setTitle("Investment");
                                 mExpandableListView.setItemChecked(childPosition, true);
                                 mExpandableListView.setSelection(childPosition);
@@ -312,9 +316,21 @@ public class DashboardActivity extends AppCompatActivity {
                     if (event.getDownTime() - lastPressedTime < PERIOD) {
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Press again to exit.",
-                                Toast.LENGTH_SHORT).show();
-                        lastPressedTime = event.getEventTime();
+                        if (fragmentInvestment != null) {
+                            if (fragmentInvestment.is_payment_dialog_open) {
+                                fragmentInvestment.dialogBox.setVisibility(View.GONE);
+                                fragmentInvestment.is_payment_dialog_open = false;
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Press again to exit.",
+                                        Toast.LENGTH_SHORT).show();
+                                lastPressedTime = event.getEventTime();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Press again to exit.",
+                                    Toast.LENGTH_SHORT).show();
+                            lastPressedTime = event.getEventTime();
+                        }
+
                     }
                     return true;
             }

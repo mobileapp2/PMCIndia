@@ -312,9 +312,21 @@ public class DashboardActivity extends AppCompatActivity {
                     if (event.getDownTime() - lastPressedTime < PERIOD) {
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Press again to exit.",
-                                Toast.LENGTH_SHORT).show();
-                        lastPressedTime = event.getEventTime();
+                        if(fragmentInvestment!=null){
+                            if(fragmentInvestment.is_payment_dialog_open){
+                                fragmentInvestment.dialogBox.setVisibility(View.GONE);
+                                fragmentInvestment.is_payment_dialog_open=false;
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Press again to exit.",
+                                        Toast.LENGTH_SHORT).show();
+                                lastPressedTime = event.getEventTime();
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Press again to exit.",
+                                    Toast.LENGTH_SHORT).show();
+                            lastPressedTime = event.getEventTime();
+                        }
+
                     }
                     return true;
             }

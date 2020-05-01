@@ -2,6 +2,8 @@ package com.imuons.pmcindia.fragments;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +22,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +40,10 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.GetPackageRecordModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;
@@ -39,6 +52,7 @@ import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.MultipartRequest;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
+import com.imuons.pmcindia.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +62,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -85,7 +100,26 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     private final String lineEnd = "\r\n";
     private final String boundary = "WebKitFormBoundary" + System.currentTimeMillis();
     private final String mimeType = "multipart/form-data;boundary=" + boundary;
-
+    public boolean is_payment_dialog_open;
+    public RelativeLayout dialogBox;
+    EditText etAmount;
+    TextView tv_makePayment;
+    TextView amt;
+    TextView remainingamt;
+    TextView tvPaidAmount;
+    TextView tvCurencyType;
+    TextView tvPaidCurrencyType;
+    ImageView qrcode;
+    TextView link;
+    TextView message;
+    TextView comingvalue;
+    TextView price;
+    TextView mTextField;
+    Button copyto;
+    Button closeBtn;
+    String currency_code;
+    String newlink, strinvoiceid, straddress;
+    int finalvalue;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -102,7 +136,11 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     private Bitmap bitmapImge;
     private InvestmentGridAdapter investmentGridAdapter;
     private InvestmentGridAdapter.ViewHolder viewholder;
-
+    private LinearLayout ll_pending_amount;
+    private LinearLayout ll_paid_amounnt;
+    private Button copyto_invoice;
+    private LinearLayout ll_invoice_id_layer;
+    private TextView tv_invoice_id;
     public FragmentInvestment() {
         // Required empty public constructor
     }
@@ -183,7 +221,67 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
     private void intUI() {
         gridview = view.findViewById(R.id.gridview);
+
+        ll_pending_amount = view.findViewById(R.id.ll_pending_amount);
+        ll_paid_amounnt = view.findViewById(R.id.ll_paid_amount);
+
+        tv_invoice_id = view.findViewById(R.id.tv_invoice_id);
+        copyto_invoice = view.findViewById(R.id.copyto_invoice);
+        ll_invoice_id_layer = view.findViewById(R.id.ll_invoice_copy);
+
+        amt = view.findViewById(R.id.amt);
+        remainingamt = view.findViewById(R.id.remainingamt);
+        tvPaidAmount = view.findViewById(R.id.tvPaidAmount);
+        qrcode = view.findViewById(R.id.qrcode);
+        link = view.findViewById(R.id.link);
+        message = view.findViewById(R.id.message);
+        comingvalue = view.findViewById(R.id.comingvalue);
+
+        copyto = view.findViewById(R.id.copyto);
+        mTextField = view.findViewById(R.id.mTextField);
+        closeBtn = view.findViewById(R.id.closeBtn);
+        dialogBox = view.findViewById(R.id.dialogBox);
+        tvCurencyType = view.findViewById(R.id.tvCurencyType);
+        tvPaidCurrencyType = view.findViewById(R.id.tvPaidCurrencyType);
+        price = view.findViewById(R.id.price);
         callRequestreport();
+
+        copyto_invoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (strinvoiceid != null) {
+                    ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("label", strinvoiceid);
+                    clipboard.setPrimaryClip(clip);
+                    copyto_invoice.setText("Copied");
+                    copyto.setText("Copy");
+                } else {
+                    Toast.makeText(getContext(), "Invoice Not Available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        copyto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (straddress != null) {
+                    ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("label", straddress);
+                    clipboard.setPrimaryClip(clip);
+                    copyto.setText("Copied");
+                    copyto_invoice.setText("Copy");
+                } else {
+                    Toast.makeText(getContext(), "Referal Link Not Available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogBox.setVisibility(View.GONE);
+                is_payment_dialog_open = false;
+            }
+        });
     }
 
     private void callRequestreport() {
@@ -238,7 +336,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     @Override
-    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type)  {
+    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type) {
         if (type.equals("INR")) {
             if (filePath.equals("")) {
                 Toast.makeText(getContext(), "Upload Payment slip", Toast.LENGTH_SHORT).show();
@@ -247,7 +345,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
                     try {
 
-                       callService(topupRequest(packageRecordModel, amount, type));
+                        callService(topupRequest(packageRecordModel, amount, type));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -537,7 +635,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             try {
                 Log.d("response--", "-------------" + new JSONObject(resultResponse));
                 AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
-                if(getActivity().isFinishing())
+                if (getActivity().isFinishing())
                     return;
 
                 JSONObject jsonObject = new JSONObject(resultResponse);
@@ -559,10 +657,53 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
     private void handleResponse(JSONObject jsonObject) throws JSONException {
         if (jsonObject.getString("code").equals("409")) {
-            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
         } else if (jsonObject.getString("code").equals("200")) {
-            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+            if (jsonObject.has("data")) {
+                JSONObject dataobj = jsonObject.getJSONObject("data");
+                if (dataobj.has("network_type")) {
+                    if (dataobj.getString("network_type").equals("BTC")) {
+                        is_payment_dialog_open = true;
+                        dialogBox.setVisibility(View.VISIBLE);
+                        setDepositDialog(dataobj);
+                    }
+                } else {
+                    Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                }
+            }
+        }else{
+          //  {"code":404,"status":"Not Found","message":"You can make only one investment!",
+            //  "data":{}}
+            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void setDepositDialog(JSONObject dataobj) throws JSONException {
+        comingvalue.setText(Constants.currency_Dollor_symbol + " " + dataobj.getInt("price_in_usd"));
+        amt.setText(Constants.currency_Ruppes_symbol + " " + dataobj.getInt("price_in_usd"));
+        price.setText("( " + String.format("%.4f", dataobj.getDouble("price_in_usd")) + " BTC )");
+        tvPaidAmount.setText(String.valueOf(dataobj.getDouble("received_amount")));
+        tvCurencyType.setText("BTC");
+        tvPaidCurrencyType.setText("BTC");
+        BigDecimal bd = new BigDecimal(dataobj.getDouble("price_in_usd"));
+        BigDecimal bd2 = new BigDecimal(dataobj.getDouble("received_amount"));
+
+        BigDecimal remainingint = bd.subtract(bd2).setScale(8, BigDecimal.ROUND_HALF_UP);
+        straddress = dataobj.getString("address");
+        newlink = "bitcoin:" + dataobj.getString("address") + "?amount=" + String.format("%.6f",
+                dataobj.getDouble("price_in_usd"));
+        setQr(newlink);
+        BigDecimal value0 = new BigDecimal(0);
+        finalvalue = remainingint.compareTo(value0);
+        if (finalvalue <= 0) {
+            remainingamt.setText("0");
+
+        } else {
+            remainingamt.setText(remainingint.toPlainString());
+        }
+        link.setText(dataobj.getString("address"));
+      //  tv_invoice_id.setText(dataobj.getJSONObject("invoice_id").getString("invoice_id"));
+        message.setText("After Making Payment, Relax and enjoy your coffee with smile on your face because our auto system will confirm your transaction after getting 3 confirmation on Explorer");
     }
 
 
@@ -631,5 +772,24 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
         Log.d("encode image ", "--------------" + imageEncoded);
         return byteArrayOutputStream.toByteArray();
+    }
+
+    private void setQr(String newlink) {
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            BitMatrix bitMatrix = writer.encode(newlink, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+            qrcode.setImageBitmap(bmp);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 }

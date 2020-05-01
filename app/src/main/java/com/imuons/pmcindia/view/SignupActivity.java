@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,6 +29,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignupActivity extends Activity {
+
+
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -113,7 +114,7 @@ public class SignupActivity extends Activity {
     }
 
     @OnClick(R.id.register)
-    void register() {
+    void register(){
         String userId = mEditUserId.getText().toString().trim();
         String userName = mEditUserName.getText().toString().trim();
         String emailId = mEditEmail.getText().toString().trim();
@@ -123,26 +124,26 @@ public class SignupActivity extends Activity {
         String sponserId = mEditSponsorName.getText().toString().trim();
         String mobileNumber = mEditMobile.getText().toString().trim();
 
-        if (userId.isEmpty())
+        if(userId.isEmpty())
             mEditUserId.setError("please enter userId");
-        else if (userName.isEmpty())
+        else if(userName.isEmpty())
             mEditUserName.setError("please enter user name");
-        else if (emailId.isEmpty())
+        else if(emailId.isEmpty())
             mEditEmail.setError("Please enter email");
-        else if (cmfEmail.isEmpty())
+        else if(cmfEmail.isEmpty())
             mEditConfirmEmail.setError("Please enter  confirm email");
-        else if (!cmfEmail.matches(emailId))
+        else if(!cmfEmail.matches(emailId))
             mEditConfirmEmail.setError("confirm email is not match");
-        else if (password.isEmpty())
+        else if(password.isEmpty())
             mEditPassword.setError("please enter password");
-        else if (cmfPassword.isEmpty())
+        else if(cmfPassword.isEmpty())
             mEditConfirmPassword.setError("please enter confirm password");
-        else if (sponserId.isEmpty())
+         else if(sponserId.isEmpty())
             mEditSponsorName.setError("please enter Sponsor Id");
-        else if (mobileNumber.isEmpty())
+        else if(mobileNumber.isEmpty())
             mEditMobile.setError("please enter mobile number");
-        else {
-            callRegisterApi(new RegitrationEntity(userId, userName, emailId, mobileNumber, sponserId, password, cmfPassword));
+        else{
+            callRegisterApi(new RegitrationEntity(userId , userName , emailId , mobileNumber , sponserId , password , cmfPassword ));
         }
     }
 
@@ -163,8 +164,8 @@ public class SignupActivity extends Activity {
                         Log.i("RendomResponse::", new Gson().toJson(authResponse));
                         if (authResponse.getCode() == 200) {
                             Intent intent = new Intent();
-                            intent.putExtra("userId", authResponse.getResponseData().getUserid());
-                            setResult(180, intent);
+                            intent.putExtra("userId" , authResponse.getResponseData().getUserid());
+                            setResult(180 , intent);
                             finish();
                         } else {
                             Toast.makeText(SignupActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();

@@ -1,8 +1,5 @@
 package com.imuons.pmcindia.view;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,13 +9,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.imuons.pmcindia.DataModel.LoginData;
 import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
-import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
-import com.imuons.pmcindia.fragments.DashboardFragment;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
@@ -29,7 +26,6 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Body;
 
 public class LoginActivity extends Activity {
 
@@ -41,7 +37,6 @@ public class LoginActivity extends Activity {
     ProgressBar progressBar;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +45,20 @@ public class LoginActivity extends Activity {
     }
 
     @OnClick(R.id.singUp)
-    void singUp(){
-        startActivityForResult(new Intent(this , SignupActivity.class) , 190);
+    void singUp() {
+        startActivityForResult(new Intent(this, SignupActivity.class), 190);
     }
+
     @OnClick(R.id.login)
-    void login(){
+    void login() {
         String userId = mEditUserName.getText().toString().trim();
         String password = mEditPassword.getText().toString().trim();
-        if(userId.isEmpty())
+        if (userId.isEmpty())
             mEditUserName.setError("Please enter userId");
-        else if(password.isEmpty())
+        else if (password.isEmpty())
             mEditPassword.setError("Please enter password");
         else
-            callLoginApi(new LoginEntity(userId , password));
+            callLoginApi(new LoginEntity(userId, password));
     }
 
     private void callLoginApi(LoginEntity loginEntity) {
@@ -81,9 +77,9 @@ public class LoginActivity extends Activity {
                     if (authResponse != null) {
                         Log.i("loginResponse::", new Gson().toJson(authResponse));
                         if (authResponse.getCode() == 200) {
-                           if(authResponse.getData() != null)
-
-                        setData(authResponse.getData());
+                            if (authResponse.getData() != null)
+                                AppCommon.getInstance(getApplicationContext()).setUserLogin(loginEntity.getUser_id(), loginEntity.getPassword());
+                            setData(authResponse.getData());
 
                         } else {
                             Toast.makeText(LoginActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -113,25 +109,22 @@ public class LoginActivity extends Activity {
     private void setData(LoginData data) {
         AppCommon.getInstance(this).setUserObject(new Gson().toJson(data));
         AppCommon.getInstance(this).setToken(data.getAccess_token());
-     //   AppCommon.getInstance(this).setstoreToUserId(data.getAccess_token());
-
-        startActivity(new Intent(this , DashboardActivity.class) );
+        startActivity(new Intent(this, DashboardActivity.class));
         finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 190 && resultCode == 180){
+        if (requestCode == 190 && resultCode == 180) {
             String userId = data.getStringExtra("userId");
             mEditUserName.setText(userId);
         }
     }
 
     @OnClick(R.id.tvForgetPassword)
-    void forgot()
-    {
-        startActivity(new Intent(this , ForgetPassword.class));
+    void forgot() {
+        startActivity(new Intent(this, ForgetPassword.class));
     }
 
 }

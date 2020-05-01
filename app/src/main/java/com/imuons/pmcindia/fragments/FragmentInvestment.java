@@ -238,19 +238,29 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     @Override
-    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type) throws IOException {
+    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type)  {
         if (type.equals("INR")) {
             if (filePath.equals("")) {
                 Toast.makeText(getContext(), "Upload Payment slip", Toast.LENGTH_SHORT).show();
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
-                    callService(topupRequest(packageRecordModel, amount, type));
+                    try {
+
+                       callService(topupRequest(packageRecordModel, amount, type));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                callService(topupRequest(packageRecordModel, amount, type));
+                try {
+
+                    callService(topupRequest(packageRecordModel, amount, type));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -526,17 +536,20 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             String resultResponse = new String(response.data);
             try {
                 Log.d("response--", "-------------" + new JSONObject(resultResponse));
+                AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
                 if(getActivity().isFinishing())
                     return;
+
                 JSONObject jsonObject = new JSONObject(resultResponse);
                 handleResponse(jsonObject);
             } catch (JSONException e) {
                 e.printStackTrace();
+                AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
             }
 
         });

@@ -20,7 +20,6 @@ import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.GetPackageRecordModel;
 import com.imuons.pmcindia.fragments.FragmentInvestment;
 
-import java.io.IOException;
 import java.util.List;
 
 public class InvestmentGridAdapter extends BaseAdapter {
@@ -43,7 +42,7 @@ public class InvestmentGridAdapter extends BaseAdapter {
 
 
     @Override
-    public Object getItem(int position) {
+    public GetPackageRecordModel getItem(int position) {
         return modelList.get(position);
     }
 
@@ -58,21 +57,22 @@ public class InvestmentGridAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        convertView = layoutInflater.inflate(R.layout.item_investment, null);
-        viewHolder = new ViewHolder();
-        viewHolder.iv_pkg_image = convertView.findViewById(R.id.pkg_image);
-        viewHolder.tv_pkg_name = convertView.findViewById(R.id.pkg_name);
-        viewHolder.tv_pkg_amount = convertView.findViewById(R.id.pkg_amount);
-        viewHolder.int_btc = convertView.findViewById(R.id.int_BTC);
-        viewHolder.int_inr = convertView.findViewById(R.id.int_inr);
-        viewHolder.ll_file_choose = convertView.findViewById(R.id.file_choose_layer);
-        viewHolder.tv_file_name = convertView.findViewById(R.id.file_name);
-        viewHolder.et_amount = convertView.findViewById(R.id.et_amount);
-        viewHolder.make_payment = convertView.findViewById(R.id.btn_payment);
-        viewHolder.rb_groupe = convertView.findViewById(R.id.int_type);
-        convertView.setTag(viewHolder);
+       if(convertView==null){
+           convertView = layoutInflater.inflate(R.layout.item_investment, null);
+           viewHolder = new ViewHolder();
+           viewHolder.iv_pkg_image = convertView.findViewById(R.id.pkg_image);
+           viewHolder.tv_pkg_name = convertView.findViewById(R.id.pkg_name);
+           viewHolder.tv_pkg_amount = convertView.findViewById(R.id.pkg_amount);
+           viewHolder.int_btc = convertView.findViewById(R.id.int_BTC);
+           viewHolder.int_inr = convertView.findViewById(R.id.int_inr);
+           viewHolder.ll_file_choose = convertView.findViewById(R.id.file_choose_layer);
+           viewHolder.tv_file_name = convertView.findViewById(R.id.file_name);
+           viewHolder.et_amount = convertView.findViewById(R.id.et_amount);
+           viewHolder.make_payment = convertView.findViewById(R.id.btn_payment);
+           viewHolder.rb_groupe = convertView.findViewById(R.id.int_type);
+           convertView.setTag(viewHolder);
+       }
         ViewHolder viewHolder1 = (ViewHolder) convertView.getTag();
-
         setData(modelList.get(position), position, viewHolder1);
 
         viewHolder1.make_payment.setOnClickListener(new View.OnClickListener() {
@@ -90,32 +90,28 @@ public class InvestmentGridAdapter extends BaseAdapter {
                         viewHolder1.et_amount.requestFocus();
                         return;
                     }
-                    try {
-                        clickEvent.clickMakeyPayment(modelList.get(position),
-                                viewHolder1.et_amount.getText().toString(),type);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Log.d("inr payment","-----"+e.getMessage());
-                    }
+                   clickEvent.clickMakeyPayment(modelList.get(position),viewHolder1.et_amount.getText().toString(),type);
                 }else{
-                    try {
-                        clickEvent.clickMakeyPayment(modelList.get(position),
-                               String.valueOf( modelList.get(position).getMinHash())
-                                ,type);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Log.d("Btc payment","-----"+e.getMessage());
-                    }
+                    clickEvent.clickMakeyPayment(modelList.get(position),String.valueOf( modelList.get(position).getMinHash()),type);
                 }
 
             }
         });
-        View finalConvertView = convertView;
+       // View finalConvertView = convertView;
         viewHolder1.rb_groupe.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton rb = finalConvertView.findViewById(checkedId);
-                if (rb.getText().toString().equals("BTC")) {
+//                RadioButton rb = finalConvertView.findViewById(checkedId);
+//                if (rb.getText().toString().equals("BTC")) {
+//                    Log.i("BTC", "1");
+//                    viewHolder1.ll_file_choose.setVisibility(View.GONE);
+//
+//                } else {
+//                    Log.i("INR", "1");
+//
+//                    viewHolder1.ll_file_choose.setVisibility(View.VISIBLE);
+//                }
+                if (viewHolder1.int_btc.isChecked()) {
                     Log.i("BTC", "1");
                     viewHolder1.ll_file_choose.setVisibility(View.GONE);
 
@@ -157,7 +153,7 @@ public class InvestmentGridAdapter extends BaseAdapter {
     public interface ClickEvent {
         void clickFileChooser(ViewHolder viewHolder);
 
-        void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount,String type) throws IOException;
+        void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount,String type);
     }
 
     public class ViewHolder {

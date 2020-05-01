@@ -136,7 +136,13 @@ public class AppCommon {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(MyPreference.mUserLogin, MODE_PRIVATE).edit();
         editor.putString(MyPreference.TokenValue, token);
         editor.apply();
+    }
 
+
+    public void setUID(String token) {
+        SharedPreferences.Editor editor = mContext.getSharedPreferences(MyPreference.mUserLogin, MODE_PRIVATE).edit();
+        editor.putString(MyPreference.TokenValue, token);
+        editor.apply();
     }
     public void setAddress(String token , String prizm) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(MyPreference.mUserLogin, MODE_PRIVATE).edit();

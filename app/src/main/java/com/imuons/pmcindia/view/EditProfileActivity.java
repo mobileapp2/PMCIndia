@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ import com.imuons.pmcindia.Entity.CheckOtpEntity;
 import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.Entity.UserInfoEntity;
 import com.imuons.pmcindia.R;
+import com.imuons.pmcindia.ResponseModel.BTCAddressResponseModel;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
 import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.ResponseModel.UserProfileDataModel;
@@ -28,6 +32,9 @@ import com.imuons.pmcindia.fragments.ProfileFragment;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +56,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
-
+    boolean sid = false;
     @BindView(R.id.tv_userId)
     EditText tv_userId;
 
@@ -58,7 +65,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @BindView(R.id.tv_MobileNo)
     EditText tv_MobileNo;
     @BindView(R.id.tv_btcAddress)
-    TextView tv_btcAddress;
+    EditText tv_btcAddress;
     @BindView(R.id.tv_withdrawType)
     TextView tv_withdrawType;
     @BindView(R.id.radio_group)
@@ -89,29 +96,91 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
+
+        tv_btcAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (tv_btcAddress !=null && tv_btcAddress.length()>0){
+                    checkBtc();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
+
+    private void checkBtc() {
+
+        Map<String, String> checkuserexistsMap = new HashMap<>();
+        final String userName;
+
+      String btcAdd = tv_btcAddress.getText().toString().trim();
+
+        checkuserexistsMap.put("network_type", "BTC");
+        checkuserexistsMap.put("address", btcAdd);
+
+        AppService apiService = ServiceGenerator.createService(AppService.class, AppCommon.getInstance(EditProfileActivity.this).getToken());
+        final Call<BTCAddressResponseModel> loginCall = apiService.wsCheckBTCAddress(checkuserexistsMap);
+        loginCall.enqueue(new Callback<BTCAddressResponseModel>() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onResponse(Call<BTCAddressResponseModel> call,
+                                   Response<BTCAddressResponseModel> response) {
+                //  pd.hide();
+                if (response.isSuccessful()) {
+                    BTCAddressResponseModel checkUserExistResponseModel = response.body();
+
+                    if (checkUserExistResponseModel.getMessage().equals("Bitcoin address is valid")) {
+
+                        sid = true;
+                        Toast.makeText(EditProfileActivity.this, checkUserExistResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(EditProfileActivity.this, checkUserExistResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BTCAddressResponseModel> call,
+                                  Throwable t) {
+                // pd.hide();
+                Toast.makeText(EditProfileActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.radioBTC:
                 if (checked)
                     withdraw_type = "BTC";
-                    break;
+                break;
             case R.id.radioINR:
                 if (checked)
                     withdraw_type = "INR";
-                    break;
+                break;
         }
         tv_withdrawType.setText(withdraw_type);
     }
+
     @OnClick(R.id.update)
     void update() {
         String mobile = tv_MobileNo.getText().toString().trim();
         String email = tv_emailId.getText().toString().trim();
         btc = tv_btcAddress.getText().toString().trim();
-       String w_Type = tv_withdrawType.getText().toString().trim();
+        String w_Type = tv_withdrawType.getText().toString().trim();
 
         callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, btc, email, holder_name, ifsc_code, mobile, pan_no, status, w_Type));
 
@@ -220,9 +289,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         pan_no = data.getPanNo();
         status = "1";
         Type = data.getWithdrawType();
-        if(data.getWithdrawType().equals("BTC")){
+        if (data.getWithdrawType().equals("BTC")) {
             radio_group.check(R.id.radioBTC);
-        }else {
+        } else {
             radio_group.check(R.id.radioINR);
         }
     }

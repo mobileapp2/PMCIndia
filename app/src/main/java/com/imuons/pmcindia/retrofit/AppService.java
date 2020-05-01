@@ -10,6 +10,7 @@ import com.imuons.pmcindia.Entity.RegitrationEntity;
 import com.imuons.pmcindia.Entity.SendMessage;
 import com.imuons.pmcindia.Entity.UserInfoEntity;
 import com.imuons.pmcindia.Entity.WithdrawAmountEntity;
+import com.imuons.pmcindia.ResponseModel.BTCAddressResponseModel;
 import com.imuons.pmcindia.ResponseModel.ChangePasswordResponseModel;
 import com.imuons.pmcindia.ResponseModel.ChatResponse;
 import com.imuons.pmcindia.ResponseModel.CheckOtpResponse;
@@ -169,4 +170,9 @@ public interface AppService {
     @FormUrlEncoded
     @POST("direct-income-referral")
     Call<DirectResponse> GetDirectWithdrawReport(@FieldMap Map<String, Object> param);
+
+    @FormUrlEncoded
+    @POST("check_address1")
+    Call<BTCAddressResponseModel> wsCheckBTCAddress(@FieldMap Map<String, String> loginMap);
+
 }

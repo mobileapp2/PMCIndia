@@ -1,6 +1,7 @@
 package com.imuons.pmcindia.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.FundRequestRecordModel;
+import com.imuons.pmcindia.view.ViewAttachment;
 
 import java.util.List;
 
@@ -66,6 +68,16 @@ List<FundRequestRecordModel> requestRecordModels_list;
                 selected_postion = position;
                 notifyDataSetChanged();
 
+            }
+        });
+
+        holder.attacment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ViewAttachment.class);
+                intent.putExtra("url", requestRecordModels_list.get(position).getAttachment());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
             }
         });
     }

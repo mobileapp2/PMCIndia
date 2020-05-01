@@ -27,7 +27,7 @@
                 android:gravity="center"
                 android:text="Show"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -36,18 +36,22 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.2"
-                android:background="@drawable/bluedt"
+                android:background="@drawable/rounded_border"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/getselectedentry"
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/spinner_show"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="10"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:editable="false"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="12sp"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:textAlignment="center"/>
 
                 <ImageView
 
@@ -66,7 +70,7 @@
                 android:gravity="center"
                 android:text="entries"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -75,7 +79,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1.8"
-                android:background="@drawable/searchborder"
+                android:background="@drawable/rounded_border"
                 android:drawableRight="@drawable/searchicon"
                 android:focusable="true"
                 android:gravity="center"
@@ -84,7 +88,11 @@
                 android:maxLines="1"
                 android:paddingRight="10dp"
                 android:singleLine="true"
-                android:textColor="@color/darkgreen" />
+                android:textColor="@color/darkgreen"
+                android:layout_marginStart="10dp"
+                android:drawableEnd="@drawable/searchicon"
+                android:paddingEnd="10dp"
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
         <LinearLayout
@@ -107,7 +115,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@drawable/drawer_gradient_background"
                     android:orientation="horizontal"
                     android:weightSum="6">
 

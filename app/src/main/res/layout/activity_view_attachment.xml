@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_comman"
+    tools:context=".view.ViewAttachment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/rounded_green"
+        android:fontFamily="@font/open_sans_bold"
+        android:gravity="center"
+        android:text="Attachment"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/iv_attacment"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_height="match_parent">
+    </ImageView>
+</RelativeLayout>

@@ -117,5 +117,6 @@ public class DashboardFragment extends Fragment {
         tv_investment.setText(String.valueOf(data.getTotalInvestment()));
         tv_winning.setText(String.valueOf(data.getWinningIncome()));
         roitotalWithdrawal.setText(String.valueOf(data.getTotalWithdraw()));
+        String id = data.getUserId();
     }
 }

@@ -28,7 +28,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -188,8 +187,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     private void callRequestreport() {
-
-
         if (AppCommon.getInstance(getContext()).isConnectingToInternet(getContext())) {
             AppCommon.getInstance(getContext()).setNonTouchableFlags(getActivity());
             AppService apiService = ServiceGenerator.createService(AppService.class, AppCommon.getInstance(getContext()).getToken());
@@ -220,8 +217,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     //  Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
         } else {
             // no internet
             //  progressBar.setVisibility(View.GONE);
@@ -231,14 +226,14 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     private void setadpter(List<GetPackageRecordModel> data) {
-         investmentGridAdapter = new InvestmentGridAdapter(getActivity(), data, FragmentInvestment.this);
+        investmentGridAdapter = new InvestmentGridAdapter(getActivity(), data, FragmentInvestment.this);
         gridview.setAdapter(investmentGridAdapter);
     }
 
     @Override
     public void clickFileChooser(InvestmentGridAdapter.ViewHolder viewHolder) {
         filePath = "";
-        this.viewholder=viewHolder;
+        this.viewholder = viewHolder;
         showPictureDialog();
     }
 
@@ -438,8 +433,8 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     selected_file_uri = data.getData();
                     filePath = getPath(data.getData());
                     // Bitmap bm = BitmapFactory.decodeFile(filePath);
-                    investmentGridAdapter.setfileName(viewholder,new File(filePath).getName());
-                    bitmapImge=decodeSampledBitmapFromFile(filePath, 600, 800);
+                    investmentGridAdapter.setfileName(viewholder, new File(filePath).getName());
+                    bitmapImge = decodeSampledBitmapFromFile(filePath, 600, 800);
 
                 } else if (resultCode == RESULT_CANCELED) {
                     // user cancelled recording
@@ -477,7 +472,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         bitmapImge.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
         destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
-        investmentGridAdapter.setfileName(viewholder,destination.getName());
+        investmentGridAdapter.setfileName(viewholder, destination.getName());
         Log.d("destination", "" + destination.getName());
         // filePath = Environment.getExternalStorageDirectory().toString() + System.currentTimeMillis() + ".jpg";
         filePath = destination.getAbsolutePath();
@@ -502,17 +497,15 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             Map<String, RequestBody> param1 = new HashMap<>();
             if (!filePath.equals("")) {
                 byte[] fileData1 = getFileDataFromDrawable(getContext(), filePath);
-                File uu=new File(filePath);
+                File uu = new File(filePath);
                 buildPart(dos, fileData1, uu.getName() + ".png");
             }
 
-            buildTextPart(dos, "product_id", String.valueOf( packageRecordModel.getId()));
-            buildTextPart(dos, "currency_code",type);
-            buildTextPart(dos, "hash_unit",amount);
+            buildTextPart(dos, "product_id", String.valueOf(packageRecordModel.getId()));
+            buildTextPart(dos, "currency_code", type);
+            buildTextPart(dos, "hash_unit", amount);
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-            Log.d(tag, "--prduct id--"+packageRecordModel.getRefProductId());
-            Log.d(tag, "--type-"+type);
-            Log.d(tag, "-hashuint--"+amount);
+
 
         } else {
             // no internet
@@ -524,20 +517,21 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     private void callService(byte[] multipartBody) {
-        String url=ServiceGenerator.API_BASE_URL+"getaddress";
+        String url = ServiceGenerator.API_BASE_URL + "getaddress";
         Map<String, String> params = new HashMap<String, String>();
-
-        params.put("Authorization", "Bearer "+AppCommon.getInstance(getContext()).getToken());
-        Log.d(tag, "--auth--"+params.toString());
-        MultipartRequest multipartRequest = new MultipartRequest(url, params, mimeType, multipartBody, new com.android.volley.Response.Listener<NetworkResponse>() {
-            @Override
-            public void onResponse(NetworkResponse response) {
-                String resultResponse = new String(response.data);
-                try {
-                    Log.d("response--", "-------------"+new JSONObject(resultResponse));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+        params.put("Authorization", "Bearer " + AppCommon.getInstance(getContext()).getToken());
+        params.put("Content-Type", "multipart/form-data; boundary=----" + boundary);
+        Log.d(tag, "--auth--" + params.toString());
+        MultipartRequest multipartRequest = new MultipartRequest(url, params, mimeType, multipartBody, response -> {
+            String resultResponse = new String(response.data);
+            try {
+                Log.d("response--", "-------------" + new JSONObject(resultResponse));
+                if(getActivity().isFinishing())
+                    return;
+                JSONObject jsonObject = new JSONObject(resultResponse);
+                handleResponse(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
@@ -548,6 +542,14 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         });
 
         Volley.newRequestQueue(getContext()).add(multipartRequest);
+    }
+
+    private void handleResponse(JSONObject jsonObject) throws JSONException {
+        if (jsonObject.getString("code").equals("409")) {
+            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+        } else if (jsonObject.getString("code").equals("200")) {
+            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -595,6 +597,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
         dataOutputStream.writeBytes(lineEnd);
     }
+
     private byte[] getFileDataFromDrawable(Context context, String filePath) {
 
         Log.d("bitmap image", "--------------" + filePath);

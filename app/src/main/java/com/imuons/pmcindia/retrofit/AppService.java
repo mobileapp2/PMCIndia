@@ -129,7 +129,7 @@ public interface AppService {
 
     //Rahul
 
-    @FormUrlEncoded
+
     @GET("get-packages")
     Call<GetPackageResponseModel> GetPackages();
 

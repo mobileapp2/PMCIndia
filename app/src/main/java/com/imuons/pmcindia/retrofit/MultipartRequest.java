@@ -30,8 +30,6 @@ public class MultipartRequest extends Request<NetworkResponse> implements Recove
 
     public MultipartRequest(String url, Map<String, String> headers, String mimeType, byte[] multipartBody, Response.Listener<NetworkResponse> listener, Response.ErrorListener errorListener) {
         super(Method.POST, url, errorListener);
-
-
         this.mListener = listener;
         this.mErrorListener = errorListener;
         this.mHeaders = headers;
@@ -55,6 +53,7 @@ public class MultipartRequest extends Request<NetworkResponse> implements Recove
     @Override
     public byte[] getBody() throws AuthFailureError {
         Log.d("get body ","-----------------");
+        getParamsEncoding();
         return mMultipartBody;
     }
 

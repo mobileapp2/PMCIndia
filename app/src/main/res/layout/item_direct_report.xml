@@ -75,7 +75,7 @@
         android:background="@drawable/bg_green_20radius"
         android:elevation="5dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
 

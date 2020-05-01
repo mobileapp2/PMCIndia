@@ -2,37 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.imuons.pmcindia">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <application
-        android:name=".application.PMCApplication"
+    <application android:name=".application.PMCApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ChangePasswordActivity"></activity>
-        <activity android:name=".view.BankDetailsActivity" />
-        <activity android:name=".view.EditProfileActivity" />
-        <activity android:name=".view.ForgetPasswordPage" />
-        <activity android:name=".view.ForgetPassword" />
-        <activity android:name=".view.SignupActivity" />
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.DashboardActivity" />
+        <activity android:name=".view.ViewAttachment"></activity>
+        <activity android:name=".view.ChangePasswordActivity"/>
+        <activity android:name=".view.BankDetailsActivity"/>
+        <activity android:name=".view.EditProfileActivity"/>
+        <activity android:name=".view.ForgetPasswordPage"/>
+        <activity android:name=".view.ForgetPassword"/>
+        <activity android:name=".view.SignupActivity"/>
+        <activity android:name=".view.LoginActivity"/>
+        <activity android:name=".view.DashboardActivity"/>
         <activity android:name=".view.SplashScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>

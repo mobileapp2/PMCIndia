@@ -1,7 +1,5 @@
 package com.imuons.pmcindia.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.imuons.pmcindia.Entity.RegitrationEntity;
 import com.imuons.pmcindia.R;
-import com.imuons.pmcindia.ResponseModel.QuestionResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.retrofit.AppService;
@@ -163,6 +161,7 @@ public class SignupActivity extends Activity {
                     if (authResponse != null) {
                         Log.i("RendomResponse::", new Gson().toJson(authResponse));
                         if (authResponse.getCode() == 200) {
+                            AppCommon.getInstance(getApplicationContext()).setUserLogin(regitrationEntity.getUser_id(), regitrationEntity.getPassword());
                             Intent intent = new Intent();
                             intent.putExtra("userId" , authResponse.getResponseData().getUserid());
                             setResult(180 , intent);

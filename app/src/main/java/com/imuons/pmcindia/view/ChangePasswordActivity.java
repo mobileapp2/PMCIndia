@@ -83,7 +83,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         String confirm_password = tv_reEnterPassword.getText().toString().trim();
 
 
-        callChangePassApi(new ChangePasswordEntity(confirm_password, new_password, old_password));
+        callChangePassApi(new ChangePasswordEntity(confirm_password, old_password, new_password));
 
     }
 
@@ -136,7 +136,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     }
 
     private void registerListeners() {
-        tv_Info.setOnClickListener(this);
+
         tv_editProfile.setOnClickListener(this);
         tv_bank_Details.setOnClickListener(this);
 

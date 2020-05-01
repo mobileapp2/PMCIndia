@@ -104,6 +104,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     withdraw_type = "INR";
                     break;
         }
+        tv_withdrawType.setText(withdraw_type);
     }
     @OnClick(R.id.update)
     void update() {
@@ -218,6 +219,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         pan_no = data.getPanNo();
         status = "1";
         Type = data.getWithdrawType();
+        if(data.getWithdrawType().equals("BTC")){
+            radio_group.check(R.id.radioBTC);
+        }else {
+            radio_group.check(R.id.radioINR);
+        }
     }
 
     private void registerListeners() {

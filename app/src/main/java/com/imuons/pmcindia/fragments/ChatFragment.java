@@ -110,7 +110,7 @@ public class ChatFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                     AppCommon.getInstance(ChatFragment.this.getContext()).clearNonTouchableFlags(ChatFragment.this.getActivity());
                     // loaderView.setVisibility(View.GONE);
-                    Toast.makeText(ChatFragment.this.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(ChatFragment.this.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
                 }
             });
 

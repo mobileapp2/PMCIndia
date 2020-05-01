@@ -1,6 +1,8 @@
 package com.imuons.pmcindia.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,7 +73,18 @@ public class BankDetailsActivity extends AppCompatActivity implements View.OnCli
         ButterKnife.bind(this);
         registerListeners();
         getUserProfileInfo();
+        tv_Info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = ProfileFragment.newInstance();
 
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.disallowAddToBackStack();
+                transaction.replace(R.id.container_layout, fragment).commit();
+
+
+            }
+        });
     }
 
     @OnClick(R.id.update)

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_comman"
-    tools:context=".view.EditProfileActivity">
+    tools:context=".view.EditProfileActivity"
+    android:id="@+id/container_layout">
 
     <TextView
         android:layout_width="match_parent"
@@ -245,9 +246,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:checked="true"
+                        android:onClick="onRadioButtonClicked"
                         android:text="BTC"
-                        android:textColor="@color/textColorGreen" />
+                        android:textColor="@color/textColorGreen"
+                        tools:ignore="OnClick" />
 
                     <RadioButton
                         android:id="@+id/radioINR"
@@ -255,7 +257,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="INR"
-                        android:textColor="@color/textColorGreen" />
+                        android:onClick="onRadioButtonClicked"
+                        android:textColor="@color/textColorGreen"
+                        tools:ignore="OnClick" />
                 </RadioGroup>
             </LinearLayout>
 

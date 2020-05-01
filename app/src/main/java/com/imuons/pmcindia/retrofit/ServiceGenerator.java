@@ -12,7 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
     //public static String API_BASE_URL = "http://172.105.68.40/vision11plan/public/api/";
     //https://user.sportsfantasy11.com/plan/api/get-info/{email}
-    public static String API_BASE_URL = "https://www.pmcindia.biz/pmc-india/public/api/";
+   // public static String API_BASE_URL = "https://www.pmcindia.biz/pmc-india/public/api/";
+    public static String API_BASE_URL = "https://www.pmcindia.biz/replica/pmc-india/public/api/";
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS).

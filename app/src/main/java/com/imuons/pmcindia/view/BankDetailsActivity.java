@@ -79,7 +79,7 @@ public class BankDetailsActivity extends AppCompatActivity implements View.OnCli
                 Fragment fragment = ProfileFragment.newInstance();
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.disallowAddToBackStack();
+                transaction.addToBackStack(null);
                 transaction.replace(R.id.container_layout, fragment).commit();
 
 

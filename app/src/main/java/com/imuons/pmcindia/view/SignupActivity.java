@@ -1,7 +1,5 @@
 package com.imuons.pmcindia.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.Entity.RegitrationEntity;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.LoginResponse;
-import com.imuons.pmcindia.ResponseModel.QuestionResponse;
 import com.imuons.pmcindia.ResponseModel.RegisterResponse;
 import com.imuons.pmcindia.ResponseModel.RendomNumberResponse;
 import com.imuons.pmcindia.retrofit.AppService;
@@ -91,6 +88,7 @@ public class SignupActivity extends Activity {
                     if (authResponse != null) {
                         Log.i("RendomResponse::", new Gson().toJson(authResponse));
                         if (authResponse.getCode() == 200) {
+
                             mEditUserId.setText(String.valueOf(authResponse.getData()));
                         } else {
                             Toast.makeText(SignupActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -171,6 +169,7 @@ public class SignupActivity extends Activity {
                             intent.putExtra("userId" , authResponse.getResponseData().getUserid());
                             setResult(180 , intent);
                             finish();*/
+                            AppCommon.getInstance(getApplicationContext()).setUserLogin(regitrationEntity.getUser_id(), regitrationEntity.getPassword());
                            callLoginApi(new LoginEntity(regitrationEntity.getUser_id() , regitrationEntity.getPassword()));
                         } else {
                             Toast.makeText(SignupActivity.this, authResponse.getMessage(), Toast.LENGTH_SHORT).show();

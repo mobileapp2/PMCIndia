@@ -279,5 +279,6 @@ public class MyTeamFragment extends Fragment {
         callgetLevelView(position - 1, records.size() , "");
         bottomProgressBar.setVisibility(View.VISIBLE);
 
+
     }
 }

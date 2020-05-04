@@ -43,7 +43,7 @@ import java.util.HashMap;
 
 import butterknife.ButterKnife;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements FragmentInvestment.OnResponseHandle {
 
     private ExpandableListAdapter mExpandableListAdapter;
     private ArrayList<ExpandableListModel> mExpandableListTitle;
@@ -154,7 +154,8 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (childPosition) {
 
                             case 0:
-                                fragmentInvestment = FragmentInvestment.newInstance();
+                                fragmentInvestment =
+                                        FragmentInvestment.newInstance(DashboardActivity.this);
                                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentInvestment).commit();
                                 getSupportActionBar().setTitle("Investment");
                                 mExpandableListView.setItemChecked(childPosition, true);
@@ -394,6 +395,16 @@ public class DashboardActivity extends AppCompatActivity {
 
         } else {
 
+        }
+    }
+
+    @Override
+    public void onResponse(int flag) {
+        if(flag==1){
+            fragmentManager.beginTransaction().replace(R.id.content_frame, FragmentRequestReport.newInstance()).commit();
+            getSupportActionBar().setTitle("Investment Request Report");
+            mExpandableListView.setItemChecked(2, true);
+            mExpandableListView.setSelection(2);
         }
     }
 }

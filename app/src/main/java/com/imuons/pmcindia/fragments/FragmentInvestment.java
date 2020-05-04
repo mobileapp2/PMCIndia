@@ -1,7 +1,6 @@
 package com.imuons.pmcindia.fragments;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -53,6 +52,7 @@ import com.imuons.pmcindia.retrofit.MultipartRequest;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
 import com.imuons.pmcindia.utils.Constants;
+import com.imuons.pmcindia.view.DashboardActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -141,14 +141,15 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     private Button copyto_invoice;
     private LinearLayout ll_invoice_id_layer;
     private TextView tv_invoice_id;
+   private static  OnResponseHandle onResponseHandle;
     public FragmentInvestment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static FragmentInvestment newInstance() {
+    public static FragmentInvestment newInstance(DashboardActivity dashboardActivity) {
         FragmentInvestment fragment = new FragmentInvestment();
-
+        onResponseHandle=(OnResponseHandle)dashboardActivity;
         return fragment;
     }
 
@@ -430,7 +431,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     private void requestpermission(int i) {
         if (i == 1) {
             int result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -593,7 +594,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
 
     private byte[] topupRequest(GetPackageRecordModel packageRecordModel, String amount, String type) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -609,9 +610,12 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 buildPart(dos, fileData1, uu.getName() + ".png");
             }
 
-            buildTextPart(dos, "product_id", String.valueOf(packageRecordModel.getId()));
-            buildTextPart(dos, "currency_code", type);
-            buildTextPart(dos, "hash_unit", amount);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                buildTextPart(dos, "product_id", String.valueOf(packageRecordModel.getId()));
+                buildTextPart(dos, "currency_code", type);
+                buildTextPart(dos, "hash_unit", amount);
+            }
+
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
 
@@ -668,6 +672,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                         setDepositDialog(dataobj);
                     }
                 } else {
+                    onResponseHandle.onResponse(1);
                     Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                 }
             }
@@ -791,5 +796,9 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    public interface OnResponseHandle{
+        public void onResponse(int flag);
     }
 }

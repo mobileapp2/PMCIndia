@@ -77,9 +77,9 @@ public class DirectReportAdapter extends RecyclerView.Adapter<DirectReportAdapte
         holder.deduction.setText(String.valueOf(topupRecordModel.getFromUserId()));
         holder.amount.setText(String.valueOf(topupRecordModel.getFromFullname()));
         holder.tv_status.setText(String.valueOf(topupRecordModel.getInvoiceId()));
-        holder.tv_withdrawtype.setText(topupRecordModel.getAmount());
+        holder.tv_withdrawtype.setText("\u20B9"+topupRecordModel.getAmount());
 
-        holder.tv_payment_mode.setText(String.valueOf(topupRecordModel.getLapsAmount()));
+        holder.tv_payment_mode.setText("\u20B9"+String.valueOf(topupRecordModel.getLapsAmount()));
         holder.statusDrict.setText(String.valueOf(topupRecordModel.getStatus()));
         holder.date.setText(topupRecordModel.getRecDate());
 

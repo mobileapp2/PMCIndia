@@ -74,7 +74,7 @@ public class EstimateAmountReportAdapter extends RecyclerView.Adapter<EstimateAm
     private void setData(ViewHolder holder, EstimateRecord estimateRecord, int position) {
 
         holder.srno.setText(String.valueOf(position + 1));
-        holder.deposit.setText(String.valueOf(estimateRecord.getAmount()));
+        holder.deposit.setText("\u20B9"+String.valueOf(estimateRecord.getAmount()));
         holder.packageName.setText(String.valueOf(estimateRecord.getProductName()));
         holder.house.setText(String.valueOf(estimateRecord.getHouseName()));
 

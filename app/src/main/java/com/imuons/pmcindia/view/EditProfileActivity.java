@@ -29,6 +29,7 @@ import com.imuons.pmcindia.fragments.ProfileFragment;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
+import com.imuons.pmcindia.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -291,7 +292,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         } else {
             radio_group.check(R.id.radioINR);
         }
-        if (data.getBtcAddress() == null || data.getBtcAddress().isEmpty() || sid==false) {
+        if (data.getBtcAddress() == null || data.getBtcAddress().isEmpty()) {
             tv_btcAddress.setFocusable(true);
             tv_btcAddress.setFocusableInTouchMode(true);
             tv_btcAddress.setClickable(true);
@@ -343,6 +344,15 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Utils.checkInternetConnection(EditProfileActivity.this.getApplicationContext())) {
 
+            getUserProfileInfo();
+        } else {
+
+        }
+    }
 
 }

@@ -71,7 +71,7 @@ public class InvestmentReportAdapter extends RecyclerView.Adapter<InvestmentRepo
     private void setData(ViewHolder holder, TopupRecordModel topupRecordModel, int position) {
         holder.srno.setText(String.valueOf(position + 1));
         holder.deposit.setText(topupRecordModel.getPin());
-        holder.amount.setText(String.valueOf(topupRecordModel.getAmount()));
+        holder.amount.setText("\u20B9"+String.valueOf(topupRecordModel.getAmount()));
         holder.tv_plan.setText(topupRecordModel.getName());
         holder.house.setText(topupRecordModel.getHouseName());
         holder.tv_slot_no.setText(String.valueOf(topupRecordModel.getSlotNo()));

@@ -112,11 +112,11 @@ public class DashboardFragment extends Fragment {
     private void setData(DashBoardData data) {
         team.setText(String.valueOf(data.getTotalTeam()));
         totalDirect.setText(String.valueOf(data.getTotalDirects()));
-        roiIncome.setText(String.valueOf(data.getRoiIncome()));
-        tv_directIncome.setText(String.valueOf(data.getDirectRefIncome()));
-        tv_investment.setText(String.valueOf(data.getTotalInvestment()));
-        tv_winning.setText(String.valueOf(data.getWinningIncome()));
-        roitotalWithdrawal.setText(String.valueOf(data.getTotalWithdraw()));
+        roiIncome.setText(getResources().getString(R.string.Rs)+String.valueOf(data.getRoiIncome()));
+        tv_directIncome.setText(getResources().getString(R.string.Rs)+String.valueOf(data.getDirectRefIncome()));
+        tv_investment.setText(getResources().getString(R.string.Rs)+String.valueOf(data.getTotalInvestment()));
+        tv_winning.setText(getResources().getString(R.string.Rs)+String.valueOf(data.getWinningIncome()));
+        roitotalWithdrawal.setText(getResources().getString(R.string.Rs)+String.valueOf(data.getTotalWithdraw()));
         String id = data.getUserId();
     }
 }

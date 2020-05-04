@@ -167,7 +167,7 @@ public class MakeWithdrawalFragment extends Fragment {
 
     private void setBalance(MakeWithdrawDataModel data) {
 
-        tv_Balance.setText(String.valueOf(data.getBalance()));
+        tv_Balance.setText("\u20B9"+String.valueOf(data.getBalance()));
 
     }
 

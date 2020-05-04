@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentInvestment"
-    >
+    android:background="@drawable/bg_comman"
+    tools:context=".fragments.FragmentInvestment">
 
-    <GridView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_comman"
+
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp5"
         android:gravity="center"
         android:horizontalSpacing="10dp"
-      android:layout_marginLeft="@dimen/dp5"
-        android:layout_marginRight="@dimen/dp5"
-        android:layout_marginTop="@dimen/dp10"
         android:numColumns="2"
 
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp"
-        android:visibility="visible"
-        />
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/dialogBox"
@@ -31,23 +28,20 @@
         android:layout_height="match_parent"
         android:background="@color/blackTransparent"
         android:clickable="true"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/dp10"
-            android:layout_marginRight="@dimen/dp10"
-            android:layout_height="match_parent"
-            >
+            android:layout_marginRight="@dimen/dp10">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="5dp"
-                >
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/txtDeposit"
@@ -63,16 +57,14 @@
                     android:paddingBottom="@dimen/dp10"
                     android:text="Deposit"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp18"
-                    />
+                    android:textSize="@dimen/sp18" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtDeposit"
                     android:background="@color/white"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/comingvalue"
@@ -83,8 +75,7 @@
                         android:layout_marginBottom="@dimen/dp5"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/sp20"
-                        tools:text="Amount"
-                        />
+                        tools:text="Amount" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -94,14 +85,12 @@
                         android:textColor="#D4C691"
                         android:textSize="16sp"
                         android:visibility="gone"
-                        tools:text="Please Deposit to complete your topup."
-                        />
+                        tools:text="Please Deposit to complete your topup." />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp40"
-                        android:layout_marginBottom="10dp"
-                        >
+                        android:layout_marginBottom="10dp">
 
                         <TextView
                             android:layout_width="0dp"
@@ -110,8 +99,7 @@
                             android:gravity="center"
                             android:text="Amount :"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                         <TextView
                             android:id="@+id/amt"
@@ -122,8 +110,7 @@
                             android:gravity="center"
                             android:paddingRight="@dimen/dp30"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                         <TextView
                             android:id="@+id/price"
@@ -133,8 +120,7 @@
                             android:gravity="center"
                             android:text="Amount"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                     </LinearLayout>
 
@@ -142,8 +128,7 @@
                         android:id="@+id/ll_pending_amount"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp40"
-                        android:layout_marginBottom="@dimen/dp10"
-                        >
+                        android:layout_marginBottom="@dimen/dp10">
 
                         <TextView
                             android:layout_width="0dp"
@@ -154,8 +139,7 @@
                             android:lines="1"
                             android:text="Remaining Amount:"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                         <TextView
                             android:id="@+id/remainingamt"
@@ -167,8 +151,7 @@
                             android:paddingRight="@dimen/dp30"
                             android:text=""
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                         <TextView
                             android:id="@+id/tvCurencyType"
@@ -178,16 +161,14 @@
                             android:gravity="center"
                             android:text="Amount"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/ll_paid_amount"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp40"
-                        >
+                        android:layout_height="@dimen/dp40">
 
                         <TextView
                             android:layout_width="0dp"
@@ -196,8 +177,7 @@
                             android:gravity="center"
                             android:text="Paid Amount:"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                         <TextView
                             android:id="@+id/tvPaidAmount"
@@ -209,8 +189,7 @@
                             android:paddingRight="@dimen/dp30"
                             android:text=""
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                         <TextView
                             android:id="@+id/tvPaidCurrencyType"
@@ -220,8 +199,7 @@
                             android:gravity="center"
                             android:text="Amount"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
                     </LinearLayout>
 
@@ -231,8 +209,7 @@
                         android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/dp10"
-                        android:src="@mipmap/ic_launcher"
-                        />
+                        android:src="@mipmap/ic_launcher" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -243,8 +220,7 @@
                         android:gravity="center"
                         android:text="Transaction Hash"
                         android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/dp15"
-                        />
+                        android:textSize="@dimen/dp15" />
 
                     <EditText
                         android:id="@+id/et_tran_hash"
@@ -255,8 +231,7 @@
                         android:layout_marginRight="@dimen/dp10"
                         android:background="@drawable/ll_bg_borader_green"
                         android:gravity="center"
-                        android:hint="Enter Transaction Hash"
-                        >
+                        android:hint="Enter Transaction Hash">
 
                     </EditText>
 
@@ -269,8 +244,7 @@
                         android:gravity="center"
                         android:text="Upload Payment slip"
                         android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/dp15"
-                        />
+                        android:textSize="@dimen/dp15" />
 
                     <LinearLayout
                         android:id="@+id/file_choose_layer"
@@ -281,8 +255,7 @@
                         android:layout_marginRight="@dimen/dp10"
                         android:background="@drawable/ll_bg_borader_green"
                         android:gravity="center"
-                        android:padding="@dimen/dp5"
-                        >
+                        android:padding="@dimen/dp5">
 
                         <TextView
                             android:id="@+id/tv_choose_file"
@@ -293,8 +266,7 @@
                             android:padding="@dimen/dp5"
                             android:text="Choose File"
                             android:textColor="#403e50"
-                            android:textSize="15dp"
-                            >
+                            android:textSize="15dp">
 
                         </TextView>
 
@@ -306,15 +278,13 @@
                             android:text="no file chosen"
                             android:textColor="#403e50"
                             android:textSize="12dp"
-                            android:textStyle="bold"
-                            ></TextView>
+                            android:textStyle="bold"></TextView>
                     </LinearLayout>
 
                     <LinearLayout
 
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        >
+                        android:layout_height="35dp">
 
                         <TextView
                             android:id="@+id/link"
@@ -329,8 +299,7 @@
                             android:padding="@dimen/dp5"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp10"
-                            tools:text="address Text"
-                            />
+                            tools:text="address Text" />
 
                         <Button
                             android:id="@+id/copyto"
@@ -341,8 +310,7 @@
                             android:background="@drawable/bg_green_20radius"
                             android:text="Copy"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
 
                     </LinearLayout>
@@ -351,8 +319,7 @@
                         android:id="@+id/ll_invoice_copy"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:visibility="gone"
-                        >
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tv_invoice_id"
@@ -367,8 +334,7 @@
                             android:padding="@dimen/dp5"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp10"
-                            tools:text="123456789456"
-                            />
+                            tools:text="123456789456" />
 
                         <Button
                             android:id="@+id/copyto_invoice"
@@ -379,8 +345,7 @@
                             android:background="@drawable/bg_green_20radius"
                             android:text="Copy"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp10"
-                            />
+                            android:textSize="@dimen/sp10" />
 
 
                     </LinearLayout>
@@ -399,8 +364,7 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/dp15"
                         android:textStyle="bold"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/mTextField"
@@ -414,16 +378,14 @@
                         android:gravity="center"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/sp10"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp5"
                         android:layout_marginBottom="@dimen/dp10"
-                        android:gravity="center"
-                        >
+                        android:gravity="center">
 
                         <Button
                             android:id="@+id/submit"
@@ -433,8 +395,7 @@
                             android:background="@drawable/bg_green_20radius"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:text="Submit"
-                            android:textColor="@color/white"
-                            />
+                            android:textColor="@color/white" />
 
                         <Button
                             android:id="@+id/closeBtn"
@@ -445,8 +406,7 @@
                             android:background="@drawable/bg_green_20radius"
                             android:backgroundTint="@color/colorPrimary"
                             android:text="Close"
-                            android:textColor="@color/white"
-                            />
+                            android:textColor="@color/white" />
                     </LinearLayout>
 
 

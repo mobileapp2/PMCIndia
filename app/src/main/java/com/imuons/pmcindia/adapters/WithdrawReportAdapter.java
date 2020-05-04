@@ -72,7 +72,7 @@ public class WithdrawReportAdapter extends RecyclerView.Adapter<WithdrawReportAd
     private void setData(WithdrawReportAdapter.ViewHolder holder, WithdrawReportRecordModel topupRecordModel, int position) {
         holder.srno.setText(String.valueOf(position + 1));
         holder.deduction.setText(String.valueOf(topupRecordModel.getDeduction()));
-        holder.amount.setText(String.valueOf(topupRecordModel.getAmount()));
+        holder.amount.setText("\u20B9"+String.valueOf(topupRecordModel.getAmount()));
         if (topupRecordModel.getStatus() == 0 || topupRecordModel.getStatus().equals("0")){
             holder.tv_status.setText("Pending");
         }else {

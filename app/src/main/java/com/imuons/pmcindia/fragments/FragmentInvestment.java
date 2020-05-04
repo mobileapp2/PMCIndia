@@ -403,7 +403,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getContext(),"Storage area Something went Wrong ",
+            Toast.makeText(getContext(),"Storage area Something went Wrong "+e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -488,7 +488,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 Log.d(tag, "----req permission-GALLERY_PICTURE_REQUEST_CODE--" + fileUri);
                 galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                 getActivity().startActivityForResult(galleryIntent, GALLERY_PICTURE_REQUEST_CODE);
-
+                Toast.makeText(getContext(),"Gallery Permission Allow", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getContext(),"Gallery Permission Denied", Toast.LENGTH_LONG).show();
             }

@@ -175,4 +175,5 @@ public interface AppService {
     @POST("check_address1")
     Call<BTCAddressResponseModel> wsCheckBTCAddress(@FieldMap Map<String, String> loginMap);
 
+
 }

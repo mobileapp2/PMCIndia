@@ -1,9 +1,5 @@
 package com.imuons.pmcindia.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,13 +14,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.gson.Gson;
-import com.imuons.pmcindia.Entity.CheckOtpEntity;
-import com.imuons.pmcindia.Entity.LoginEntity;
 import com.imuons.pmcindia.Entity.UserInfoEntity;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.BTCAddressResponseModel;
-import com.imuons.pmcindia.ResponseModel.LoginResponse;
 import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.ResponseModel.UserProfileDataModel;
 import com.imuons.pmcindia.ResponseModel.UserProfileResponse;
@@ -154,6 +151,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             //    Toast.makeText(EditProfileActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void backBtn(View view) {
+        onBackPressed();
     }
 
     public void onRadioButtonClicked(View view) {

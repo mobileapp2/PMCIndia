@@ -1,9 +1,5 @@
 package com.imuons.pmcindia.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +9,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.gson.Gson;
 import com.imuons.pmcindia.Entity.ChangePasswordEntity;
-import com.imuons.pmcindia.Entity.UserInfoEntity;
 import com.imuons.pmcindia.R;
 import com.imuons.pmcindia.ResponseModel.ChangePasswordResponseModel;
-import com.imuons.pmcindia.ResponseModel.UpdateProfileResponse;
 import com.imuons.pmcindia.fragments.ProfileFragment;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
@@ -73,6 +71,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
             }
         });
+    }
+    public void backBtn(View view) {
+        onBackPressed();
     }
 
 

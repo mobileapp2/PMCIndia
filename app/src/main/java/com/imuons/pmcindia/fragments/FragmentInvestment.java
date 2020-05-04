@@ -96,6 +96,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     private static final String[] CAMERA_PERM = {Manifest.permission.CAMERA};
     private static final String IMAGE_DIRECTORY_NAME = "PMC";
     private static final int PICK_FILE_REQUEST = 1;
+    private static OnResponseHandle onResponseHandle;
     private final String twoHyphens = "------";
     private final String lineEnd = "\r\n";
     private final String boundary = "WebKitFormBoundary" + System.currentTimeMillis();
@@ -118,6 +119,10 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     Button copyto;
     Button closeBtn;
     String currency_code;
+    EditText et_tran_hash;
+    TextView tv_choose_file;
+    TextView tv_file_name;
+    Button btn_submit;
     String newlink, strinvoiceid, straddress;
     int finalvalue;
     // TODO: Rename and change types of parameters
@@ -141,7 +146,8 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     private Button copyto_invoice;
     private LinearLayout ll_invoice_id_layer;
     private TextView tv_invoice_id;
-   private static  OnResponseHandle onResponseHandle;
+    private boolean is_popup_image;
+
     public FragmentInvestment() {
         // Required empty public constructor
     }
@@ -149,7 +155,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     // TODO: Rename and change types and number of parameters
     public static FragmentInvestment newInstance(DashboardActivity dashboardActivity) {
         FragmentInvestment fragment = new FragmentInvestment();
-        onResponseHandle=(OnResponseHandle)dashboardActivity;
+        onResponseHandle = dashboardActivity;
         return fragment;
     }
 
@@ -245,6 +251,31 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         tvCurencyType = view.findViewById(R.id.tvCurencyType);
         tvPaidCurrencyType = view.findViewById(R.id.tvPaidCurrencyType);
         price = view.findViewById(R.id.price);
+
+        et_tran_hash = view.findViewById(R.id.et_tran_hash);
+        tv_choose_file = view.findViewById(R.id.tv_choose_file);
+        tv_file_name = view.findViewById(R.id.file_name);
+        btn_submit = view.findViewById(R.id.submit);
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_tran_hash.getText().toString().trim().isEmpty()) {
+                    et_tran_hash.setError("Enter Transaction Hash");
+                    et_tran_hash.requestFocus();
+                    return;
+                }else if(filePath.equals("")){
+                    Toast.makeText(getContext(), "Upload Payment slip", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                try {
+                    setFundRequest();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         callRequestreport();
 
         copyto_invoice.setOnClickListener(new View.OnClickListener() {
@@ -283,7 +314,18 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 is_payment_dialog_open = false;
             }
         });
+        tv_choose_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filePath = "";
+                is_popup_image = true;
+                showPictureDialog();
+            }
+        });
     }
+
+
+
 
     private void callRequestreport() {
         if (AppCommon.getInstance(getContext()).isConnectingToInternet(getContext())) {
@@ -333,6 +375,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     public void clickFileChooser(InvestmentGridAdapter.ViewHolder viewHolder) {
         filePath = "";
         this.viewholder = viewHolder;
+        is_popup_image = false;
         showPictureDialog();
     }
 
@@ -398,13 +441,13 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     getActivity().startActivityForResult(galleryIntent, GALLERY_PICTURE_REQUEST_CODE);
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    Toast.makeText(getContext(),"Something went Wrong", Toast.LENGTH_LONG).show();
+                    //                    Toast.makeText(getContext(),"Something went Wrong", Toast.LENGTH_LONG).show();
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-//            Toast.makeText(getContext(),"Storage area Something went Wrong "+e.getMessage(),
-//                    Toast.LENGTH_LONG).show();
+            //            Toast.makeText(getContext(),"Storage area Something went Wrong "+e.getMessage(),
+            //                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -478,7 +521,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         if (requestCode == REQUEST_WRITE_PERMISSION_FILE_CHOSER) {
             int result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (result == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getContext(),"No File  Choose option", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "No File  Choose option", Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == REQUEST_WRITE_PERMISSION) {
             int result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -489,8 +532,8 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                 getActivity().startActivityForResult(galleryIntent, GALLERY_PICTURE_REQUEST_CODE);
                 //Toast.makeText(getContext(),"Gallery Permission Allow", Toast.LENGTH_LONG).show();
-            }else{
-               // Toast.makeText(getContext(),"Gallery Permission Denied", Toast.LENGTH_LONG)
+            } else {
+                // Toast.makeText(getContext(),"Gallery Permission Denied", Toast.LENGTH_LONG)
                 // .show();
             }
         } else if (requestCode == INITIAL_REQUEST_CAMERA) {
@@ -547,7 +590,12 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     selected_file_uri = data.getData();
                     filePath = getPath(data.getData());
                     // Bitmap bm = BitmapFactory.decodeFile(filePath);
-                    investmentGridAdapter.setfileName(viewholder, new File(filePath).getName());
+                    if (is_popup_image) {
+                        tv_file_name.setText(new File(filePath).getName());
+                    } else {
+                        investmentGridAdapter.setfileName(viewholder, new File(filePath).getName());
+                    }
+
                     bitmapImge = decodeSampledBitmapFromFile(filePath, 600, 800);
 
                 } else if (resultCode == RESULT_CANCELED) {
@@ -586,7 +634,12 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         bitmapImge.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
         destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
-        investmentGridAdapter.setfileName(viewholder, destination.getName());
+        if (is_popup_image) {
+            tv_file_name.setText(destination.getName());
+        } else {
+            investmentGridAdapter.setfileName(viewholder, destination.getName());
+        }
+
         Log.d("destination", "" + destination.getName());
         // filePath = Environment.getExternalStorageDirectory().toString() + System.currentTimeMillis() + ".jpg";
         filePath = destination.getAbsolutePath();
@@ -598,7 +651,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         }
 
     }
-
 
 
     private byte[] topupRequest(GetPackageRecordModel packageRecordModel, String amount, String type) throws IOException {
@@ -674,15 +726,17 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     if (dataobj.getString("network_type").equals("BTC")) {
                         is_payment_dialog_open = true;
                         dialogBox.setVisibility(View.VISIBLE);
+                        filePath="";
                         setDepositDialog(dataobj);
                     }
                 } else {
+                    filePath="";
                     onResponseHandle.onResponse(1);
                     Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                 }
             }
-        }else{
-          //  {"code":404,"status":"Not Found","message":"You can make only one investment!",
+        } else {
+            //  {"code":404,"status":"Not Found","message":"You can make only one investment!",
             //  "data":{}}
             Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
         }
@@ -700,8 +754,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
         BigDecimal remainingint = bd.subtract(bd2).setScale(8, BigDecimal.ROUND_HALF_UP);
         straddress = dataobj.getString("address");
-        newlink = "bitcoin:" + dataobj.getString("address") + "?amount=" + String.format("%.6f",
-                dataobj.getDouble("price_in_usd"));
+        newlink = "bitcoin:" + dataobj.getString("address") + "?amount=" + String.format("%.6f", dataobj.getDouble("price_in_usd"));
         setQr(newlink);
         BigDecimal value0 = new BigDecimal(0);
         finalvalue = remainingint.compareTo(value0);
@@ -712,7 +765,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             remainingamt.setText(remainingint.toPlainString());
         }
         link.setText(dataobj.getString("address"));
-      //  tv_invoice_id.setText(dataobj.getJSONObject("invoice_id").getString("invoice_id"));
+        tv_invoice_id.setText(dataobj.getString("invoice_id"));
         message.setText("After Making Payment, Relax and enjoy your coffee with smile on your face because our auto system will confirm your transaction after getting 3 confirmation on Explorer");
     }
 
@@ -803,7 +856,75 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         }
     }
 
-    public interface OnResponseHandle{
-        public void onResponse(int flag);
+    private void setFundRequest() throws IOException {
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(bos);
+        if (!filePath.equals("")) {
+            byte[] fileData1 = getFileDataFromDrawable(getContext(), filePath);
+            File uu = new File(filePath);
+            buildPart(dos, fileData1, uu.getName() + ".png");
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            buildTextPart(dos, "transaction_hash", et_tran_hash.getText().toString());
+            buildTextPart(dos, "invoice_id", tv_invoice_id.getText().toString());
+        }
+
+        dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+        fundRequest(bos.toByteArray());
     }
+
+    private void fundRequest(byte[] multipartBody) {
+        String url = ServiceGenerator.API_BASE_URL + "fund-request";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("Authorization", "Bearer " + AppCommon.getInstance(getContext()).getToken());
+        params.put("Content-Type", "multipart/form-data; boundary=----" + boundary);
+        Log.d(tag, "--auth--" + params.toString());
+        MultipartRequest multipartRequest = new MultipartRequest(url, params, mimeType, multipartBody, response -> {
+            String resultResponse = new String(response.data);
+            try {
+                Log.d("fund response--", "-------------" + new JSONObject(resultResponse));
+                AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
+                if (getActivity().isFinishing())
+                    return;
+                    parsefundRequest(new JSONObject(resultResponse));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
+            }
+
+        });
+
+        Volley.newRequestQueue(getContext()).add(multipartRequest);
+    }
+
+    private void parsefundRequest(JSONObject jsonObject) throws JSONException {
+        if (jsonObject.getString("code").equals("409")) {
+            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+        } else if (jsonObject.getString("code").equals("200")) {
+            if (jsonObject.has("data")) {
+                JSONObject dataobj = jsonObject.getJSONObject("data");
+                Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                is_payment_dialog_open = true;
+                dialogBox.setVisibility(View.GONE);
+                filePath="";
+                onResponseHandle.onResponse(1);
+            }
+        } else {
+
+            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public interface OnResponseHandle {
+        void onResponse(int flag);
+    }
+
 }

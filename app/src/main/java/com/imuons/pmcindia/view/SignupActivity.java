@@ -31,8 +31,6 @@ import retrofit2.Response;
 
 public class SignupActivity extends Activity {
 
-
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.mEditUserId)

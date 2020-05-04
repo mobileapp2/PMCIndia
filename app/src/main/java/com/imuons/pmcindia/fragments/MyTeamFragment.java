@@ -184,7 +184,7 @@ public class MyTeamFragment extends Fragment {
                         }
                     } else {
                         if (finalIsupdate)
-                            AppCommon.getInstance(MyTeamFragment.this.getContext()).showDialog(MyTeamFragment.this.getActivity(), "Server Error");
+                            AppCommon.getInstance(MyTeamFragment.this.getContext()).showDialog(MyTeamFragment.this.getActivity(), "Data Not Found");
                     }
                 }
 
@@ -241,7 +241,7 @@ public class MyTeamFragment extends Fragment {
                             Toast.makeText(MyTeamFragment.this.getContext(), authResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        AppCommon.getInstance(MyTeamFragment.this.getContext()).showDialog(MyTeamFragment.this.getActivity(), "Server Error");
+                        AppCommon.getInstance(MyTeamFragment.this.getContext()).showDialog(MyTeamFragment.this.getActivity(), "Data Not Found");
                     }
                 }
 
@@ -250,7 +250,7 @@ public class MyTeamFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                     AppCommon.getInstance(MyTeamFragment.this.getContext()).clearNonTouchableFlags(MyTeamFragment.this.getActivity());
                     // loaderView.setVisibility(View.GONE);
-                    Toast.makeText(MyTeamFragment.this.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyTeamFragment.this.getContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
                 }
             });
 

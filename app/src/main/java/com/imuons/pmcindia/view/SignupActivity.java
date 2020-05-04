@@ -31,8 +31,6 @@ import retrofit2.Response;
 
 public class SignupActivity extends Activity {
 
-
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.mEditUserId)
@@ -64,7 +62,7 @@ public class SignupActivity extends Activity {
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignupActivity.this, SignupActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

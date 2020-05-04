@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import com.imuons.pmcindia.ResponseModel.UserProfileResponse;
 import com.imuons.pmcindia.retrofit.AppService;
 import com.imuons.pmcindia.retrofit.ServiceGenerator;
 import com.imuons.pmcindia.utils.AppCommon;
+import com.imuons.pmcindia.utils.Utils;
 import com.imuons.pmcindia.view.BankDetailsActivity;
 import com.imuons.pmcindia.view.ChangePasswordActivity;
 import com.imuons.pmcindia.view.EditProfileActivity;
@@ -77,6 +79,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         registerListeners();
         getUserProfileInfo();
+
         return view;
     }
 
@@ -165,6 +168,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Utils.checkInternetConnection(ProfileFragment.this.getContext())) {
+
+            getUserProfileInfo();
+        } else {
+
         }
     }
 }

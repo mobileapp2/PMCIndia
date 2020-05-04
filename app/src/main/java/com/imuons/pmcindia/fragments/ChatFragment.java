@@ -98,10 +98,10 @@ public class ChatFragment extends Fragment {
                             setChatData(authResponse.getData());
                         } else {
 
-                            Toast.makeText(ChatFragment.this.getContext(), authResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(ChatFragment.this.getContext(), authResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        AppCommon.getInstance(ChatFragment.this.getContext()).showDialog(ChatFragment.this.getActivity(), "Server Error");
+                        AppCommon.getInstance(ChatFragment.this.getContext()).showDialog(ChatFragment.this.getActivity(), "Data Not Found");
                     }
                 }
 
@@ -172,7 +172,7 @@ public class ChatFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                     AppCommon.getInstance(ChatFragment.this.getContext()).clearNonTouchableFlags(ChatFragment.this.getActivity());
                     // loaderView.setVisibility(View.GONE);
-                    Toast.makeText(ChatFragment.this.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatFragment.this.getContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
                 }
             });
 

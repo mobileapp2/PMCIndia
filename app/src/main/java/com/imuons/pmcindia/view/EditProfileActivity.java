@@ -70,7 +70,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     TextView tv_withdrawType;
     @BindView(R.id.radio_group)
     RadioGroup radio_group;
-
+    String btc_validation;
     @BindView(R.id.update)
     TextView update;
     String account_no, bank_name, branch_name, btc, holder_name, ifsc_code, pan_no, status, withdraw_type, Type;
@@ -105,7 +105,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (tv_btcAddress !=null && tv_btcAddress.length()>0){
+                if (tv_btcAddress != null && tv_btcAddress.length() > 0) {
                     checkBtc();
                 }
             }
@@ -120,9 +120,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void checkBtc() {
 
         Map<String, String> checkuserexistsMap = new HashMap<>();
-        final String userName;
-
-      String btcAdd = tv_btcAddress.getText().toString().trim();
+        String btcAdd = tv_btcAddress.getText().toString().trim();
 
         checkuserexistsMap.put("network_type", "BTC");
         checkuserexistsMap.put("address", btcAdd);
@@ -138,14 +136,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 if (response.isSuccessful()) {
                     BTCAddressResponseModel checkUserExistResponseModel = response.body();
 
-                    if (checkUserExistResponseModel.getMessage().equals("Bitcoin address is valid")) {
-
+                    if(checkUserExistResponseModel.getCode()==200){
                         sid = true;
-                        Toast.makeText(EditProfileActivity.this, checkUserExistResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
+                        tv_btcAddress.setError(null);
 
-                    } else {
-                        Toast.makeText(EditProfileActivity.this, checkUserExistResponseModel.getMessage(), Toast.LENGTH_SHORT).show();
+                        tv_btcAddress.setFocusable(false);
+                        tv_btcAddress.setFocusableInTouchMode(false);
+                        tv_btcAddress.setClickable(false);
+                        btc_validation = checkUserExistResponseModel.getMessage();
+                    }if (checkUserExistResponseModel.getCode()==404){
+                        tv_btcAddress.setError("Bitcoin address is not valid");
                     }
+
                 }
             }
 
@@ -153,7 +155,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             public void onFailure(Call<BTCAddressResponseModel> call,
                                   Throwable t) {
                 // pd.hide();
-                Toast.makeText(EditProfileActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(EditProfileActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -182,7 +184,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         btc = tv_btcAddress.getText().toString().trim();
         String w_Type = tv_withdrawType.getText().toString().trim();
 
-        callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, btc, email, holder_name, ifsc_code, mobile, pan_no, status, w_Type));
+        callUpdateApi(new UserInfoEntity(account_no, bank_name, branch_name, tv_btcAddress.getText().toString().trim(), email, holder_name, ifsc_code, mobile, pan_no, status, w_Type));
 
     }
 
@@ -264,7 +266,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 }
             });
 
-
         } else {
             // no internet
             progressBar.setVisibility(View.GONE);
@@ -294,6 +295,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         } else {
             radio_group.check(R.id.radioINR);
         }
+        if (data.getBtcAddress() == null || data.getBtcAddress().isEmpty() || sid==false) {
+            tv_btcAddress.setFocusable(true);
+            tv_btcAddress.setFocusableInTouchMode(true);
+            tv_btcAddress.setClickable(true);
+        } else {
+            tv_btcAddress.setFocusable(false);
+            tv_btcAddress.setFocusableInTouchMode(false);
+            tv_btcAddress.setClickable(false);
+        }
+
     }
 
     private void registerListeners() {
@@ -326,4 +337,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
+
+    private boolean validateBTC() {
+        String strreferalid = tv_btcAddress.getText().toString().trim();
+        if (strreferalid.isEmpty() || sid == false) {
+            Toast.makeText(getApplicationContext(), getString(R.string.empty_btc_address), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+
+
 }

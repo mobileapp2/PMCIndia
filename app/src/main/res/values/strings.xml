@@ -21,4 +21,5 @@
     <string name="cancle_imagegselect">Selected image not Uploaded</string>
     <string name="flaid_select_image">No image selected</string>
     <string name="something_went_wrong">Some thing went wrong</string>
+    <string name="empty_btc_address">Bitcoin address is not valid</string>
 </resources>

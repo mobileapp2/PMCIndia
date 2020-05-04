@@ -398,10 +398,13 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     getActivity().startActivityForResult(galleryIntent, GALLERY_PICTURE_REQUEST_CODE);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Toast.makeText(getContext(),"Something went Wrong", Toast.LENGTH_LONG).show();
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(getContext(),"Storage area Something went Wrong ",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -476,7 +479,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         if (requestCode == REQUEST_WRITE_PERMISSION_FILE_CHOSER) {
             int result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (result == PackageManager.PERMISSION_GRANTED) {
-
+                Toast.makeText(getContext(),"No File  Choose option", Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == REQUEST_WRITE_PERMISSION) {
             int result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -487,6 +490,8 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 galleryIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                 getActivity().startActivityForResult(galleryIntent, GALLERY_PICTURE_REQUEST_CODE);
 
+            }else{
+                Toast.makeText(getContext(),"Gallery Permission Denied", Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == INITIAL_REQUEST_CAMERA) {
             int result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);

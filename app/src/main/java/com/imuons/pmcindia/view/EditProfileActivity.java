@@ -139,10 +139,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     if(checkUserExistResponseModel.getCode()==200){
                         sid = true;
                         tv_btcAddress.setError(null);
-
-                        tv_btcAddress.setFocusable(false);
-                        tv_btcAddress.setFocusableInTouchMode(false);
-                        tv_btcAddress.setClickable(false);
                         btc_validation = checkUserExistResponseModel.getMessage();
                     }if (checkUserExistResponseModel.getCode()==404){
                         tv_btcAddress.setError("Bitcoin address is not valid");

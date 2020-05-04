@@ -449,7 +449,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
             }
 
-
         } else if (i == 2) {
             int result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
             if (result == PackageManager.PERMISSION_GRANTED) {

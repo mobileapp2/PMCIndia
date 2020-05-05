@@ -218,7 +218,7 @@ public class PrincipleWithdrawFragment extends Fragment {
     }
 
     private void setBalance(PincipleDataModel data) {
-        tv_Balance.setText(String.valueOf(data.getPrincipleWalletBalance()));
+        tv_Balance.setText("\u20B9"+String.valueOf(data.getPrincipleWalletBalance()));
         tv_amount.setText(String.valueOf(data.getPrincipleWalletBalance()));
         amount = data.getPrincipleWalletBalance();
     }

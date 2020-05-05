@@ -85,7 +85,7 @@ List<FundRequestRecordModel> requestRecordModels_list;
     private void setData(ViewHolder holder, FundRequestRecordModel fundRequestRecordModel, int position) {
         holder.srno.setText(String.valueOf(position + 1));
         holder.deposit.setText(fundRequestRecordModel.getInvoiceId());
-        holder.amount.setText(String.valueOf(fundRequestRecordModel.getAmount()));
+        holder.amount.setText("\u20B9"+String.valueOf(fundRequestRecordModel.getAmount()));
         holder.tv_pkg_name.setText(fundRequestRecordModel.getProductName());
         holder.status.setText(fundRequestRecordModel.getStatus());
         holder.date.setText(fundRequestRecordModel.getEntryTime());

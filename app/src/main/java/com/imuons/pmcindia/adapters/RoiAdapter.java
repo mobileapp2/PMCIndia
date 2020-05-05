@@ -73,8 +73,8 @@ public class RoiAdapter extends RecyclerView.Adapter<RoiAdapter.ViewHolder> {
     private void setData(RoiAdapter.ViewHolder holder, RoiRecordModel roiRecordModel, int position) {
         holder.srno.setText(String.valueOf(position + 1));
         holder.deposit.setText(roiRecordModel.getPin());
-        holder.amount.setText(String.valueOf(roiRecordModel.getOnAmount()));
-        holder.tv_profit.setText(String.valueOf(roiRecordModel.getAmount()));
+        holder.amount.setText("\u20B9"+String.valueOf(roiRecordModel.getOnAmount()));
+        holder.tv_profit.setText("\u20B9"+String.valueOf(roiRecordModel.getAmount()));
         holder.date.setText(roiRecordModel.getEntryTime());
         holder.packageName.setText(roiRecordModel.getName());
 

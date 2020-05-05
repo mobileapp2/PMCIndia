@@ -4,6 +4,7 @@
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="bankdetails">Bank Details</string>
     <string name="server_error">Server Error</string>
+    <string name="Rs">\u20B9</string>
     <string-array name="show_array">
         <item>10</item>
         <item>50</item>

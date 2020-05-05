@@ -47,7 +47,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.MyTeamHold
         holder.srno.setText(String.valueOf(position+1));
         holder.date.setText(levelData.getEntryTime());
         holder.email.setText(levelData.getEm());
-        holder.investment.setText(String.valueOf(levelData.getTotalInvestment()));
+        holder.investment.setText("\u20B9"+String.valueOf(levelData.getTotalInvestment()));
         holder.sponsorid.setText(levelData.getSponserId());
         holder.userid.setText(levelData.getDownUserId());
         holder.sponsorName.setText(levelData.getFn());

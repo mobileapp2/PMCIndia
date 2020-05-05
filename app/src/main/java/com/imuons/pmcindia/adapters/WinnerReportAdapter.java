@@ -74,7 +74,7 @@ public class WinnerReportAdapter extends RecyclerView.Adapter<WinnerReportAdapte
         holder.srno.setText(String.valueOf(position + 1));
         holder.deposit.setText(topupRecordModel.getProductName());
         holder.amount.setText(String.valueOf(topupRecordModel.getHouseName()));
-        holder.tv_plan.setText(String.valueOf(topupRecordModel.getAmount()));
+        holder.tv_plan.setText("\u20B9"+String.valueOf(topupRecordModel.getAmount()));
         holder.date.setText(topupRecordModel.getEntryTime());
 
     }

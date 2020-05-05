@@ -26,7 +26,7 @@
             android:textStyle="bold"
             android:text="JAl"
             android:layout_marginTop="5dp"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="#4a495a"
             android:layout_height="wrap_content">
 
@@ -37,7 +37,7 @@
             android:textStyle="bold"
             android:text="1000"
             android:layout_marginTop="5dp"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:textColor="#29722c"
             android:layout_height="wrap_content">
         </TextView>
@@ -68,7 +68,7 @@
                 android:checked="true"
                 android:text="BTC"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="15dp" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/int_inr"
@@ -80,7 +80,7 @@
                 android:checked="false"
                 android:text="INR"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="15dp" />
+                android:textSize="12sp" />
         </RadioGroup>
         <LinearLayout
             android:id="@+id/file_choose_layer"
@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="Choose File"
-                android:textSize="15dp"
+                android:textSize="12sp"
                 android:padding="@dimen/dp5"
                 android:background="@drawable/ll_bg_borader_green"
                 android:textColor="#403e50"

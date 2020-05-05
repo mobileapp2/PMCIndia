@@ -71,7 +71,7 @@ public class WithdrawReportAdapter extends RecyclerView.Adapter<WithdrawReportAd
 
     private void setData(WithdrawReportAdapter.ViewHolder holder, WithdrawReportRecordModel topupRecordModel, int position) {
         holder.srno.setText(String.valueOf(position + 1));
-        holder.deduction.setText(String.valueOf(topupRecordModel.getDeduction()));
+        holder.deduction.setText(String.valueOf(topupRecordModel.getNetworkType()));
         holder.amount.setText("\u20B9"+String.valueOf(topupRecordModel.getAmount()));
         if (topupRecordModel.getStatus() == 0 || topupRecordModel.getStatus().equals("0")){
             holder.tv_status.setText("Pending");
@@ -84,7 +84,7 @@ public class WithdrawReportAdapter extends RecyclerView.Adapter<WithdrawReportAd
         if (topupRecordModel.getWithdrawType()==6){
             holder.tv_withdrawtype.setText("Principal Amount");
         }
-        holder.tv_payment_mode.setText(String.valueOf(topupRecordModel.getNetworkType()));
+      //  holder.tv_payment_mode.setText(String.valueOf(topupRecordModel.getNetworkType()));
         holder.date.setText(topupRecordModel.getEntryTime());
 
     }

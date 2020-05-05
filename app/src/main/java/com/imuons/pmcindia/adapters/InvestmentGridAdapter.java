@@ -134,7 +134,7 @@ public class InvestmentGridAdapter extends BaseAdapter {
 
     private void setData(GetPackageRecordModel getPackageRecordModel, int position, ViewHolder viewHolder1) {
         viewHolder1.tv_pkg_name.setText(getPackageRecordModel.getName());
-        viewHolder1.tv_pkg_amount.setText(String.valueOf(getPackageRecordModel.getMinHash()));
+        viewHolder1.tv_pkg_amount.setText("\u20B9"+String.valueOf(getPackageRecordModel.getMinHash()));
         if (getPackageRecordModel.getId() == 1) {
             viewHolder1.iv_pkg_image.setImageResource(R.drawable.aakash);
         } else if (getPackageRecordModel.getId() == 2) {

@@ -147,6 +147,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     private LinearLayout ll_invoice_id_layer;
     private TextView tv_invoice_id;
     private boolean is_popup_image;
+    private String amount;
 
     public FragmentInvestment() {
         // Required empty public constructor
@@ -264,7 +265,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     et_tran_hash.setError("Enter Transaction Hash");
                     et_tran_hash.requestFocus();
                     return;
-                }else if(filePath.equals("")){
+                } else if (filePath.equals("")) {
                     Toast.makeText(getContext(), "Upload Payment slip", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -323,8 +324,6 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
             }
         });
     }
-
-
 
 
     private void callRequestreport() {
@@ -388,7 +387,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
                     try {
-
+                        this.amount = amount;
                         callService(topupRequest(packageRecordModel, amount, type));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -726,11 +725,11 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                     if (dataobj.getString("network_type").equals("BTC")) {
                         is_payment_dialog_open = true;
                         dialogBox.setVisibility(View.VISIBLE);
-                        filePath="";
+                        filePath = "";
                         setDepositDialog(dataobj);
                     }
                 } else {
-                    filePath="";
+                    filePath = "";
                     onResponseHandle.onResponse(1);
                     Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                 }
@@ -743,12 +742,14 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     private void setDepositDialog(JSONObject dataobj) throws JSONException {
-        comingvalue.setText(Constants.currency_Dollor_symbol + " " + dataobj.getInt("price_in_usd"));
+        comingvalue.setText("Package "+Constants.currency_Ruppes_symbol + " " + dataobj.getInt(
+                "price_in_usd"));
         amt.setText(Constants.currency_Ruppes_symbol + " " + dataobj.getInt("price_in_usd"));
-        price.setText("( " + String.format("%.4f", dataobj.getDouble("price_in_usd")) + " BTC )");
-        tvPaidAmount.setText(String.valueOf(dataobj.getDouble("received_amount")));
-        tvCurencyType.setText("BTC");
-        tvPaidCurrencyType.setText("BTC");
+      //  amt.setText(Constants.currency_Ruppes_symbol + amount);
+//        price.setText("( " + String.format("%.4f", dataobj.getDouble("price_in_usd")) + " BTC )");
+//        tvPaidAmount.setText(String.valueOf(dataobj.getDouble("received_amount")));
+//        tvCurencyType.setText("BTC");
+//        tvPaidCurrencyType.setText("BTC");
         BigDecimal bd = new BigDecimal(dataobj.getDouble("price_in_usd"));
         BigDecimal bd2 = new BigDecimal(dataobj.getDouble("received_amount"));
 
@@ -766,7 +767,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         }
         link.setText(dataobj.getString("address"));
         tv_invoice_id.setText(dataobj.getString("invoice_id"));
-        message.setText("After Making Payment, Relax and enjoy your coffee with smile on your face because our auto system will confirm your transaction after getting 3 confirmation on Explorer");
+//        message.setText("After Making Payment, Relax and enjoy your coffee with smile on your face because our auto system will confirm your transaction after getting 3 confirmation on Explorer");
     }
 
 
@@ -888,7 +889,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 AppCommon.getInstance(getContext()).clearNonTouchableFlags(getActivity());
                 if (getActivity().isFinishing())
                     return;
-                    parsefundRequest(new JSONObject(resultResponse));
+                parsefundRequest(new JSONObject(resultResponse));
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -914,7 +915,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                 is_payment_dialog_open = true;
                 dialogBox.setVisibility(View.GONE);
-                filePath="";
+                filePath = "";
                 onResponseHandle.onResponse(1);
             }
         } else {

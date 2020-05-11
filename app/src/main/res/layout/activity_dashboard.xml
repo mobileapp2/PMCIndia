@@ -73,8 +73,6 @@
                 android:choiceMode="singleChoice"
                 android:dividerHeight="1px"
                 android:groupIndicator="@null" />
-
-
         </LinearLayout>
     </com.rom4ek.arcnavigationview.ArcNavigationView>
 

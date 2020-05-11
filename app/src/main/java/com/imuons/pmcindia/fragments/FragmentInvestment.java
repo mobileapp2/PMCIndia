@@ -379,7 +379,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     @Override
-    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type) {
+    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type, int selectedItemPosition) {
         if (type.equals("INR")) {
             if (filePath.equals("")) {
                 Toast.makeText(getContext(), "Upload Payment slip", Toast.LENGTH_SHORT).show();
@@ -388,7 +388,13 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
                     try {
                         this.amount = amount;
-                        callService(topupRequest(packageRecordModel, amount, type));
+                        if(selectedItemPosition!=0){
+                            int id=  packageRecordModel.getHouses().get(selectedItemPosition).getId();
+                            callService(topupRequest(packageRecordModel, amount, type, id));
+                        }else{
+                            Toast.makeText(getContext(), "Select House", Toast.LENGTH_SHORT).show();
+                        }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -397,8 +403,13 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 try {
+                    if(selectedItemPosition!=0){
+                     int id=  packageRecordModel.getHouses().get(selectedItemPosition).getId();
+                        callService(topupRequest(packageRecordModel, amount, type,id));
+                    }else{
+                        Toast.makeText(getContext(), "Select House", Toast.LENGTH_SHORT).show();
+                    }
 
-                    callService(topupRequest(packageRecordModel, amount, type));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -652,7 +663,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
 
-    private byte[] topupRequest(GetPackageRecordModel packageRecordModel, String amount, String type) throws IOException {
+    private byte[] topupRequest(GetPackageRecordModel packageRecordModel, String amount, String type, int id) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(bos);
 
@@ -670,6 +681,7 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
                 buildTextPart(dos, "product_id", String.valueOf(packageRecordModel.getId()));
                 buildTextPart(dos, "currency_code", type);
                 buildTextPart(dos, "hash_unit", amount);
+                buildTextPart(dos, "house_id",String.valueOf(id));
             }
 
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);

@@ -3,6 +3,8 @@ package com.imuons.pmcindia.ResponseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class GetPackageRecordModel {
     @SerializedName("id")
     @Expose
@@ -103,7 +105,22 @@ public class GetPackageRecordModel {
     @SerializedName("countryCode")
     @Expose
     private Object countryCode;
+
+    @SerializedName("houses")
+    @Expose
+    private List<GetPackageHouseModel> houses = null;
+
+
+
     private final static long serialVersionUID = -715073582588838945L;
+
+    public List<GetPackageHouseModel> getHouses() {
+        return houses;
+    }
+
+    public void setHouses(List<GetPackageHouseModel> houses) {
+        this.houses = houses;
+    }
 
     public Integer getId() {
         return id;

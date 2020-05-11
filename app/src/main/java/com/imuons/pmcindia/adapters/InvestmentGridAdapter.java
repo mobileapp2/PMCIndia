@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,17 +13,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.imuons.pmcindia.R;
+import com.imuons.pmcindia.ResponseModel.GetPackageHouseModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageRecordModel;
 import com.imuons.pmcindia.fragments.FragmentInvestment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class InvestmentGridAdapter extends BaseAdapter {
+public class InvestmentGridAdapter extends BaseAdapter implements SpinnnerAdapter.clickInterfce {
 
     List<GetPackageRecordModel> modelList;
     ClickEvent clickEvent;
@@ -57,60 +61,98 @@ public class InvestmentGridAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-       if(convertView==null){
-           convertView = layoutInflater.inflate(R.layout.item_investment, null);
-           viewHolder = new ViewHolder();
-           viewHolder.iv_pkg_image = convertView.findViewById(R.id.pkg_image);
-           viewHolder.tv_pkg_name = convertView.findViewById(R.id.pkg_name);
-           viewHolder.tv_pkg_amount = convertView.findViewById(R.id.pkg_amount);
-           viewHolder.int_btc = convertView.findViewById(R.id.int_BTC);
-           viewHolder.int_inr = convertView.findViewById(R.id.int_inr);
-           viewHolder.ll_file_choose = convertView.findViewById(R.id.file_choose_layer);
-           viewHolder.tv_file_name = convertView.findViewById(R.id.file_name);
-           viewHolder.et_amount = convertView.findViewById(R.id.et_amount);
-           viewHolder.make_payment = convertView.findViewById(R.id.btn_payment);
-           viewHolder.rb_groupe = convertView.findViewById(R.id.int_type);
-           convertView.setTag(viewHolder);
-       }
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.item_investment, null);
+            viewHolder = new ViewHolder();
+            viewHolder.iv_pkg_image = convertView.findViewById(R.id.pkg_image);
+            viewHolder.tv_pkg_name = convertView.findViewById(R.id.pkg_name);
+            viewHolder.tv_pkg_amount = convertView.findViewById(R.id.pkg_amount);
+            viewHolder.int_btc = convertView.findViewById(R.id.int_BTC);
+            viewHolder.int_inr = convertView.findViewById(R.id.int_inr);
+            viewHolder.ll_file_choose = convertView.findViewById(R.id.file_choose_layer);
+            viewHolder.tv_file_name = convertView.findViewById(R.id.file_name);
+            viewHolder.et_amount = convertView.findViewById(R.id.et_amount);
+            viewHolder.make_payment = convertView.findViewById(R.id.btn_payment);
+            viewHolder.rb_groupe = convertView.findViewById(R.id.int_type);
+            viewHolder.house_list = convertView.findViewById(R.id.house_list);
+            convertView.setTag(viewHolder);
+        }
         ViewHolder viewHolder1 = (ViewHolder) convertView.getTag();
+        GetPackageHouseModel houseobj = new GetPackageHouseModel();
+        houseobj.setName("Select House");
+        List<GetPackageHouseModel> listofHouse = new ArrayList<>();
+        listofHouse.add(houseobj);
+        if (modelList.get(position).getHouses().size() != 0) {
+
+            List<GetPackageHouseModel> listofHouse1 = modelList.get(position).getHouses();
+            listofHouse.addAll(listofHouse1);
+            SpinnnerAdapter spinnnerAdapter = new SpinnnerAdapter(mContext, listofHouse, InvestmentGridAdapter.this);
+            viewHolder1.house_list.setDropDownHorizontalOffset(R.layout.spinner_item);
+            viewHolder1.house_list.setAdapter(spinnnerAdapter);
+            viewHolder1.house_list.setSelection(0);
+        } else {
+            viewHolder1.house_list.setVisibility(View.GONE);
+        }
+
+
         setData(modelList.get(position), position, viewHolder1);
+
+        viewHolder1.house_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int spinnsePosition, long id) {
+                if(spinnsePosition!=0){
+
+                }
+                Log.d("iite select", "---select item--" +listofHouse.get(spinnsePosition).getName());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
 
         viewHolder1.make_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String type ;
-                if(viewHolder1.int_btc.isChecked()){
-                    type="BTC";
-                }else{
-                    type="INR";
+                String type;
+                if (viewHolder1.int_btc.isChecked()) {
+                    type = "BTC";
+                } else {
+                    type = "INR";
                 }
-                if(modelList.get(position).getId()==5){
-                    if(viewHolder1.et_amount.getText().toString().isEmpty()){
+                if (modelList.get(position).getId() == 5) {
+                    if (viewHolder1.et_amount.getText().toString().isEmpty()) {
                         viewHolder1.et_amount.setError("Enter amount");
                         viewHolder1.et_amount.requestFocus();
                         return;
                     }
-                   clickEvent.clickMakeyPayment(modelList.get(position),viewHolder1.et_amount.getText().toString(),type);
-                }else{
-                    clickEvent.clickMakeyPayment(modelList.get(position),String.valueOf( modelList.get(position).getMinHash()),type);
+                    clickEvent.clickMakeyPayment(modelList.get(position),
+                            viewHolder1.et_amount.getText().toString(), type,
+                            viewHolder1.house_list.getSelectedItemPosition());
+                } else {
+                    clickEvent.clickMakeyPayment(modelList.get(position),
+                            String.valueOf(modelList.get(position).getMinHash()), type,viewHolder1.house_list.getSelectedItemPosition());
                 }
 
             }
         });
-       // View finalConvertView = convertView;
+        // View finalConvertView = convertView;
         viewHolder1.rb_groupe.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton rb = finalConvertView.findViewById(checkedId);
-//                if (rb.getText().toString().equals("BTC")) {
-//                    Log.i("BTC", "1");
-//                    viewHolder1.ll_file_choose.setVisibility(View.GONE);
-//
-//                } else {
-//                    Log.i("INR", "1");
-//
-//                    viewHolder1.ll_file_choose.setVisibility(View.VISIBLE);
-//                }
+                //                RadioButton rb = finalConvertView.findViewById(checkedId);
+                //                if (rb.getText().toString().equals("BTC")) {
+                //                    Log.i("BTC", "1");
+                //                    viewHolder1.ll_file_choose.setVisibility(View.GONE);
+                //
+                //                } else {
+                //                    Log.i("INR", "1");
+                //
+                //                    viewHolder1.ll_file_choose.setVisibility(View.VISIBLE);
+                //                }
                 if (viewHolder1.int_btc.isChecked()) {
                     Log.i("BTC", "1");
                     viewHolder1.ll_file_choose.setVisibility(View.GONE);
@@ -134,7 +176,7 @@ public class InvestmentGridAdapter extends BaseAdapter {
 
     private void setData(GetPackageRecordModel getPackageRecordModel, int position, ViewHolder viewHolder1) {
         viewHolder1.tv_pkg_name.setText(getPackageRecordModel.getName());
-        viewHolder1.tv_pkg_amount.setText("\u20B9"+String.valueOf(getPackageRecordModel.getMinHash()));
+        viewHolder1.tv_pkg_amount.setText("\u20B9" + getPackageRecordModel.getMinHash());
         if (getPackageRecordModel.getId() == 1) {
             viewHolder1.iv_pkg_image.setImageResource(R.drawable.aakash);
         } else if (getPackageRecordModel.getId() == 2) {
@@ -150,10 +192,27 @@ public class InvestmentGridAdapter extends BaseAdapter {
 
     }
 
+    @Override
+    public void clickOnText(GetPackageHouseModel getPackageHouseModel) {
+        Log.d("iite select", "---select item--" + getPackageHouseModel.getName());
+    }
+
+    public void setfileName(ViewHolder viewHolder, String filename) {
+        if (last_view != null) {
+            last_view.tv_file_name.setText("No file choosen");
+            last_view = null;
+            last_view = viewHolder;
+        } else {
+            last_view = viewHolder;
+        }
+        last_view = viewHolder;
+        viewHolder.tv_file_name.setText(filename);
+    }
+
     public interface ClickEvent {
         void clickFileChooser(ViewHolder viewHolder);
 
-        void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount,String type);
+        void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type, int selectedItemPosition);
     }
 
     public class ViewHolder {
@@ -167,17 +226,7 @@ public class InvestmentGridAdapter extends BaseAdapter {
         EditText et_amount;
         Button make_payment;
         RadioGroup rb_groupe;
+        Spinner house_list;
 
-    }
-    public void setfileName(ViewHolder viewHolder ,String filename){
-        if(last_view!=null){
-            last_view.tv_file_name.setText("No file choosen");
-            last_view=null;
-            last_view=viewHolder;
-        }else{
-            last_view=viewHolder;
-        }
-        last_view=viewHolder;
-        viewHolder.tv_file_name.setText(filename);
     }
 }

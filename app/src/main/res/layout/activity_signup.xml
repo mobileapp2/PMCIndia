@@ -6,27 +6,32 @@
     android:background="@drawable/registrationbg"
     tools:context=".view.SignupActivity">
 
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:text="Sign Up"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/darkgreen"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/heading"
+        android:paddingTop="@dimen/dp5">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="@dimen/dp15"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:text="Sign Up"
-                android:textColor="@color/darkgreen"
-                android:textSize="40sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,12 +51,12 @@
                         android:id="@+id/mEditUserId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/id"
                         android:drawableLeft="@drawable/id"
                         android:drawablePadding="20dp"
-                        android:focusable="false"
                         android:editable="false"
+                        android:focusable="false"
                         android:fontFamily="@font/open_sans_bold"
                         android:hint=" Enter ID"
                         android:paddingStart="10dp"
@@ -63,6 +68,11 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -73,7 +83,7 @@
                         android:id="@+id/mEditUserName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/userid"
                         android:drawableLeft="@drawable/userid"
                         android:drawablePadding="20dp"
@@ -89,6 +99,12 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/register_editbox_height"
@@ -98,7 +114,7 @@
                         android:id="@+id/mEditEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/email"
                         android:drawableLeft="@drawable/email"
                         android:drawablePadding="20dp"
@@ -114,6 +130,12 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,7 +146,7 @@
                         android:id="@+id/mEditConfirmEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/email"
                         android:drawableLeft="@drawable/email"
                         android:drawablePadding="20dp"
@@ -139,6 +161,11 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,7 +176,7 @@
                         android:id="@+id/mEditPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/password"
                         android:drawableLeft="@drawable/password"
                         android:drawablePadding="20dp"
@@ -165,6 +192,11 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -175,7 +207,7 @@
                         android:id="@+id/mEditConfirmPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/password"
                         android:drawableLeft="@drawable/password"
                         android:drawablePadding="20dp"
@@ -191,6 +223,11 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -201,7 +238,7 @@
                         android:id="@+id/mEditSponsorName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/userid"
                         android:drawableLeft="@drawable/userid"
                         android:drawablePadding="20dp"
@@ -216,6 +253,12 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -226,7 +269,7 @@
                         android:id="@+id/mEditMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:background="@null"
                         android:drawableStart="@drawable/mobile"
                         android:drawableLeft="@drawable/mobile"
                         android:drawablePadding="20dp"
@@ -243,12 +286,18 @@
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:background="@color/text_color" />
+
                 <TextView
                     android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/bgbtn"
                     android:fontFamily="@font/open_sans_bold"
                     android:gravity="center"
@@ -274,11 +323,11 @@
     </ScrollView>
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/progressBar"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </RelativeLayout>

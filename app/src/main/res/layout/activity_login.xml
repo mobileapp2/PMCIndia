@@ -10,7 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dp10"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="@dimen/dp10"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -32,9 +34,9 @@
             <EditText
                 android:id="@+id/mEditUserName"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/border"
+                android:background="@null"
                 android:drawableStart="@drawable/user"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="20dp"
@@ -48,12 +50,18 @@
                 android:textColorHint="@color/text_color"
                 android:textSize="18sp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dp2"
+                android:background="@color/text_color" />
+
             <EditText
                 android:id="@+id/mEditPassword"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/border"
+                android:background="@null"
                 android:drawableStart="@drawable/password"
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="20dp"
@@ -66,6 +74,12 @@
                 android:textColor="@color/darkgreen"
                 android:textColorHint="@color/text_color"
                 android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dp2"
+                android:background="@color/text_color" />
 
             <TextView
                 android:id="@+id/tvForgetPassword"
@@ -101,9 +115,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:padding="5dp"
             android:fontFamily="@font/open_sans_bold"
             android:gravity="center"
+            android:padding="5dp"
             android:text="New User? SIGN UP here !!"
             android:textColor="@color/green"
             android:textSize="16sp" />
@@ -115,7 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </RelativeLayout>

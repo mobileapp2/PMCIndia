@@ -82,8 +82,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         String old_password = tv_OldPassword.getText().toString().trim();
         String new_password = tv_NewPassword.getText().toString().trim();
         String confirm_password = tv_reEnterPassword.getText().toString().trim();
-
-
         callChangePassApi(new ChangePasswordEntity(confirm_password, old_password, new_password));
 
     }

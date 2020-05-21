@@ -12,8 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
     //public static String API_BASE_URL = "http://172.105.68.40/vision11plan/public/api/";
     //https://user.sportsfantasy11.com/plan/api/get-info/{email}
-   // public static String API_BASE_URL = "https://www.pmcindia.biz/pmc-india/public/api/";
-    public static String API_BASE_URL = "https://www.pmcindia.biz/replica/pmc-india/public/api/";
+    public static String API_BASE_URL = "https://www.pmcindia.biz/pmc-india/public/api/";
+   // public static String API_BASE_URL = "https://www.pmcindia.biz/replica/pmc-india/public/api/";
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS).
@@ -39,14 +39,12 @@ public class ServiceGenerator {
                 @Override
                 public okhttp3.Response intercept(Chain chain) throws IOException {
                     Request original = chain.request();
-
                     // Request customization: add request headers
                     Request.Builder requestBuilder = original.newBuilder()
                             .header("Authorization", "Bearer "+authToken)
                             // .header("Content-Type","application/x-www-form-urlencoded")
 //                            .header("Content-Type","application/json")
                             .method(original.method(), original.body());
-
                     Request request = requestBuilder.build();
                     return chain.proceed(request);
                 }

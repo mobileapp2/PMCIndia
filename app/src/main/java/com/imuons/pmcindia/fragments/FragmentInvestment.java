@@ -44,6 +44,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.imuons.pmcindia.R;
+import com.imuons.pmcindia.ResponseModel.GetPackageHouseModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageRecordModel;
 import com.imuons.pmcindia.ResponseModel.GetPackageResponseModel;
 import com.imuons.pmcindia.adapters.InvestmentGridAdapter;
@@ -379,7 +380,8 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
     }
 
     @Override
-    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type, int selectedItemPosition) {
+    public void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount,
+                                  String type, GetPackageHouseModel selectedhouse) {
         if (type.equals("INR")) {
             if (filePath.equals("")) {
                 Toast.makeText(getContext(), "Upload Payment slip", Toast.LENGTH_SHORT).show();
@@ -388,18 +390,18 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
 
                     try {
                         this.amount = amount;
-                        if(selectedItemPosition!=0){
+                        if(selectedhouse!=null){
                             if( packageRecordModel.getHouses().size()>0){
-                                Integer id=
-                                        packageRecordModel.getHouses().get(selectedItemPosition).getId();
-                                callService(topupRequest(packageRecordModel, amount, type,id));
-                            }else{
-                                callService(topupRequest(packageRecordModel, amount, type,null));
+                                if(selectedhouse.getId()!=null){
+                                    Integer id=selectedhouse.getId();
+                                            callService(topupRequest(packageRecordModel, amount, type,id));
+                                }else{
+                                    Toast.makeText(getContext(), "Select House", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }else{
-                            Toast.makeText(getContext(), "Select House", Toast.LENGTH_SHORT).show();
+                            callService(topupRequest(packageRecordModel, amount, type,null));
                         }
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -408,17 +410,17 @@ public class FragmentInvestment extends Fragment implements InvestmentGridAdapte
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 try {
-                    if(selectedItemPosition!=0){
+                    if(selectedhouse!=null){
                         if( packageRecordModel.getHouses().size()>0){
-                            Integer id=
-                                    packageRecordModel.getHouses().get(selectedItemPosition).getId();
-                            callService(topupRequest(packageRecordModel, amount, type,id));
-                        }else{
-                            callService(topupRequest(packageRecordModel, amount, type,null));
+                            if(selectedhouse.getId()!=null){
+                                Integer id=selectedhouse.getId();
+                                callService(topupRequest(packageRecordModel, amount, type,id));
+                            }else{
+                                Toast.makeText(getContext(), "Select House", Toast.LENGTH_SHORT).show();
+                            }
                         }
-
                     }else{
-                        Toast.makeText(getContext(), "Select House", Toast.LENGTH_SHORT).show();
+                        callService(topupRequest(packageRecordModel, amount, type,null));
                     }
 
                 } catch (IOException e) {

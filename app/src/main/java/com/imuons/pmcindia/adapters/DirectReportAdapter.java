@@ -63,7 +63,6 @@ public class DirectReportAdapter extends RecyclerView.Adapter<DirectReportAdapte
             public void onClick(View v) {
                 selected_postion = position;
                 notifyDataSetChanged();
-
             }
         });
     }
@@ -80,7 +79,6 @@ public class DirectReportAdapter extends RecyclerView.Adapter<DirectReportAdapte
         holder.tv_payment_mode.setText("\u20B9"+String.valueOf(topupRecordModel.getLapsAmount()));
         holder.statusDrict.setText(String.valueOf(topupRecordModel.getStatus()));
         holder.date.setText(topupRecordModel.getRecDate());
-
     }
 
     @Override
@@ -114,8 +112,6 @@ public class DirectReportAdapter extends RecyclerView.Adapter<DirectReportAdapte
             tv_withdrawtype = itemView.findViewById(R.id.withdraw);
             tv_payment_mode = itemView.findViewById(R.id.payment);
             statusDrict = itemView.findViewById(R.id.statusDrict);
-
-
         }
     }
 }

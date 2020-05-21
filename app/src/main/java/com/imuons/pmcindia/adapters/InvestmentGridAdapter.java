@@ -131,10 +131,11 @@ public class InvestmentGridAdapter extends BaseAdapter implements SpinnnerAdapte
                     }
                     clickEvent.clickMakeyPayment(modelList.get(position),
                             viewHolder1.et_amount.getText().toString(), type,
-                            viewHolder1.house_list.getSelectedItemPosition());
+                            (GetPackageHouseModel) viewHolder1.house_list.getSelectedItem());
                 } else {
                     clickEvent.clickMakeyPayment(modelList.get(position),
-                            String.valueOf(modelList.get(position).getMinHash()), type,viewHolder1.house_list.getSelectedItemPosition());
+                            String.valueOf(modelList.get(position).getMinHash()), type,
+                            (GetPackageHouseModel) viewHolder1.house_list.getSelectedItem());
                 }
 
             }
@@ -212,7 +213,8 @@ public class InvestmentGridAdapter extends BaseAdapter implements SpinnnerAdapte
     public interface ClickEvent {
         void clickFileChooser(ViewHolder viewHolder);
 
-        void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount, String type, int selectedItemPosition);
+        void clickMakeyPayment(GetPackageRecordModel packageRecordModel, String amount,
+                               String type, GetPackageHouseModel selectedItemPosition);
     }
 
     public class ViewHolder {

@@ -9,7 +9,7 @@ public class GetPackageHouseModel {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Integer id=null;
     @SerializedName("product_id")
     @Expose
     private Integer productId;
